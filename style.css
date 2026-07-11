@@ -1,0 +1,4 @@
+body { font-family: Arial; background: #f8f8f8; margin: 0; }
+header { background: #e91e63; color: white; text-align: center; padding: 40px; }
+button { background: #e91e63; color: white; padding: 12px 24px; border: none; border-radius: 8px; }
+.features { padding: 20px; }
