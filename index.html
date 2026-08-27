@@ -18,7 +18,7 @@
             --radius-sm: 10px;
             --radius-md: 18px;
             --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
-            --shadow-hover: 0 20px 40px -10px rgba(0, 166, 81, 0.15);
+            --shadow-hover: 0 20px 40px -10px rgba(0, 166, 81, 0.2);
             --header-bg: rgba(255, 255, 255, 0.95);
             --card-bg: #ffffff;
             --chat-bg: #f8fafc;
@@ -33,7 +33,7 @@
             --surface: #151d2a;
             --border: #2a364f;
             --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
-            --shadow-hover: 0 20px 40px -10px rgba(0, 166, 81, 0.25);
+            --shadow-hover: 0 20px 40px -10px rgba(0, 166, 81, 0.35);
             --header-bg: rgba(21, 29, 42, 0.95);
             --card-bg: #151d2a;
             --chat-bg: #0b0f17;
@@ -52,8 +52,13 @@
 
         .main-container { flex: 1; max-width: 1280px; width: 100%; margin: 32px auto; padding: 0 24px; }
         
-        .greeting-banner { background: linear-gradient(135deg, #00b359 0%, #007a3b 100%); color: #ffffff; padding: 36px; border-radius: var(--radius-md); margin-bottom: 28px; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; }
-        .greeting-banner::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: rgba(255,255,255,0.06); border-radius: 50%; pointer-events: none; }
+        .greeting-banner { 
+            background: linear-gradient(135deg, #00c862 0%, #007a3b 50%, #004d25 100%); 
+            color: #ffffff; padding: 36px; border-radius: var(--radius-md); margin-bottom: 28px; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; 
+        }
+        .greeting-banner::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: rgba(255,255,255,0.08); border-radius: 50%; pointer-events: none; animation: floatCircle 8s infinite alternate ease-in-out; }
+        @keyframes floatCircle { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-20px, 20px) scale(1.1); } }
+
         .greeting-content { flex: 1; z-index: 2; }
         .greeting-banner h3 { font-size: 26px; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.5px; }
         .greeting-banner p { font-size: 15px; opacity: 0.92; line-height: 1.5; }
@@ -88,14 +93,24 @@
         .service-icon { width: 60px; height: 60px; border-radius: 16px; background: var(--safaricom-light-green); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
         .service-badge { background: var(--chat-bg); color: var(--text-muted); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; }
 
+        /* REAL ANIMATED HIGH-IMPACT BUTTONS */
         .btn-animated { 
             width: 100%; 
-            background: linear-gradient(135deg, #00d26a 0%, var(--safaricom-green) 50%, var(--safaricom-dark-green) 100%);
-            background-size: 200% 200%; color: #ffffff; border: none; padding: 16px 24px; border-radius: 30px; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; animation: pulseGlow 3s infinite ease-in-out; transition: all 0.3s ease; margin-top: 20px; text-transform: uppercase; letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #00e676 0%, #00a651 50%, #006633 100%);
+            background-size: 200% auto;
+            color: #ffffff; border: none; padding: 16px 24px; border-radius: 30px; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; 
+            animation: continuousGradient 3s infinite alternate, pulseGlow 2.5s infinite ease-in-out; 
+            transition: all 0.3s ease; margin-top: 20px; text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .btn-animated:hover:not(:disabled) { transform: translateY(-2px) scale(1.01); filter: brightness(1.1); box-shadow: 0 8px 20px rgba(0, 166, 81, 0.35); }
+        .btn-animated:hover:not(:disabled) { transform: translateY(-3px) scale(1.015); filter: brightness(1.1); box-shadow: 0 10px 25px rgba(0, 166, 81, 0.45); }
+        .btn-animated:disabled { background: #cbd5e1 !important; animation: none !important; cursor: not-allowed; opacity: 0.7; box-shadow: none !important; }
 
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(0, 166, 81, 0.4); } 50% { box-shadow: 0 0 0 14px rgba(0, 166, 81, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 166, 81, 0); } }
+        @keyframes continuousGradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(0, 166, 81, 0.5); } 50% { box-shadow: 0 0 0 16px rgba(0, 166, 81, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 166, 81, 0); } }
 
         .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
         .modal-overlay.active { display: flex; }
@@ -116,9 +131,11 @@
         .valid-icon { position: absolute; right: 14px; font-weight: 800; font-size: 14px; pointer-events: none; display: none; }
         .form-group.is-valid input, .form-group.is-valid select { border-color: var(--valid-green); background-color: rgba(16, 185, 129, 0.02); }
         .form-group.is-valid .valid-icon { display: block; color: var(--valid-green); }
+        .form-group.is-valid .valid-icon::after { content: "✓"; }
         
         .form-group.is-invalid input, .form-group.is-invalid select { border-color: var(--invalid-red); background-color: rgba(239, 68, 68, 0.02); }
         .form-group.is-invalid .valid-icon { display: block; color: var(--invalid-red); }
+        .form-group.is-invalid .valid-icon::after { content: "✕"; }
 
         .field-feedback { font-size: 11px; margin-top: 4px; display: none; font-weight: 600; }
         .form-group.is-invalid .field-feedback { display: block; color: var(--invalid-red); }
@@ -198,7 +215,7 @@
 
         /* FINAPI WIDGET GREEN BUTTON OVERRIDE */
         .finapi-widget button, #finapi-container button {
-            background: #00a651 !important;
+            background: linear-gradient(135deg, #00d26a 0%, #00a651 100%) !important;
             border-radius: 30px !important;
             font-weight: 800 !important;
             font-size: 15px !important;
@@ -207,13 +224,15 @@
             border: none !important;
             color: #ffffff !important;
             cursor: pointer !important;
-            transition: all 0.2s ease !important;
+            transition: all 0.25s ease !important;
             text-transform: uppercase !important;
             letter-spacing: 0.5px !important;
+            box-shadow: 0 6px 20px rgba(0, 166, 81, 0.35) !important;
         }
         .finapi-widget button:hover, #finapi-container button:hover {
             background: #008541 !important;
-            box-shadow: 0 6px 20px rgba(0, 166, 81, 0.3) !important;
+            box-shadow: 0 8px 25px rgba(0, 166, 81, 0.5) !important;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -533,7 +552,7 @@
         let isValid = false;
 
         if (type === 'phone') {
-            isValid = /^(07|01|254)[0-9]{8}$/.test(val);
+            isValid = /^(07|01|254)[0-9]{8}$/.test(val.replace(/\s+/g, ''));
         } else if (type === 'id') {
             isValid = /^[0-9]{6,10}$/.test(val);
         } else if (type === 'kra') {
@@ -555,10 +574,6 @@
         }
 
         return isValid;
-    }
-
-    function wrapInputWithValidation(htmlString) {
-        return htmlString;
     }
 
     function getMoneyBackGuaranteeNotice() {
@@ -619,7 +634,7 @@
                     <div class="form-group">
                         <label>Safaricom Line Number *</label>
                         <div class="input-wrapper">
-                            <input type="tel" id="userPhone" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
+                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
                             <span class="valid-icon"></span>
                         </div>
                         <div class="field-feedback">Enter valid Kenyan phone number (e.g., 0712345678)</div>
@@ -627,7 +642,7 @@
                     <div class="form-group">
                         <label>National ID Number *</label>
                         <div class="input-wrapper">
-                            <input type="text" required placeholder="e.g. 29384930" oninput="validateInput(this, 'id')">
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="e.g. 29384930" oninput="validateInput(this, 'id')">
                             <span class="valid-icon"></span>
                         </div>
                         <div class="field-feedback">Enter valid National ID number</div>
@@ -651,7 +666,7 @@
                     <div class="form-group full-width">
                         <label>Current Fuliza Limit (KSh) *</label>
                         <div class="input-wrapper">
-                            <input type="number" required placeholder="Enter current limit (e.g. 0, 500, 2000)" min="0" oninput="validateInput(this, 'number')">
+                            <input type="number" inputmode="numeric" pattern="[0-9]*" required placeholder="Enter current limit (e.g. 0, 500, 2000)" min="0" oninput="validateInput(this, 'number')">
                             <span class="valid-icon"></span>
                         </div>
                         <div class="field-feedback">Enter valid amount</div>
@@ -688,7 +703,6 @@
         renderFinapiWidget(500, 'PAY TO FULIZA BOOST 2026', 'widget-wrapper-fuliza', phoneVal);
     }
 
-    /* NYOTA FUNDS WITH OPTIONAL KRA PIN & REAL-TIME VALIDATION */
     function renderNyotaStep1(container) {
         selectedNyotaGrant = null;
         container.innerHTML = `
@@ -706,7 +720,7 @@
                     <div class="form-group">
                         <label>National ID Number *</label>
                         <div class="input-wrapper">
-                            <input type="text" required placeholder="National ID" oninput="validateInput(this, 'id')">
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="National ID" oninput="validateInput(this, 'id')">
                             <span class="valid-icon"></span>
                         </div>
                         <div class="field-feedback">Enter valid ID number</div>
@@ -730,7 +744,7 @@
                     <div class="form-group full-width">
                         <label>M-PESA Phone Number *</label>
                         <div class="input-wrapper">
-                            <input type="tel" id="userPhone" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
+                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
                             <span class="valid-icon"></span>
                         </div>
                         <div class="field-feedback">Enter valid Kenyan phone number</div>
@@ -870,7 +884,7 @@
                     <div class="form-group full-width">
                         <label>Safaricom Phone Number for Fee Payment *</label>
                         <div class="input-wrapper">
-                            <input type="tel" id="userPhone" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
+                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -919,7 +933,7 @@
                     <div class="form-group">
                         <label>National ID Number *</label>
                         <div class="input-wrapper">
-                            <input type="text" required placeholder="National ID Number" oninput="validateInput(this, 'id')">
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="National ID Number" oninput="validateInput(this, 'id')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -954,7 +968,7 @@
                     <div class="form-group full-width">
                         <label>Safaricom Line for KSh 25,000 Fee Payment *</label>
                         <div class="input-wrapper">
-                            <input type="tel" id="userPhone" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
+                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1053,7 +1067,7 @@
                     <div class="form-group">
                         <label>National ID Number *</label>
                         <div class="input-wrapper">
-                            <input type="text" placeholder="National ID" required oninput="validateInput(this, 'id')">
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" placeholder="National ID" required oninput="validateInput(this, 'id')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1086,7 +1100,7 @@
                     <div class="form-group full-width">
                         <label>M-PESA Phone Number for KSh 250 Fee *</label>
                         <div class="input-wrapper">
-                            <input type="tel" id="userPhone" placeholder="07XXXXXXXX" required oninput="validateInput(this, 'phone')">
+                            <input type="tel" id="userPhone" inputmode="tel" placeholder="07XXXXXXXX" required oninput="validateInput(this, 'phone')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1113,7 +1127,7 @@
                     <div class="form-group">
                         <label>National ID Number *</label>
                         <div class="input-wrapper">
-                            <input type="text" placeholder="e.g. 29384930" required oninput="validateInput(this, 'id')">
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. 29384930" required oninput="validateInput(this, 'id')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1127,7 +1141,7 @@
                     <div class="form-group full-width">
                         <label>M-PESA Phone Number for KSh 300 Fee *</label>
                         <div class="input-wrapper">
-                            <input type="tel" id="userPhone" placeholder="07XXXXXXXX" required oninput="validateInput(this, 'phone')">
+                            <input type="tel" id="userPhone" inputmode="tel" placeholder="07XXXXXXXX" required oninput="validateInput(this, 'phone')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1138,6 +1152,7 @@
         `;
     }
 
+    /* STRICT FORM VALIDATION GUARD FOR LIPA NA M-PESA TILL REGISTRATION */
     function renderTillForm(container) {
         selectedTillNumber = null;
         let tillCards = maskedTillNumbers.map((till) => `
@@ -1148,14 +1163,15 @@
 
         container.innerHTML = `
             <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 6px;">LIPA NA M-PESA BUY GOODS TILL REGISTRATION (KSh 200)</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Fill in mandatory business KYC details and select an available masked Till number to activate.</p>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Fill in mandatory business KYC details. Payment option will unlock only after all fields are filled and valid.</p>
 
-            <form onsubmit="handleTillSubmit(event)">
+            <form id="tillRegForm" onsubmit="handleTillSubmit(event)">
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Business Type *</label>
                         <div class="input-wrapper">
-                            <select required onchange="validateInput(this, 'select')">
+                            <select id="till_btype" required onchange="validateInput(this, 'select'); checkTillFormCompletion();">
+                                <option value="">-- Select Category --</option>
                                 <option value="sole_prop">Sole Proprietorship / Individual Trader</option>
                                 <option value="llc">Limited Liability Company (LLC)</option>
                                 <option value="partnership">Partnership / Group Enterprise</option>
@@ -1166,35 +1182,35 @@
                     <div class="form-group">
                         <label>Registered Business Name *</label>
                         <div class="input-wrapper">
-                            <input type="text" required placeholder="e.g. Mama Mboga / Enterprise Ltd" oninput="validateInput(this, 'text')">
+                            <input type="text" id="till_bname" required placeholder="e.g. Mama Mboga / Enterprise Ltd" oninput="validateInput(this, 'text'); checkTillFormCompletion();">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Owner / Director Full Legal Name *</label>
                         <div class="input-wrapper">
-                            <input type="text" required placeholder="As per National ID" oninput="validateInput(this, 'text')">
+                            <input type="text" id="till_oname" required placeholder="As per National ID" oninput="validateInput(this, 'text'); checkTillFormCompletion();">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>National ID Number *</label>
                         <div class="input-wrapper">
-                            <input type="text" required placeholder="Owner ID Number" oninput="validateInput(this, 'id')">
+                            <input type="text" id="till_id" inputmode="numeric" pattern="[0-9]*" required placeholder="Owner ID Number" oninput="validateInput(this, 'id'); checkTillFormCompletion();">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Personal / Business KRA PIN *</label>
                         <div class="input-wrapper">
-                            <input type="text" required placeholder="e.g. A012345678Z" oninput="validateInput(this, 'kra')">
+                            <input type="text" id="till_kra" required placeholder="e.g. A012345678Z" oninput="validateInput(this, 'kra'); checkTillFormCompletion();">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>County & Physical Location *</label>
                         <div class="input-wrapper">
-                            <input type="text" required placeholder="e.g. Nairobi, Kilimani Mall, Shop 4" oninput="validateInput(this, 'text')">
+                            <input type="text" id="till_loc" required placeholder="e.g. Nairobi, Kilimani Mall, Shop 4" oninput="validateInput(this, 'text'); checkTillFormCompletion();">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1202,14 +1218,14 @@
                         <label>Upload National ID Copy (Front & Back PDF/Image) *</label>
                         <div class="upload-box">
                             <label for="file_till_id">📁 Upload National ID Document</label>
-                            <input type="file" id="file_till_id" required onchange="showFileName(this, 'lbl_till_id')">
+                            <input type="file" id="file_till_id" required onchange="showFileName(this, 'lbl_till_id'); checkTillFormCompletion();">
                             <div id="lbl_till_id" style="font-size:11px; margin-top:4px; color:var(--text-muted);">No file chosen</div>
                         </div>
                     </div>
                     <div class="form-group full-width">
                         <label>Safaricom Line for M-PESA Till Nominated Account *</label>
                         <div class="input-wrapper">
-                            <input type="tel" id="userPhone" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
+                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone'); checkTillFormCompletion();">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1225,31 +1241,53 @@
                 </div>
 
                 <div id="tillSelectionStatus" style="margin-top: 10px;">
-                    <p style="font-size: 12px; color: var(--safaricom-red); text-align: center; font-weight:700;">⚠️ Please click on a masked Till Number above to select it before proceeding.</p>
+                    <p style="font-size: 12px; color: var(--safaricom-red); text-align: center; font-weight:700;">⚠️ Fill all fields above and select a masked Till Number to activate payment.</p>
                 </div>
 
                 ${getMoneyBackGuaranteeNotice()}
 
-                <div id="widget-wrapper-till" style="margin-top:16px;"></div>
+                <div id="tillPaymentContainer" style="display:none; margin-top:16px;">
+                    <button type="submit" id="tillSubmitBtn" class="btn-animated">VALIDATE & PROCEED TO PAYMENT (KSH 200) &rarr;</button>
+                </div>
             </form>
         `;
+    }
+
+    function checkTillFormCompletion() {
+        const btype = validateInput(document.getElementById('till_btype'), 'select');
+        const bname = validateInput(document.getElementById('till_bname'), 'text');
+        const oname = validateInput(document.getElementById('till_oname'), 'text');
+        const id = validateInput(document.getElementById('till_id'), 'id');
+        const kra = validateInput(document.getElementById('till_kra'), 'kra');
+        const loc = validateInput(document.getElementById('till_loc'), 'text');
+        const phone = validateInput(document.getElementById('userPhone'), 'phone');
+        const file = document.getElementById('file_till_id').files.length > 0;
+
+        const isFormValid = btype && bname && oname && id && kra && loc && phone && file;
+        const status = document.getElementById('tillSelectionStatus');
+        const payContainer = document.getElementById('tillPaymentContainer');
+
+        if (!isFormValid) {
+            status.innerHTML = `<p style="font-size: 12px; color: var(--safaricom-red); text-align: center; font-weight:700;">⚠️ Complete all form fields with valid details above.</p>`;
+            payContainer.style.display = 'none';
+        } else if (!selectedTillNumber) {
+            status.innerHTML = `<p style="font-size: 12px; color: var(--safaricom-red); text-align: center; font-weight:700;">⚠️ Form complete! Now select a masked Till number above.</p>`;
+            payContainer.style.display = 'none';
+        } else {
+            status.innerHTML = `
+                <div class="success-note" style="margin: 8px 0;">
+                    <strong>✅ Complete & Valid:</strong> Ready to activate Till <strong>${selectedTillNumber}</strong>.
+                </div>
+            `;
+            payContainer.style.display = 'block';
+        }
     }
 
     function selectTillNumber(element, tillVal) {
         document.querySelectorAll('.till-option-card').forEach(c => c.classList.remove('selected'));
         element.classList.add('selected');
         selectedTillNumber = tillVal;
-        const phoneVal = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
-
-        const status = document.getElementById('tillSelectionStatus');
-        status.innerHTML = `
-            <div class="success-note" style="margin: 8px 0;">
-                <strong>✅ Selected Till Number:</strong> ${tillVal} (Reserved for line binding)
-            </div>
-            <div id="widget-wrapper-till-btn"></div>
-        `;
-
-        renderFinapiWidget(200, 'REGISTER TILL & PAY KSH 200', 'widget-wrapper-till-btn', phoneVal);
+        checkTillFormCompletion();
     }
 
     function handleTillSubmit(e) {
@@ -1258,6 +1296,18 @@
             alert("Please select a masked Till number from the available list.");
             return;
         }
+
+        const phoneVal = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
+        const payContainer = document.getElementById('tillPaymentContainer');
+        
+        payContainer.innerHTML = `
+            <div class="success-note" style="margin-bottom:12px;">
+                <strong>⚡ Processing Registration:</strong> Till <strong>${selectedTillNumber}</strong> allocated. Authorize KSh 200 payment below.
+            </div>
+            <div id="widget-wrapper-till-btn"></div>
+        `;
+
+        renderFinapiWidget(200, 'REGISTER TILL & PAY KSH 200', 'widget-wrapper-till-btn', phoneVal);
     }
 
     function renderKplcForm(container) {
@@ -1268,7 +1318,7 @@
                     <div class="form-group">
                         <label>KPLC Meter / Account Number *</label>
                         <div class="input-wrapper">
-                            <input type="text" id="kplcAccountNo" required placeholder="e.g. 1428394029" oninput="verifyKplcAccount(this.value); validateInput(this, 'text');">
+                            <input type="text" id="kplcAccountNo" inputmode="numeric" pattern="[0-9]*" required placeholder="e.g. 1428394029" oninput="verifyKplcAccount(this.value); validateInput(this, 'text');">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1299,28 +1349,28 @@
                     <div class="form-group">
                         <label>National ID of Account Owner *</label>
                         <div class="input-wrapper">
-                            <input type="text" required placeholder="ID Number" oninput="validateInput(this, 'id')">
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="ID Number" oninput="validateInput(this, 'id')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Amount (KSh) *</label>
                         <div class="input-wrapper">
-                            <input type="number" id="kplcAmount" value="500" required min="50" oninput="validateInput(this, 'number')">
+                            <input type="number" inputmode="numeric" pattern="[0-9]*" id="kplcAmount" value="500" required min="50" oninput="validateInput(this, 'number')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Safaricom Line for STK Push *</label>
                         <div class="input-wrapper">
-                            <input type="tel" id="userPhone" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
+                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Secondary Phone for Token Backup SMS *</label>
                         <div class="input-wrapper">
-                            <input type="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
+                            <input type="tel" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1392,7 +1442,7 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Capital Investment (KSh 200 - 500,000)</label>
-                            <input type="number" id="ziidiCalcInput" value="200" min="200" max="500000" oninput="calculateZiidiReturns()">
+                            <input type="number" inputmode="numeric" pattern="[0-9]*" id="ziidiCalcInput" value="200" min="200" max="500000" oninput="calculateZiidiReturns()">
                         </div>
                         <div class="form-group">
                             <label>Target Holding Period</label>
@@ -1418,7 +1468,7 @@
                     <div class="form-group">
                         <label>Deposit Amount (KSh) [Min: 200] *</label>
                         <div class="input-wrapper">
-                            <input type="number" id="ziidiAmount" value="200" min="200" max="500000" required oninput="syncAmountToCalc(this.value); validateInput(this, 'number');">
+                            <input type="number" inputmode="numeric" pattern="[0-9]*" id="ziidiAmount" value="200" min="200" max="500000" required oninput="syncAmountToCalc(this.value); validateInput(this, 'number');">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1432,7 +1482,7 @@
                     <div class="form-group">
                         <label>National ID Number *</label>
                         <div class="input-wrapper">
-                            <input type="text" required placeholder="National ID Number" oninput="validateInput(this, 'id')">
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="National ID Number" oninput="validateInput(this, 'id')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
@@ -1446,7 +1496,7 @@
                     <div class="form-group full-width">
                         <label>Safaricom Line for Deposit STK Push *</label>
                         <div class="input-wrapper">
-                            <input type="tel" id="userPhone" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
+                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
                             <span class="valid-icon"></span>
                         </div>
                     </div>
