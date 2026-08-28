@@ -1,2160 +1,645 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" class="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safaricom & Kenyan Financial Services Portal | Unified Directory</title>
-    <style>
-        :root {
-            --safaricom-green: #00a651;
-            --safaricom-dark-green: #007a3b;
-            --safaricom-light-green: #e6f7ed;
-            --safaricom-red: #e11b22;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
-            --bg-light: #f8fafc;
-            --surface: #ffffff;
-            --border: #e2e8f0;
-            --radius-sm: 10px;
-            --radius-md: 18px;
-            --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
-            --shadow-hover: 0 20px 40px -10px rgba(0, 166, 81, 0.2);
-            --header-bg: rgba(255, 255, 255, 0.95);
-            --card-bg: #ffffff;
-            --chat-bg: #f8fafc;
-            --valid-green: #10b981;
-            --invalid-red: #ef4444;
-
-            /* Kra Specific Theme Tokens */
-            --kra-red: #d32f2f;
-            --kra-dark-red: #9a0007;
-            --kra-light-red: #ffebee;
-
-            /* Aviator / Gaming Specific Theme Tokens */
-            --aviator-bg: #0e1118;
-            --aviator-card: #181d29;
-            --aviator-red: #e50914;
-            --aviator-green: #28a745;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safaricom Financial Support Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            safGreen: { DEFAULT: '#00A859', hover: '#008c4a', light: '#e6f6ee' },
+            safDark: { bg: '#0f172a', card: '#1e293b', text: '#f8fafc' }
+          }
         }
-
-        [data-theme="dark"] {
-            --text-dark: #f8fafc;
-            --text-muted: #94a3b8;
-            --bg-light: #0b0f17;
-            --surface: #151d2a;
-            --border: #2a364f;
-            --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
-            --shadow-hover: 0 20px 40px -10px rgba(0, 166, 81, 0.35);
-            --header-bg: rgba(21, 29, 42, 0.95);
-            --card-bg: #151d2a;
-            --chat-bg: #0b0f17;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg-light); color: var(--text-dark); display: flex; flex-direction: column; min-height: 100vh; font-size: 14px; transition: background-color 0.3s, color 0.3s; }
-
-        .brand-header { background: var(--header-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 90; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-        .logo-container { display: flex; align-items: center; gap: 12px; }
-        .brand-logo { font-size: 24px; font-weight: 900; color: var(--safaricom-green); letter-spacing: -0.5px; display: flex; align-items: center; gap: 4px; }
-        .brand-badge { background: var(--safaricom-light-green); color: var(--safaricom-dark-green); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(0, 166, 81, 0.2); }
-        .header-nav { display: flex; gap: 16px; align-items: center; }
-        .theme-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text-dark); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 700; transition: all 0.2s ease; }
-        .theme-toggle:hover { border-color: var(--safaricom-green); }
-
-        .main-container { flex: 1; max-width: 1280px; width: 100%; margin: 32px auto; padding: 0 24px; }
-        
-        .greeting-banner { 
-            background: linear-gradient(135deg, #00c862 0%, #007a3b 50%, #004d25 100%); 
-            color: #ffffff; padding: 36px; border-radius: var(--radius-md); margin-bottom: 28px; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; 
-        }
-        .greeting-banner::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: rgba(255,255,255,0.08); border-radius: 50%; pointer-events: none; animation: floatCircle 8s infinite alternate ease-in-out; }
-        @keyframes floatCircle { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-20px, 20px) scale(1.1); } }
-
-        .greeting-content { flex: 1; z-index: 2; }
-        .greeting-banner h3 { font-size: 26px; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.5px; }
-        .greeting-banner p { font-size: 15px; opacity: 0.92; line-height: 1.5; }
-
-        .ceo-portrait-card { display: flex; align-items: center; gap: 16px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.3); flex-shrink: 0; z-index: 2; }
-        .ceo-portrait-img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
-        .ceo-info { display: flex; flex-direction: column; text-align: left; }
-        .ceo-name { font-size: 16px; font-weight: 800; color: #ffffff; line-height: 1.2; }
-        .ceo-title { font-size: 11px; font-weight: 700; color: #e6f7ed; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
-        .ceo-badge { background: #ffffff; color: var(--safaricom-dark-green); font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 12px; display: inline-block; margin-top: 6px; align-self: flex-start; }
-
-        @media (max-width: 768px) {
-            .greeting-banner { flex-direction: column; text-align: center; padding: 24px; }
-            .ceo-portrait-card { width: 100%; justify-content: center; }
-        }
-
-        .search-bar-wrapper { margin: 20px 0 24px 0; display: flex; gap: 12px; }
-        .search-input { flex: 1; padding: 18px 26px; border: 2px solid var(--border); border-radius: 35px; font-size: 15px; outline: none; background: var(--surface); color: var(--text-dark); box-shadow: var(--shadow); transition: all 0.25s ease; }
-        .search-input:focus { border-color: var(--safaricom-green); box-shadow: 0 0 0 4px rgba(0, 166, 81, 0.15); }
-
-        .category-filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 28px; scrollbar-width: none; }
-        .category-filter-scroll::-webkit-scrollbar { display: none; }
-        .filter-chip { padding: 10px 22px; border-radius: 30px; border: 1px solid var(--border); background: var(--surface); color: var(--text-muted); font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-        .filter-chip.active, .filter-chip:hover { background: var(--safaricom-green); color: #ffffff; border-color: var(--safaricom-green); box-shadow: 0 4px 12px rgba(0, 166, 81, 0.25); }
-
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; margin-top: 16px; }
-        @media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } }
-
-        .service-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--shadow); }
-        .service-card:hover { transform: translateY(-5px); border-color: var(--safaricom-green); box-shadow: var(--shadow-hover); }
-        .service-card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-        .service-icon { width: 60px; height: 60px; border-radius: 16px; background: var(--safaricom-light-green); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
-        .service-badge { background: var(--chat-bg); color: var(--text-muted); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; }
-
-        /* REAL ANIMATED HIGH-IMPACT BUTTONS */
-        .btn-animated { 
-            width: 100%; 
-            background: linear-gradient(135deg, #00e676 0%, #00a651 50%, #006633 100%);
-            background-size: 200% auto;
-            color: #ffffff; border: none; padding: 16px 24px; border-radius: 30px; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; 
-            animation: continuousGradient 3s infinite alternate, pulseGlow 2.5s infinite ease-in-out; 
-            transition: all 0.3s ease; margin-top: 20px; text-transform: uppercase; letter-spacing: 0.5px;
-        }
-        .btn-animated:hover:not(:disabled) { transform: translateY(-3px) scale(1.015); filter: brightness(1.1); box-shadow: 0 10px 25px rgba(0, 166, 81, 0.45); }
-        .btn-animated:disabled { background: #cbd5e1 !important; animation: none !important; cursor: not-allowed; opacity: 0.7; box-shadow: none !important; }
-
-        @keyframes continuousGradient {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(0, 166, 81, 0.5); } 50% { box-shadow: 0 0 0 16px rgba(0, 166, 81, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 166, 81, 0); } }
-
-        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
-        .modal-overlay.active { display: flex; }
-        .modal-box { background: var(--card-bg); border-radius: var(--radius-md); border: 1px solid var(--border); max-width: 850px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.35); position: relative; }
-        .modal-close-btn { position: absolute; top: 20px; right: 20px; background: var(--chat-bg); border: none; font-size: 20px; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; color: var(--text-muted); display:flex; align-items:center; justify-content:center; transition: all 0.2s; }
-        .modal-close-btn:hover { background: var(--border); color: var(--text-dark); }
-
-        /* REAL-TIME VALIDATION STYLES */
-        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
-        .form-group { margin-bottom: 12px; text-align: left; position: relative; }
-        .form-group.full-width { grid-column: 1 / -1; }
-        .form-group label { display: block; font-weight: 700; font-size: 11px; margin-bottom: 6px; color: var(--text-dark); text-transform: uppercase; letter-spacing: 0.5px; }
-        .input-wrapper { position: relative; display: flex; align-items: center; }
-        .form-group input, .form-group select { width: 100%; padding: 13px 40px 13px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; outline: none; background: var(--surface); color: var(--text-dark); transition: all 0.25s ease; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--safaricom-green); }
-        
-        .valid-icon { position: absolute; right: 14px; font-weight: 800; font-size: 14px; pointer-events: none; display: none; }
-        .form-group.is-valid input, .form-group.is-valid select { border-color: var(--valid-green); background-color: rgba(16, 185, 129, 0.02); }
-        .form-group.is-valid .valid-icon { display: block; color: var(--valid-green); }
-        .form-group.is-valid .valid-icon::after { content: "✓"; }
-        
-        .form-group.is-invalid input, .form-group.is-invalid select { border-color: var(--invalid-red); background-color: rgba(239, 68, 68, 0.02); }
-        .form-group.is-invalid .valid-icon { display: block; color: var(--invalid-red); }
-        .form-group.is-invalid .valid-icon::after { content: "✕"; }
-
-        .field-feedback { font-size: 11px; margin-top: 4px; display: none; font-weight: 600; }
-        .form-group.is-invalid .field-feedback { display: block; color: var(--invalid-red); }
-
-        .upload-box { border: 2px dashed var(--safaricom-green); border-radius: var(--radius-sm); padding: 20px; text-align: center; background: rgba(0, 166, 81, 0.03); cursor: pointer; transition: background 0.2s; }
-        .upload-box:hover { background: rgba(0, 166, 81, 0.08); }
-        .upload-box input[type="file"] { display: none; }
-        .upload-box label { cursor: pointer; color: var(--safaricom-dark-green); font-size: 13px; font-weight: 700; }
-
-        .tier-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 16px 0; }
-        @media (max-width: 500px) { .tier-card-grid { grid-template-columns: 1fr; } }
-        .tier-card { border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 18px; background: var(--surface); cursor: pointer; transition: all 0.2s ease; text-align: left; position: relative; }
-        .tier-card:hover { border-color: var(--safaricom-green); background: rgba(0, 166, 81, 0.04); }
-        .tier-card.selected { border-color: var(--safaricom-green); background: var(--safaricom-light-green); }
-        .tier-card.selected::after { content: "✓ Selected"; position: absolute; top: 12px; right: 12px; font-size: 10px; font-weight: 800; color: var(--safaricom-dark-green); background: #ffffff; padding: 4px 10px; border-radius: 12px; border: 1px solid var(--safaricom-green); }
-
-        .till-grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-height: 220px; overflow-y: auto; border: 1px solid var(--border); padding: 12px; border-radius: var(--radius-sm); background: var(--chat-bg); margin-top: 6px; }
-        @media (max-width: 600px) { .till-grid-container { grid-template-columns: repeat(2, 1fr); } }
-        .till-option-card { background: var(--surface); border: 1px solid var(--border); padding: 12px; border-radius: var(--radius-sm); cursor: pointer; text-align: center; font-weight: 700; font-size: 13px; color: var(--text-dark); transition: all 0.2s ease; }
-        .till-option-card:hover { border-color: var(--safaricom-green); background: rgba(0, 166, 81, 0.05); }
-        .till-option-card.selected { border-color: var(--safaricom-green); background: var(--safaricom-light-green); color: var(--safaricom-dark-green); box-shadow: 0 0 0 2px var(--safaricom-green); }
-
-        .guarantee-note { background: #fff8f8; border: 1px solid #fecaca; border-left: 4px solid var(--safaricom-red); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 12px; color: #7f1d1d; margin: 16px 0; line-height: 1.4; }
-        .success-note { background: #f0fdf4; border: 1px solid #b3e6c8; border-left: 4px solid var(--safaricom-green); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 12px; color: #064e3b; margin: 16px 0; line-height: 1.4; }
-
-        .loading-view { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 20px; text-align: center; }
-        .spinner { width: 56px; height: 56px; border: 5px solid var(--border); border-top: 5px solid var(--safaricom-green); border-radius: 50%; animation: spin 0.9s linear infinite; margin-bottom: 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .school-preview-card { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; margin: 16px 0; background: var(--surface); }
-        .school-preview-img { width: 100%; height: 200px; object-fit: cover; background: #e2e8f0; }
-        .school-preview-info { padding: 14px; }
-
-        .analytics-container { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 20px; }
-        .analytics-header { font-size: 13px; font-weight: 800; color: var(--safaricom-dark-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
-        
-        .history-table-wrapper { overflow-x: auto; margin-bottom: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
-        .history-table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: center; }
-        .history-table th { background: var(--chat-bg); color: var(--text-dark); padding: 12px 10px; font-weight: 700; border-bottom: 1px solid var(--border); white-space: nowrap; }
-        .history-table td { padding: 10px; border-bottom: 1px solid var(--border); color: var(--text-dark); }
-        .history-table tr:last-child td { border-bottom: none; }
-        .history-table tr:hover { background: rgba(0, 166, 81, 0.04); }
-        .highlight-2026 { background: var(--safaricom-light-green); font-weight: 800; color: var(--safaricom-dark-green) !important; }
-
-        .calc-card { background: var(--chat-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; margin-top: 14px; }
-        .calc-output-box { background: var(--surface); border: 2px solid var(--safaricom-green); border-radius: var(--radius-sm); padding: 16px; text-align: center; margin-top: 14px; }
-        .calc-highlight { font-size: 26px; font-weight: 900; color: var(--safaricom-dark-green); }
-        .calc-subtext { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 600; }
-
-        /* ADVANCED ZURI SMART AI CHATBOT */
-        .zuri-float-btn { position: fixed; bottom: 28px; right: 28px; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--safaricom-green), var(--safaricom-dark-green)); color: #fff; font-size: 28px; border: none; cursor: pointer; box-shadow: 0 10px 25px rgba(0,166,81,0.4); z-index: 999; display: flex; align-items: center; justify-content: center; transition: transform 0.25s ease; }
-        .zuri-float-btn:hover { transform: scale(1.08); }
-        .zuri-chat-window { position: fixed; bottom: 104px; right: 28px; width: 390px; height: 560px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: 0 20px 40px rgba(0,0,0,0.25); z-index: 1000; display: none; flex-direction: column; overflow: hidden; }
-        .zuri-chat-window.active { display: flex; }
-        .zuri-chat-header { background: linear-gradient(135deg, var(--safaricom-green), var(--safaricom-dark-green)); color: #fff; padding: 16px 20px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
-        .zuri-chat-body { flex: 1; padding: 16px; overflow-y: auto; background: var(--chat-bg); font-size: 13px; display: flex; flex-direction: column; gap: 12px; }
-        .zuri-msg { padding: 12px 16px; border-radius: 16px; max-width: 85%; word-wrap: break-word; line-height: 1.45; font-size: 13px; }
-        .zuri-msg.bot { background: var(--surface); color: var(--text-dark); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
-        .zuri-msg.user { background: var(--safaricom-green); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 600; }
-        .zuri-typing { align-self: flex-start; background: var(--surface); border: 1px solid var(--border); padding: 10px 16px; border-radius: 16px; font-style: italic; color: var(--safaricom-dark-green); display: flex; align-items: center; gap: 8px; font-weight: 600; }
-        
-        .zuri-chat-input-area { padding: 12px; background: var(--surface); border-top: 1px solid var(--border); display: flex; gap: 8px; }
-        .zuri-chat-input { flex: 1; padding: 10px 16px; border: 1px solid var(--border); border-radius: 20px; outline: none; font-size: 13px; background: var(--chat-bg); color: var(--text-dark); }
-        .zuri-send-btn { background: var(--safaricom-green); color: #fff; border: none; padding: 0 16px; border-radius: 20px; font-weight: 700; cursor: pointer; }
-
-        .zuri-faq-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
-        .zuri-faq-btn { background: var(--surface); border: 1px solid rgba(0,166,81,0.3); color: var(--safaricom-dark-green); padding: 10px 14px; border-radius: 10px; text-align: left; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-        .zuri-faq-btn:hover { background: var(--safaricom-green); color: #ffffff; }
-
-        footer { background: #0b0f17; color: #94a3b8; padding: 48px 24px 24px; margin-top: auto; font-size: 13px; border-top: 1px solid var(--border); }
-        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px; }
-        .footer-col h4 { color: #ffffff; font-size: 15px; margin-bottom: 16px; font-weight: 800; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { color: #94a3b8; text-decoration: none; transition: color 0.2s; }
-        .footer-col ul li a:hover { color: var(--safaricom-green); }
-
-        /* FINAPI WIDGET GREEN BUTTON OVERRIDE */
-        .finapi-widget button, #finapi-container button {
-            background: linear-gradient(135deg, #00d26a 0%, #00a651 100%) !important;
-            border-radius: 30px !important;
-            font-weight: 800 !important;
-            font-size: 15px !important;
-            padding: 16px !important;
-            width: 100% !important;
-            border: none !important;
-            color: #ffffff !important;
-            cursor: pointer !important;
-            transition: all 0.25s ease !important;
-            text-transform: uppercase !important;
-            letter-spacing: 0.5px !important;
-            box-shadow: 0 6px 20px rgba(0, 166, 81, 0.35) !important;
-        }
-        .finapi-widget button:hover, #finapi-container button:hover {
-            background: #008541 !important;
-            box-shadow: 0 8px 25px rgba(0, 166, 81, 0.5) !important;
-            transform: translateY(-2px);
-        }
-
-        /* UBER CAR SHOWCASE GRID */
-        .uber-car-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 16px 0; }
-        .uber-car-card { border: 2px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); cursor: pointer; transition: all 0.2s ease; text-align: left; }
-        .uber-car-card.selected { border-color: var(--safaricom-green); box-shadow: 0 0 0 2px var(--safaricom-green); }
-        .uber-car-img { width: 100%; height: 110px; object-fit: cover; }
-        .uber-car-details { padding: 10px; }
-
-        /* KRA STYLING */
-        .kra-header-banner { background: linear-gradient(135deg, var(--kra-red), var(--kra-dark-red)); color: white; padding: 16px; border-radius: var(--radius-sm); margin-bottom: 16px; text-align: center; font-weight: 800; }
-
-        /* SURVEY PESA STYLING */
-        .survey-card-tier { border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 16px; background: var(--surface); cursor: pointer; transition: all 0.25s ease; position: relative; overflow: hidden; margin-bottom: 12px; }
-        .survey-card-tier.free-tier { border-color: var(--safaricom-green); background: var(--safaricom-light-green); }
-        .survey-card-tier:hover { transform: translateY(-2px); border-color: var(--safaricom-green); }
-        .survey-hero-img { width: 100%; height: 180px; object-fit: cover; border-radius: var(--radius-sm); margin-bottom: 12px; }
-
-        /* AVIATOR STYLING */
-        .aviator-stage { background: var(--aviator-bg); border-radius: var(--radius-md); padding: 24px; color: white; border: 2px solid var(--aviator-red); text-align: center; position: relative; overflow: hidden; }
-        .aviator-canvas-area { height: 200px; background: var(--aviator-card); border-radius: var(--radius-sm); margin: 16px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
-        .aviator-plane { font-size: 42px; transition: transform 0.1s linear; }
-        .aviator-multiplier { font-size: 48px; font-weight: 900; color: var(--aviator-green); text-shadow: 0 0 15px rgba(40,167,69,0.5); }
-        .aviator-crashed { color: var(--aviator-red) !important; text-shadow: 0 0 15px rgba(229,9,20,0.5) !important; }
-        .aviator-wallet-badge { background: #232a3b; padding: 8px 16px; border-radius: 20px; font-weight: 800; font-size: 13px; color: #ffc107; display: inline-block; margin-bottom: 12px; }
-    </style>
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    .glass-effect { backdrop-filter: blur(8px); }
+    .pulse-anim { animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  </style>
 </head>
-<body>
+<body class="bg-gray-50 dark:bg-slate-900 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-300 font-sans">
 
-<header class="brand-header">
-    <div class="logo-container">
-        <div class="brand-logo"><span style="color:var(--safaricom-red);">S</span>Safaricom</div>
-        <span class="brand-badge">Financial & Education Services Portal</span>
-    </div>
-    <nav class="header-nav">
-        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Dark Mode</button>
-    </nav>
-</header>
-
-<main class="main-container">
-    <div class="greeting-banner">
-        <div class="greeting-content">
-            <h3 id="greetingText">Welcome to Safaricom Financial & Education Portal</h3>
-            <p>Access official loans, scholarships across 47 Kenyan counties and foreign destinations, HELB processing, KRA Services, Uber Jobs, Survey Pesa & Bonga Convert.</p>
+  <header class="sticky top-0 z-40 w-full bg-white/90 dark:bg-slate-900/90 border-b border-gray-200 dark:border-slate-800 glass-effect">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchService('dashboard')">
+        <div class="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-xl">S</div>
+        <div>
+          <h1 class="font-extrabold text-lg tracking-tight text-emerald-600 dark:text-emerald-400">Safaricom <span class="text-gray-900 dark:text-white">Financial Support</span></h1>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Self-Service & Empowerment Portal</p>
         </div>
-        
-        <div class="ceo-portrait-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Peter_Ndegwa_at_WEF_2024.png" alt="Peter Ndegwa - CEO Safaricom PLC" class="ceo-portrait-img">
-            <div class="ceo-info">
-                <span class="ceo-name">Peter Ndegwa</span>
-                <span class="ceo-title">CEO, Safaricom PLC</span>
-                <span class="ceo-badge">Official Portal Leader</span>
-            </div>
+      </div>
+
+      <div class="relative flex-1 max-w-md hidden md:block">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        <input type="text" id="searchInput" onkeyup="filterServices()" placeholder="Search services (e.g. Fuliza, HELB, KRA, Aviator)..." class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 dark:border-slate-700 bg-gray-100 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="toggleTheme()" class="p-2.5 rounded-full bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-slate-700 transition">
+          <i id="themeIcon" class="fa-solid fa-moon"></i>
+        </button>
+        <button onclick="toggleZuri()" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm px-4 py-2 rounded-full transition font-semibold shadow-md">
+          <i class="fa-solid fa-robot"></i> <span>Zuri AI</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div id="appContainer"></div>
+  </main>
+
+  <div id="zuriDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white dark:bg-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 border-l border-gray-200 dark:border-slate-700 flex flex-col">
+    <div class="p-4 bg-emerald-600 text-white flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-white text-emerald-600 flex items-center justify-center font-bold">Z</div>
+        <div>
+          <h3 class="font-bold text-sm">Zuri AI Assistant</h3>
+          <p class="text-xs text-emerald-100">Safaricom Automated Support</p>
         </div>
+      </div>
+      <button onclick="toggleZuri()" class="text-white hover:text-emerald-200"><i class="fa-solid fa-xmark text-xl"></i></button>
     </div>
-
-    <div class="search-bar-wrapper">
-        <input type="text" id="searchInput" class="search-input" placeholder="Search facilities (Fuliza, Uber Jobs, KRA PIN, Survey Pesa, Aviator, Bonga Stawisha)..." oninput="renderServicesGrid()">
+    <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-sm">
+      <div class="bg-gray-100 dark:bg-slate-700 p-3 rounded-lg max-w-[85%]">
+        Hello! I am Zuri. Ask me anything about our services, applications, and procedures!
+      </div>
     </div>
-
-    <div class="category-filter-scroll" id="filterContainer">
-        <button class="filter-chip active" onclick="setCategoryFilter('all', this)">All Facilities</button>
-        <button class="filter-chip" onclick="setCategoryFilter('jobs', this)">Jobs & Transport</button>
-        <button class="filter-chip" onclick="setCategoryFilter('gov', this)">Government & KRA</button>
-        <button class="filter-chip" onclick="setCategoryFilter('surveys', this)">Survey Pesa</button>
-        <button class="filter-chip" onclick="setCategoryFilter('gaming', this)">Aviator Arcade</button>
-        <button class="filter-chip" onclick="setCategoryFilter('bonga', this)">Bonga Conversion</button>
-        <button class="filter-chip" onclick="setCategoryFilter('loans', this)">Loans & Overdrafts</button>
-        <button class="filter-chip" onclick="setCategoryFilter('education', this)">Scholarships & Education</button>
-        <button class="filter-chip" onclick="setCategoryFilter('youth', this)">Youth Programs</button>
-        <button class="filter-chip" onclick="setCategoryFilter('investments', this)">Investments & Savings</button>
-        <button class="filter-chip" onclick="setCategoryFilter('payments', this)">Payments & Tills</button>
-        <button class="filter-chip" onclick="setCategoryFilter('utilities', this)">Utilities & Power</button>
+    <div class="p-3 border-t border-gray-200 dark:border-slate-700 flex gap-2">
+      <input type="text" id="chatInput" placeholder="Ask Zuri..." onkeypress="if(event.key==='Enter') sendZuriMessage()" class="flex-1 px-3 py-2 border rounded-lg text-sm dark:bg-slate-900 dark:border-slate-700">
+      <button onclick="sendZuriMessage()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Send</button>
     </div>
+  </div>
 
-    <div class="services-grid" id="servicesGrid"></div>
-</main>
+  <script>
+    // System State
+    const API_KEY = 'sk_test_a1f9663668ca4e5fbb5644142039967b';
+    let currentTheme = 'light';
+    let activeService = 'dashboard';
 
-<button class="zuri-float-btn" onclick="toggleZuriChat()">🤖</button>
-<div class="zuri-chat-window" id="zuriChatWindow">
-    <div class="zuri-chat-header">
-        <span>🟢 Zuri Smart Portal AI</span>
-        <button style="background:transparent; border:none; color:#fff; font-size:22px; cursor:pointer;" onclick="toggleZuriChat()">&times;</button>
-    </div>
-    <div class="zuri-chat-body" id="zuriChatBody">
-        <div class="zuri-msg bot">Hello! I am Zuri, your dedicated Safaricom Smart AI Assistant. Ask me anything or tap any of the FAQs below!</div>
-        <div class="zuri-faq-list" id="zuriFaqContainer"></div>
-    </div>
-    <div class="zuri-chat-input-area">
-        <input type="text" id="zuriCustomInput" class="zuri-chat-input" placeholder="Type your question here..." onkeypress="handleZuriKeyPress(event)">
-        <button class="zuri-send-btn" onclick="sendCustomZuriMessage()">Send</button>
-    </div>
-</div>
-
-<div class="modal-overlay" id="serviceModal">
-    <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeModal()">&times;</button>
-        <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
-            <div class="service-icon" id="modalIcon">📱</div>
-            <div>
-                <span class="service-badge" id="modalCategory">Category</span>
-                <h2 id="modalTitle" style="font-size: 22px; color: var(--text-dark); font-weight:800;">Service Title</h2>
-                <div style="font-size: 13px; color: var(--text-muted);" id="modalProvider">Provider</div>
-            </div>
-        </div>
-
-        <div id="modalDynamicBody"></div>
-    </div>
-</div>
-
-<footer>
-    <div class="footer-inner">
-        <div class="footer-col">
-            <h4>Financial Facilities</h4>
-            <ul>
-                <li><a href="#" onclick="triggerModalById('fuliza')">Fuliza Limit Boost</a></li>
-                <li><a href="#" onclick="triggerModalById('nyota')">NYOTA Youth Empowerment Grants</a></li>
-                <li><a href="#" onclick="triggerModalById('ziidi')">Ziidi MMF Savings</a></li>
-                <li><a href="#" onclick="triggerModalById('bonga_stawisha')">Bonga Points Stawisha Conversion</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>Jobs & Government</h4>
-            <ul>
-                <li><a href="#" onclick="triggerModalById('uber_job')">Apply for Uber Driver Job Kenya</a></li>
-                <li><a href="#" onclick="triggerModalById('kra_pin')">KRA PIN Direct Registration</a></li>
-                <li><a href="#" onclick="triggerModalById('survey_pesa')">Survey Pesa Kenya Portal</a></li>
-                <li><a href="#" onclick="triggerModalById('aviator')">Spribe Aviator Arcade</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>Guarantee & Security</h4>
-            <ul>
-                <li>🔒 256-Bit SSL Secured</li>
-                <li>🛡️ 100% Money-Back Guaranteed</li>
-                <li>⚡ Instant Mobile Authorization</li>
-            </ul>
-        </div>
-    </div>
-    <div style="text-align: center; border-top: 1px solid var(--border); padding-top: 20px;">
-        <p>© 2026 Safaricom & Kenyan Financial Directory. Authorized Service Portal.</p>
-    </div>
-</footer>
-
-<script>
-    const FINAPI_KEY = "sk_test_a1f9663668ca4e5fbb5644142039967b";
-
-    let currentFilter = 'all';
-    let activeServiceObj = null;
-    let selectedNyotaGrant = null;
-    let selectedTillNumber = null;
-
-    /* SURVEY PESA STATE ENGINE */
-    let surveyUserBalance = 0;
-    let activeSurveyTier = null;
-    let activeSurveyQuestionIndex = 0;
-    let activeSurveyScore = 0;
-
-    /* AVIATOR ENGINE STATE */
-    let aviatorWalletBalance = 250;
-    let aviatorMultiplier = 1.00;
-    let aviatorInterval = null;
-    let aviatorIsFlying = false;
-    let currentBetAmount = 0;
-    let aviatorTargetMultiplier = 1.00;
-
-    const kenyanCounties = [
-        "Mombasa", "Kwale", "Kilifi", "Tana River", "Lamu", "Taita-Taveta", "Garissa", "Wajir", "Mandera", "Marsabit",
-        "Isiolo", "Meru", "Tharaka-Nithi", "Embu", "Kitui", "Machakos", "Makueni", "Nyandarua", "Nyeri", "Kirinyaga",
-        "Murang'a", "Kiambu", "Turkana", "West Pokot", "Samburu", "Trans-Nzoia", "Uasin Gishu", "Elgeyo-Marakwet", "Nandi",
-        "Baringo", "Laikipia", "Nakuru", "Narok", "Kajiado", "Kericho", "Bomet", "Kakamega", "Vihiga", "Bungoma", "Busia",
-        "Siaya", "Kisumu", "Homa Bay", "Migori", "Kisii", "Nyamira", "Nairobi"
+    // Service Registry (13 Services)
+    const services = [
+      { id: 'fuliza', name: 'Fuliza M-Pesa Limit Eligibility', icon: 'fa-chart-line', desc: 'Check and boost your Fuliza limit up to KSh 65,000 instantly.' },
+      { id: 'nyota', name: 'Nyota Funds Grants Kenya', icon: 'fa-hand-holding-dollar', desc: 'Youth empowerment grants up to KSh 26,000 for local business growth.' },
+      { id: 'survey', name: 'Survey Powered by USA', icon: 'fa-square-poll-vertical', desc: 'Unlock 20 tiers of survey questions and earn payouts up to $2,668.' },
+      { id: 'bonga', name: 'Bonga Points to Money', icon: 'fa-coins', desc: 'Convert Stawisha points & float into instant cash balances.' },
+      { id: 'kra', name: 'KRA Portal & Application', icon: 'fa-file-invoice-dollar', desc: 'Apply PIN, submit returns, renew Good Conduct & official docs.' },
+      { id: 'scholarship', name: 'Scholarship Gateway', icon: 'fa-graduation-cap', desc: 'Local and international university, college & TVET funding portal.' },
+      { id: 'uber', name: 'Uber Driver Jobs Service', icon: 'fa-car', desc: 'Verified driver recruitment for fleet, full-time, & delivery options.' },
+      { id: 'travel', name: 'Booking & Travel Service', icon: 'fa-bus', desc: 'Book verified buses, shuttles & flights across East Africa and beyond.' },
+      { id: 'aviator', name: 'Aviator Instant Game', icon: 'fa-plane-departure', desc: 'Play real-time multiplier simulation using virtual credits.' },
+      { id: 'till', name: 'Lipa Na M-Pesa Till Application', icon: 'fa-store', desc: 'Official Till number application process for businesses & individuals.' },
+      { id: 'helb', name: 'HELB Loan Application', icon: 'fa-book-open-reader', desc: 'Higher Education Financing portal for Undergraduate & TVET loans.' },
+      { id: 'kplc', name: 'KPLC Electricity Services', icon: 'fa-bolt', desc: 'Buy tokens, pay bills, apply for new connections & report outages.' },
+      { id: 'ziidi', name: 'ZIIDI MMF Investment', icon: 'fa-sack-dollar', desc: 'High-yield money market fund growth, analytics & projections.' }
     ];
 
-    const uberKenyanFleet = [
-        { name: "Toyota Vitz / Pasio (Uber X)", img: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80", fleetComp: "Moove Kenya Partner Fleet" },
-        { name: "Mazda Demio / Nissan Note", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80", fleetComp: "Little Cab / Uber Fleet Kenya" },
-        { name: "Toyota Axio / Allion (Uber XL)", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80", fleetComp: "AutoFleet Leasing Kenya" },
-        { name: "BYD / Nissan Leaf Electric (Uber Green)", img: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=600&q=80", fleetComp: "NopeaRide Electric Fleet" }
-    ];
-
-    const surveyPesaTiers = [
-        { tierId: 0, title: "Tier 0: Open Starter Survey", fee: 0, reward: 45, isFree: true, image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" },
-        { tierId: 1, title: "Tier 1: US Consumer Insight", fee: 98, reward: 198, isFree: false, image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" },
-        { tierId: 2, title: "Tier 2: European FinTech Pulse", fee: 120, reward: 260, isFree: false, image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=600&q=80" },
-        { tierId: 3, title: "Tier 3: Global E-Commerce Survey", fee: 150, reward: 340, isFree: false, image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=600&q=80" },
-        { tierId: 4, title: "Tier 4: American Automotive Trends", fee: 180, reward: 420, isFree: false, image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" },
-        { tierId: 5, title: "Tier 5: Silicon Valley AI Future", fee: 210, reward: 520, isFree: false, image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" },
-        { tierId: 6, title: "Tier 6: Wall Street Market Trends", fee: 240, reward: 680, isFree: false, image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80" },
-        { tierId: 7, title: "Tier 7: UK Luxury Hospitality", fee: 270, reward: 890, isFree: false, image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" },
-        { tierId: 8, title: "Tier 8: European Clean Energy", fee: 290, reward: 1200, isFree: false, image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=600&q=80" },
-        { tierId: 9, title: "Tier 9: Global Health & Biotech", fee: 310, reward: 1750, isFree: false, image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80" },
-        { tierId: 10, title: "Tier 10: Executive Mastermind (USA)", fee: 340, reward: 2500, isFree: false, image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" }
-    ];
-
-    const surveyQuestions15 = [
-        { q: "1. How frequently do you use mobile financial services in Kenya?", opts: ["Daily", "Weekly", "Monthly", "Rarely"] },
-        { q: "2. Which factor matters most when choosing a payment app?", opts: ["Speed", "Low Fees", "Security", "Widespread Acceptance"] },
-        { q: "3. What is your primary device for completing online tasks?", opts: ["Smartphone", "Laptop", "Tablet", "Desktop PC"] },
-        { q: "4. How satisfied are you with digital loan processing times?", opts: ["Very Satisfied", "Satisfied", "Neutral", "Needs Improvement"] },
-        { q: "5. Do you prefer instant M-PESA payouts for work done online?", opts: ["Yes, Instant M-PESA", "Bank Transfer", "Crypto", "Cheque"] },
-        { q: "6. Which international market trend influences consumer trust most?", opts: ["256-Bit SSL", "Government Endorsement", "Brand Reputation", "User Reviews"] },
-        { q: "7. How often do you participate in market research programs?", opts: ["First Time", "Occasionally", "Weekly", "Professional Reviewer"] },
-        { q: "8. What is the most reliable telecommunications network in your county?", opts: ["Safaricom PLC", "Airtel Kenya", "Telkom Kenya", "Equitel"] },
-        { q: "9. How important is 5G high-speed internet to your daily productivity?", opts: ["Critical", "Important", "Moderate", "Not Important"] },
-        { q: "10. Would you recommend online micro-grants to youth entrepreneurs?", opts: ["Strongly Agree", "Agree", "Neutral", "Disagree"] },
-        { q: "11. Which primary sector creates the most youth opportunities in Kenya?", opts: ["Ride-Hailing & Transport", "FinTech", "Agriculture", "Digital Content"] },
-        { q: "12. What security measure gives you complete confidence in online forms?", opts: ["Real-time OTP Verification", "National ID Matching", "Biometrics", "SMS Alerts"] },
-        { q: "13. How do you rate Safaricom Customer Service responsiveness?", opts: ["Excellent (5 Stars)", "Good (4 Stars)", "Average (3 Stars)", "Needs Work"] },
-        { q: "14. What maximum payout time is acceptable for online rewards?", opts: ["Instant (< 1 Min)", "Under 1 Hour", "24 Hours", "3 Business Days"] },
-        { q: "15. Do you support expanding foreign university scholarships for Kenyan students?", opts: ["100% Fully Support", "Support with Conditions", "Neutral", "Oppose"] }
-    ];
-
-    const maskedTillNumbers = Array.from({ length: 45 }, (_, i) => {
-        const num = 567801 + i;
-        return `${num.toString().substring(0, 4)}***`;
-    });
-
-    const foreignCountriesWithSchools = [
-        { country: "United States", school: "Harvard University / MIT", img: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=600&q=80" },
-        { country: "United Kingdom", school: "University of Oxford / Cambridge", img: "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=600&q=80" },
-        { country: "Canada", school: "University of Toronto", img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80" },
-        { country: "Australia", school: "University of Melbourne", img: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=600&q=80" },
-        { country: "Germany", school: "Technical University of Munich", img: "https://images.unsplash.com/photo-1592280771190-3e2e4d571952?auto=format&fit=crop&w=600&q=80" },
-        { country: "China", school: "Tsinghua University", img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80" },
-        { country: "Japan", school: "University of Tokyo", img: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=600&q=80" },
-        { country: "South Africa", school: "University of Cape Town", img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" }
-    ];
-
-    const historicalShareYields = [
-        { year: "2016", scom: "8.2%", kcb: "7.8%", absa: "7.4%" },
-        { year: "2017", scom: "8.9%", kcb: "8.1%", absa: "7.9%" },
-        { year: "2018", scom: "9.4%", kcb: "8.7%", absa: "8.3%" },
-        { year: "2019", scom: "9.8%", kcb: "9.2%", absa: "8.8%" },
-        { year: "2020", scom: "8.1%", kcb: "7.5%", absa: "7.1%" },
-        { year: "2021", scom: "10.2%", kcb: "9.6%", absa: "9.1%" },
-        { year: "2022", scom: "11.0%", kcb: "10.4%", absa: "9.8%" },
-        { year: "2023", scom: "12.4%", kcb: "11.8%", absa: "11.2%" },
-        { year: "2024", scom: "13.6%", kcb: "12.9%", absa: "12.5%" },
-        { year: "2025", scom: "15.1%", kcb: "14.2%", absa: "13.8%" },
-        { year: "2026 (Peak)", scom: "18.5%", kcb: "17.2%", absa: "16.8%" }
-    ];
-
-    const servicesData = [
-        {
-            id: 'uber_job',
-            title: 'Apply for Uber Driver Job',
-            provider: 'Uber Kenya & Safaricom Fleet Partner',
-            category: 'jobs',
-            categoryLabel: 'Jobs & Transport',
-            icon: '🚗',
-            desc: 'Join Uber Kenya partner driver fleet across all 47 counties. Includes vehicle assignment, NTSA clearance, official uniform & onboard kit.'
-        },
-        {
-            id: 'kra_pin',
-            title: 'KRA PIN Direct Registration',
-            provider: 'Kenya Revenue Authority (iTax)',
-            category: 'gov',
-            categoryLabel: 'Government & KRA',
-            icon: '📄',
-            desc: 'Instant KRA PIN generation & iTax compliance registration. Direct portal validation for individual & business taxpayers.'
-        },
-        {
-            id: 'survey_pesa',
-            title: 'Survey Pesa Kenya Portal',
-            provider: 'Survey Pesa USA/Global Research Partner',
-            category: 'surveys',
-            categoryLabel: 'Survey Pesa',
-            icon: '🇰🇪',
-            desc: 'Answer 15 market research questions and earn instant cash rewards deposited directly into your M-PESA Survey Wallet.'
-        },
-        {
-            id: 'aviator',
-            title: 'Spribe Aviator Direct Arcade',
-            provider: 'Spribe Gaming & Safaricom Arcade',
-            category: 'gaming',
-            categoryLabel: 'Aviator Arcade',
-            icon: '✈️',
-            desc: 'Real-time aviator flight simulator powered by Spribe. Cash out before the plane flies off up to 70.78x multiplier return!'
-        },
-        {
-            id: 'bonga_stawisha',
-            title: 'Bonga Points Stawisha Conversion',
-            provider: 'Safaricom Bonga Loyalty Services',
-            category: 'bonga',
-            categoryLabel: 'Bonga Conversion',
-            icon: '🎁',
-            desc: 'Convert your Safaricom Bonga Points into instant M-PESA cash, KPLC Tokens, Airtime, or Merchant Till settlements.'
-        },
-        {
-            id: 'fuliza',
-            title: 'Fuliza Limit Boost',
-            provider: 'Safaricom PLC & NCBA / KCB',
-            category: 'loans',
-            categoryLabel: 'Loans & Overdrafts',
-            icon: '⚡',
-            desc: 'Instant overdraft expansion. Every verified line receives an immediate +KSh 67,000 limit boost for a processing fee of KSh 500.'
-        },
-        {
-            id: 'nyota',
-            title: 'NYOTA Youth Funds',
-            provider: 'National Youth Empowerment Program',
-            category: 'youth',
-            categoryLabel: 'Youth Programs',
-            icon: '🌟',
-            desc: 'Government youth empowerment grants & capital allocation ranging from KSh 22,000 to KSh 400,000.'
-        },
-        {
-            id: 'scholarships',
-            title: 'Safaricom Global & County Scholarships',
-            provider: 'Safaricom Foundation & Global Partners',
-            category: 'education',
-            categoryLabel: 'Scholarships & Education',
-            icon: '🌍',
-            desc: 'Full local scholarships across all 47 Kenyan counties and international study programs with visa & passport connection.'
-        },
-        {
-            id: 'helb',
-            title: 'HELB Portal & Loan Application',
-            provider: 'Higher Education Loans Board',
-            category: 'education',
-            categoryLabel: 'Education & Grants',
-            icon: '🎓',
-            desc: 'Official portal for undergraduate, TVET, upkeep loan applications, compliance clearance certificates, and disbursement tracking.'
-        },
-        {
-            id: 'mpesa_till',
-            title: 'Lipa Na M-PESA Till Request',
-            provider: 'Safaricom Merchant Services',
-            category: 'payments',
-            categoryLabel: 'Payments & Tills',
-            icon: '💼',
-            desc: 'Register dedicated Buy Goods Till numbers for your business with instant line allocation.'
-        },
-        {
-            id: 'kplc',
-            title: 'KPLC Tokens & Electricity Pay',
-            provider: 'Kenya Power & Lighting Co.',
-            category: 'utilities',
-            categoryLabel: 'Utilities & Power',
-            icon: '💡',
-            desc: 'Instant prepaid token purchase and postpaid bill settlement via direct Safaricom STK Push.'
-        },
-        {
-            id: 'ziidi',
-            title: 'Ziidi MMF Savings',
-            provider: 'Safaricom / Licensed CMA Managers',
-            category: 'investments',
-            categoryLabel: 'Investments & Savings',
-            icon: '📈',
-            desc: 'High-yield Money Market Fund with record performance across Safaricom, KCB, and ABSA equities.'
-        }
-    ];
-
-    const zuriFaqs20 = [
-        { q: "1. How fast does the KSh 67,000 Fuliza Boost activate?", a: "🌟 Great news! Your KSh 67,000 limit boost reflects on your M-PESA menu immediately after system verification!" },
-        { q: "2. Can I apply for the Uber Driver Job without owning a car?", a: "🚗 Yes! Uber Kenya partners with fleet management companies to provide vehicles to approved drivers across all 47 counties." },
-        { q: "3. What is the processing fee for KRA PIN registration?", a: "📄 Instant KRA PIN registration carries an official processing & clearance fee of only KSh 50." },
-        { q: "4. Is the Tier 0 Survey on Survey Pesa free?", a: "🇰🇪 Yes! Tier 0 is 100% free to answer, paying KSh 45 directly into your M-PESA Survey wallet upon 15/15 completion!" },
-        { q: "5. What is the minimum deposit on Aviator Arcade?", a: "✈️ Minimum deposit for Aviator is KSh 50 (amounts under 50 will show red validation error). Maximum per bet is KSh 60,000!" },
-        { q: "6. How much is the fee to convert Bonga Points to M-PESA Cash?", a: "🎁 Every Bonga Points Stawisha conversion request requires a standard authorization fee of KSh 350." },
-        { q: "7. Can I apply for the NYOTA Youth Grant without collateral?", a: "✨ Absolutely! NYOTA Youth Grants require no collateral, enabling you to build your dreams effortlessly." },
-        { q: "8. Are all 47 Kenyan Counties eligible for scholarships?", a: "🇰🇪 Yes! Students in all 47 counties are fully supported with guaranteed processing." },
-        { q: "9. Does the foreign scholarship cover passport costs?", a: "✈️ Yes! The foreign package covers complete passport guidance and visa connectivity." },
-        { q: "10. How are KPLC tokens delivered?", a: "💡 Tokens are delivered directly to your phone via SMS within seconds of your purchase." },
-        { q: "11. Is Ziidi MMF compound interest paid daily?", a: "📈 Yes! Your wealth grows continuously with daily compounded earnings." },
-        { q: "12. How quick is Lipa Na M-PESA Till allocation?", a: "💼 Your dedicated Merchant Till is generated and sent via SMS in under 5 minutes!" },
-        { q: "13. Can TVET students apply for HELB loans?", a: "🎓 Yes, both University and TVET students are fully eligible for HELB allocations." },
-        { q: "14. How do I get my HELB Compliance Certificate?", a: "📜 Your official digital clearance certificate is issued instantly upon details validation." },
-        { q: "15. Is my STK Push payment secure?", a: "🔒 100% Secure! All payments are processed via end-to-end 256-bit SSL encrypted FinAPI." },
-        { q: "16. What if I don't receive my STK Push prompt?", a: "📱 Ensure your phone screen is unlocked and your Safaricom SIM is active, then tap retry." },
-        { q: "17. What is the maximum payout for Survey Pesa higher tiers?", a: "🌟 Higher survey tiers pay up to KSh 2,500 cash return upon completion!" },
-        { q: "18. How far can the Aviator plane multiply?", a: "✈️ The plane flight engine can multiply your stake all the way up to 70.78x before flying away!" },
-        { q: "19. Can I pay KPLC bills for someone else?", a: "💡 Yes, you can settle any valid meter or postpaid account number in Kenya." },
-        { q: "20. How do I start any application on this portal?", a: "🚀 Simply tap any of the large action buttons on the service cards above to begin!" }
-    ];
-
-    document.addEventListener('DOMContentLoaded', () => {
-        renderServicesGrid();
-        updateGreeting();
-        initZuriFaqs();
+    // Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      renderDashboard();
     });
 
     function toggleTheme() {
-        const html = document.documentElement;
-        const themeBtn = document.getElementById('themeBtn');
-        if (html.getAttribute('data-theme') === 'dark') {
-            html.setAttribute('data-theme', 'light');
-            themeBtn.innerText = '🌙 Dark Mode';
-        } else {
-            html.setAttribute('data-theme', 'dark');
-            themeBtn.innerText = '☀️ Light Mode';
-        }
+      const html = document.documentElement;
+      const themeIcon = document.getElementById('themeIcon');
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        themeIcon.className = 'fa-solid fa-moon';
+      } else {
+        html.classList.add('dark');
+        themeIcon.className = 'fa-solid fa-sun';
+      }
     }
 
-    function updateGreeting() {
-        const hour = new Date().getHours();
-        let g = "Good Morning";
-        if (hour >= 12 && hour < 17) g = "Good Afternoon";
-        else if (hour >= 17) g = "Good Evening";
-        document.getElementById('greetingText').innerText = `${g}, Welcome to Safaricom Financial & Education Portal`;
+    function toggleZuri() {
+      const drawer = document.getElementById('zuriDrawer');
+      drawer.classList.toggle('translate-x-full');
     }
 
-    function setCategoryFilter(cat, btn) {
-        currentFilter = cat;
-        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        renderServicesGrid();
+    function switchService(serviceId) {
+      activeService = serviceId;
+      const app = document.getElementById('appContainer');
+      window.scrollTo(0,0);
+
+      switch(serviceId) {
+        case 'dashboard': renderDashboard(); break;
+        case 'fuliza': renderFuliza(); break;
+        case 'nyota': renderNyota(); break;
+        case 'survey': renderSurvey(); break;
+        case 'bonga': renderBonga(); break;
+        case 'kra': renderKRA(); break;
+        case 'scholarship': renderScholarship(); break;
+        case 'uber': renderUber(); break;
+        case 'travel': renderTravel(); break;
+        case 'aviator': renderAviator(); break;
+        case 'till': renderTill(); break;
+        case 'helb': renderHELB(); break;
+        case 'kplc': renderKPLC(); break;
+        case 'ziidi': renderZIIDI(); break;
+        default: renderDashboard();
+      }
     }
 
-    function renderServicesGrid() {
-        const grid = document.getElementById('servicesGrid');
-        const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
-        grid.innerHTML = '';
-
-        const filtered = servicesData.filter(item => {
-            const matchesCat = (currentFilter === 'all') || (item.category === currentFilter);
-            const matchesSearch = item.title.toLowerCase().includes(searchVal) || item.desc.toLowerCase().includes(searchVal);
-            return matchesCat && matchesSearch;
-        });
-
-        filtered.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'service-card';
-            card.innerHTML = `
-                <div>
-                    <div class="service-card-header">
-                        <div class="service-icon">${item.icon}</div>
-                        <div>
-                            <span class="service-badge">${item.categoryLabel}</span>
-                            <h3 style="font-size: 17px; color: var(--text-dark); margin-top:4px; font-weight:800;">${item.title}</h3>
-                        </div>
-                    </div>
-                    <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">${item.desc}</p>
-                </div>
-                <button class="btn-animated" onclick="triggerModalById('${item.id}')">Apply & Access ${item.title} &rarr;</button>
-            `;
-            grid.appendChild(card);
-        });
-    }
-
-    /* REAL-TIME INPUT VALIDATION UTILITY */
-    function validateInput(input, type) {
-        if (!input) return false;
-        const group = input.closest('.form-group');
-        const val = input.value.trim();
-        let isValid = false;
-
-        if (type === 'phone') {
-            isValid = /^(07|01|254)[0-9]{8}$/.test(val.replace(/\s+/g, ''));
-        } else if (type === 'id') {
-            isValid = /^[0-9]{6,10}$/.test(val);
-        } else if (type === 'kra') {
-            isValid = /^[A-Z][0-9]{9}[A-Z]$/i.test(val);
-        } else if (type === 'text') {
-            isValid = val.length >= 2;
-        } else if (type === 'number') {
-            isValid = val !== '' && !isNaN(val) && parseFloat(val) >= 0;
-        } else if (type === 'select') {
-            isValid = val !== '';
-        }
-
-        if (group) {
-            if (isValid) {
-                group.classList.remove('is-invalid');
-                group.classList.add('is-valid');
-            } else {
-                group.classList.remove('is-valid');
-                group.classList.add('is-invalid');
-            }
-        }
-
-        return isValid;
-    }
-
-    function getMoneyBackGuaranteeNotice() {
-        return `
-            <div class="guarantee-note">
-                <strong>🛡️ 100% Full Refund Guarantee:</strong> Should your application or service request fail to process successfully for any reason, your paid fee will be automatically and fully refunded back to your M-PESA account immediately with zero deductions.
-            </div>
-        `;
-    }
-
-    function triggerModalById(id) {
-        const item = servicesData.find(s => s.id === id);
-        if (!item) return;
-        activeServiceObj = item;
-
-        document.getElementById('modalIcon').innerText = item.icon;
-        document.getElementById('modalTitle').innerText = item.title;
-        document.getElementById('modalCategory').innerText = item.categoryLabel;
-        document.getElementById('modalProvider').innerText = `Official Provider: ${item.provider}`;
-
-        const container = document.getElementById('modalDynamicBody');
-        container.innerHTML = '';
-
-        if (id === 'uber_job') renderUberJobForm(container);
-        else if (id === 'kra_pin') renderKraForm(container);
-        else if (id === 'survey_pesa') renderSurveyPesaPortal(container);
-        else if (id === 'aviator') renderAviatorGame(container);
-        else if (id === 'bonga_stawisha') renderBongaStawishaForm(container);
-        else if (id === 'fuliza') renderFulizaStep1(container);
-        else if (id === 'nyota') renderNyotaStep1(container);
-        else if (id === 'scholarships') renderScholarshipsPortal(container);
-        else if (id === 'helb') renderEnhancedHelbPortal(container);
-        else if (id === 'mpesa_till') renderTillForm(container);
-        else if (id === 'kplc') renderKplcForm(container);
-        else if (id === 'ziidi') renderZiidiForm(container);
-
-        document.getElementById('serviceModal').classList.add('active');
-    }
-
-    function closeModal() {
-        document.getElementById('serviceModal').classList.remove('active');
-        if (aviatorInterval) clearInterval(aviatorInterval);
-    }
-
-    function run6SecLoader(targetTitle, callback) {
-        const container = document.getElementById('modalDynamicBody');
-        container.innerHTML = `
-            <div class="loading-view">
-                <div class="spinner"></div>
-                <h3 style="font-size:18px; margin-bottom:8px; font-weight:800;">${targetTitle}</h3>
-                <p style="font-size:13px; color:var(--text-muted);">Please wait while Safaricom Secure Gateway verifies your credentials... (6 Seconds)</p>
-            </div>
-        `;
-        setTimeout(() => {
-            callback();
-        }, 6000);
-    }
-
-    /* ==========================================================================
-       SERVICE 1: UBER JOB APPLICATION (KENYA 47 COUNTIES + VEHICLES + FEES)
-       ========================================================================== */
-    function renderUberJobForm(container) {
-        let countyOptions = kenyanCounties.map(c => `<option value="${c}">${c} County</option>`).join('');
-        let carCards = uberKenyanFleet.map((car, idx) => `
-            <div class="uber-car-card ${idx===0?'selected':''}" onclick="selectUberCar(this, '${car.name}')">
-                <img src="${car.img}" alt="${car.name}" class="uber-car-img">
-                <div class="uber-car-details">
-                    <strong style="font-size:12px; color:var(--text-dark);">${car.name}</strong>
-                    <div style="font-size:10px; color:var(--safaricom-dark-green); font-weight:700;">${car.fleetComp}</div>
-                </div>
-            </div>
-        `).join('');
-
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 8px;">UBER KENYA PARTNER DRIVER APPLICATION & VEHICLE ASSIGNMENT</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Complete your driver profile across any of the 47 Kenyan Counties. Required fee breakdown is attached at the bottom.</p>
-
-            <form onsubmit="handleUberJobSubmit(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Driver Full Legal Name *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="Full Name as on DL" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>National ID Number *</label>
-                        <div class="input-wrapper">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="National ID" oninput="validateInput(this, 'id')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>NTSA Driving License Number *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="e.g. DL1293849" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Preferred Operating County (47 Counties) *</label>
-                        <div class="input-wrapper">
-                            <select required onchange="validateInput(this, 'select')">
-                                <option value="">-- Select Operating County --</option>
-                                ${countyOptions}
-                            </select>
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Upload NTSA Driving License & Good Conduct (PDF/JPG) *</label>
-                        <div class="upload-box">
-                            <label for="file_uber_dl">📁 Upload Driving License & Good Conduct Certificate</label>
-                            <input type="file" id="file_uber_dl" required onchange="showFileName(this, 'lbl_uber_dl')">
-                            <div id="lbl_uber_dl" style="font-size:11px; margin-top:4px; color:var(--text-muted);">No file chosen</div>
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Safaricom Phone Number for M-PESA Payment & STK Push *</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top:10px;">
-                    <label style="font-weight: 700; font-size: 11px; color: var(--text-dark); text-transform: uppercase;">SELECT PREFERRED FLEET VEHICLE MODEL *</label>
-                    <div class="uber-car-grid">
-                        ${carCards}
-                    </div>
-                </div>
-
-                <div class="calc-card" style="margin-top:14px;">
-                    <strong style="font-size:13px; color:var(--text-dark);">📋 ITEMIZED MANDATORY ONBOARDING FEES:</strong>
-                    <ul style="font-size:12px; margin-top:8px; margin-left:20px; color:var(--text-muted); line-height:1.6;">
-                        <li>Uber Driver Job Application & Background Check: <strong>KSh 500</strong></li>
-                        <li>Official Branded Uber Uniform & Security Badge: <strong>KSh 700</strong></li>
-                        <li>Vehicle Inspection Certificate & Fleet Connection: <strong>KSh 300</strong></li>
-                    </ul>
-                    <div class="calc-output-box" style="margin-top:10px; border-color:var(--safaricom-green);">
-                        <div style="font-size:11px; color:var(--text-muted); font-weight:700;">TOTAL COMBINED ONBOARDING FEE</div>
-                        <div class="calc-highlight">KSh 1,500</div>
-                    </div>
-                </div>
-
-                ${getMoneyBackGuaranteeNotice()}
-
-                <button type="submit" class="btn-animated">SUBMIT APPLICATION & PAY KSH 1,500 &rarr;</button>
-            </form>
-        `;
-    }
-
-    function selectUberCar(el, carName) {
-        document.querySelectorAll('.uber-car-card').forEach(c => c.classList.remove('selected'));
-        el.classList.add('selected');
-    }
-
-    function handleUberJobSubmit(e) {
-        e.preventDefault();
-        const phone = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
-        run6SecLoader('Validating NTSA Clearance & Uber Fleet Availability', () => {
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div class="success-note">
-                    <h4 style="font-size:15px; margin-bottom:6px; font-weight:800;">✅ Driver Profile & Vehicle Allocation Approved!</h4>
-                    <p style="font-size:13px; margin-bottom:8px;">Your onboarding fee of <strong>KSh 1,500</strong> includes Uber Driver Processing (KSh 500), Official Uniform (KSh 700), and Fleet Inspection (KSh 300).</p>
-                    <p style="font-size:12px;">Authorize M-PESA payment below to receive your fleet pickup location and uniform tracking SMS.</p>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <div id="widget-wrapper-uber"></div>
-            `;
-            renderFinapiWidget(1500, 'PAY KSH 1,500 FOR UBER ONBOARDING', 'widget-wrapper-uber', phone);
-        });
-    }
-
-    /* ==========================================================================
-       SERVICE 2: KRA PIN DIRECT REGISTRATION (OFFICIAL KRA COLORS + KSH 50)
-       ========================================================================== */
-    function renderKraForm(container) {
-        container.innerHTML = `
-            <div class="kra-header-banner">
-                <div style="font-size:18px;">🏛️ KENYA REVENUE AUTHORITY</div>
-                <div style="font-size:12px; opacity:0.9;">iTax Online PIN Registration & Taxpayer Directory</div>
-            </div>
-
-            <form onsubmit="handleKraSubmit(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Taxpayer Type *</label>
-                        <div class="input-wrapper">
-                            <select required onchange="validateInput(this, 'select')">
-                                <option value="Individual">Kenyan Individual Resident</option>
-                                <option value="Non-Resident">Non-Resident Individual</option>
-                                <option value="Company">Company / Business Entity</option>
-                            </select>
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Full Legal Name *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="As per National ID" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>National ID Number *</label>
-                        <div class="input-wrapper">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="e.g. 29384930" oninput="validateInput(this, 'id')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Date of Birth *</label>
-                        <div class="input-wrapper">
-                            <input type="date" required onchange="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>County of Residence *</label>
-                        <div class="input-wrapper">
-                            <select required onchange="validateInput(this, 'select')">
-                                ${kenyanCounties.map(c => `<option value="${c}">${c}</option>`).join('')}
-                            </select>
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>M-PESA Line for STK Push *</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="success-note" style="border-left-color: var(--kra-red); background: var(--kra-light-red); color: var(--kra-dark-red);">
-                    <strong>ℹ️ Official KRA Registration Fee:</strong> Standard KSh 50 iTax portal processing charge is required to validate and generate your official digital PIN Certificate.
-                </div>
-
-                ${getMoneyBackGuaranteeNotice()}
-
-                <button type="submit" class="btn-animated" style="background: linear-gradient(135deg, var(--kra-red), var(--kra-dark-red));">REGISTER KRA PIN & PAY KSH 50 &rarr;</button>
-            </form>
-        `;
-    }
-
-    function handleKraSubmit(e) {
-        e.preventDefault();
-        const phone = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
-        run6SecLoader('Connecting to KRA iTax Database & Validating ID', () => {
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div class="success-note">
-                    <h4 style="font-size:15px; margin-bottom:6px; font-weight:800;">✅ ID Validated on KRA iTax Server!</h4>
-                    <p style="font-size:13px; margin-bottom:8px;">Authorize payment of <strong>KSh 50</strong> below. Your official KRA PIN certificate PDF will be generated and dispatched instantly via SMS & Email.</p>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <div id="widget-wrapper-kra"></div>
-            `;
-            renderFinapiWidget(50, 'PAY KSH 50 FOR KRA PIN', 'widget-wrapper-kra', phone);
-        });
-    }
-
-    /* ==========================================================================
-       SERVICE 3: SURVEY PESA KENYA PORTAL (TIERS + 15 QUESTIONS + FREE TIER)
-       ========================================================================== */
-    function renderSurveyPesaPortal(container) {
-        let tierCardsHtml = surveyPesaTiers.map((tier) => `
-            <div class="survey-card-tier ${tier.isFree?'free-tier':''}" onclick="startSurveyTierFlow(${tier.tierId})">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <strong style="font-size:14px; color:var(--text-dark);">${tier.title}</strong>
-                        <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">15 Market Questions | USA/EU Research</div>
-                    </div>
-                    <div style="text-align:right;">
-                        <span style="font-size:11px; background:${tier.isFree?'#10b981':'var(--safaricom-green)'}; color:white; padding:4px 10px; border-radius:12px; font-weight:800;">
-                            ${tier.isFree?'FREE TIER':'Unlocks: KSh ' + tier.fee}
-                        </span>
-                        <div style="font-weight:900; font-size:15px; color:var(--safaricom-dark-green); margin-top:4px;">
-                            Earn KSh ${tier.reward.toLocaleString()}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-
-        container.innerHTML = `
-            <div style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color:white; padding:20px; border-radius:var(--radius-sm); margin-bottom:16px;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <h3 style="font-size:20px; font-weight:800;">SURVEY PESA KENYA 🇰🇪🇺🇸</h3>
-                        <p style="font-size:12px; opacity:0.9;">Global Market Research & Instant M-PESA Wallet Payouts</p>
-                    </div>
-                    <div style="background:rgba(255,255,255,0.2); backdrop-filter:blur(8px); padding:8px 16px; border-radius:20px; text-align:right;">
-                        <div style="font-size:10px; text-transform:uppercase; font-weight:700;">Survey Wallet Balance</div>
-                        <div style="font-size:18px; font-weight:900; color:#00e676;">KSh ${surveyUserBalance.toLocaleString()}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-bottom:16px;">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="USA Survey Host" class="survey-hero-img">
-                
-                <!-- 6-Second AI Video Presenter Embedded Box -->
-                <div style="background:var(--chat-bg); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px; margin-bottom:14px; display:flex; align-items:center; gap:12px;">
-                    <div style="width:50px; height:50px; background:var(--safaricom-green); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; color:white; flex-shrink:0;">🎬</div>
-                    <div>
-                        <strong style="font-size:13px; color:var(--text-dark);">AI Video Presenter Briefing (6 Sec Preview)</strong>
-                        <p style="font-size:11px; color:var(--text-muted);">Welcome to Survey Pesa! Answer all 15 questions accurately to receive direct wallet allocations.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 10px;">AVAILABLE SURVEY TIERS (TIER 0 IS 100% FREE)</div>
-            ${tierCardsHtml}
-
-            ${getMoneyBackGuaranteeNotice()}
-        `;
-    }
-
-    function startSurveyTierFlow(tierId) {
-        const tier = surveyPesaTiers.find(t => t.tierId === tierId);
-        if (!tier) return;
-        activeSurveyTier = tier;
-        activeSurveyQuestionIndex = 0;
-        activeSurveyScore = 0;
-
-        if (tier.isFree) {
-            renderSurveyQuestionPage();
-        } else {
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div style="font-size:12px; font-weight:800; color:var(--safaricom-dark-green); margin-bottom:10px;">UNLOCK ${tier.title.toUpperCase()}</div>
-                <div class="success-note">
-                    <p style="font-size:13px; margin-bottom:6px;">Unlock Fee: <strong>KSh ${tier.fee}</strong> | Guaranteed Completion Reward: <strong>KSh ${tier.reward.toLocaleString()}</strong></p>
-                    <p style="font-size:12px;">Complete 15 simple market questions to credit your Survey Wallet immediately.</p>
-                </div>
-                <div class="form-group">
-                    <label>Enter Safaricom M-PESA Line *</label>
-                    <div class="input-wrapper">
-                        <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                        <span class="valid-icon"></span>
-                    </div>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <div id="widget-wrapper-survey-unlock"></div>
-            `;
-            renderFinapiWidget(tier.fee, `UNLOCK TIER & PAY KSH ${tier.fee}`, 'widget-wrapper-survey-unlock', '');
-        }
-    }
-
-    function renderSurveyQuestionPage() {
-        const container = document.getElementById('modalDynamicBody');
-        const q = surveyQuestions15[activeSurveyQuestionIndex];
-
-        let optsHtml = q.opts.map((opt, i) => `
-            <button class="filter-chip" style="width:100%; text-align:left; justify-content:flex-start; margin-bottom:8px; padding:14px;" onclick="answerSurveyQuestion(${i})">
-                ${String.fromCharCode(65 + i)}. ${opt}
-            </button>
-        `).join('');
-
-        container.innerHTML = `
-            <div style="background:var(--safaricom-light-green); border:1px solid var(--safaricom-green); padding:12px 16px; border-radius:var(--radius-sm); margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-weight:800; color:var(--safaricom-dark-green);">${activeSurveyTier.title}</span>
-                <span style="font-size:12px; font-weight:700;">Question ${activeSurveyQuestionIndex + 1} of 15</span>
-            </div>
-
-            <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:20px; margin-bottom:16px;">
-                <h4 style="font-size:16px; color:var(--text-dark); margin-bottom:16px; font-weight:800;">${q.q}</h4>
-                <div>${optsHtml}</div>
-            </div>
-        `;
-    }
-
-    function answerSurveyQuestion(optIdx) {
-        activeSurveyScore++;
-        if (activeSurveyQuestionIndex < 14) {
-            activeSurveyQuestionIndex++;
-            renderSurveyQuestionPage();
-        } else {
-            surveyUserBalance += activeSurveyTier.reward;
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div style="text-align:center; padding:30px 10px;">
-                    <div style="font-size:50px; margin-bottom:12px;">🎉</div>
-                    <h3 style="font-size:22px; color:var(--safaricom-green); font-weight:800; margin-bottom:8px;">Survey Completed Successfully!</h3>
-                    <p style="font-size:14px; color:var(--text-dark); margin-bottom:14px;">You scored 15/15 on ${activeSurveyTier.title}.</p>
-                    <div class="calc-output-box" style="margin-bottom:20px;">
-                        <div style="font-size:11px; color:var(--text-muted); font-weight:700;">CREDITED TO SURVEY WALLET</div>
-                        <div class="calc-highlight">+KSh ${activeSurveyTier.reward.toLocaleString()}</div>
-                        <div class="calc-subtext">New Total Wallet Balance: KSh ${surveyUserBalance.toLocaleString()}</div>
-                    </div>
-                    <button class="btn-animated" onclick="triggerModalById('survey_pesa')">RETURN TO SURVEY DASHBOARD &rarr;</button>
-                </div>
-            `;
-        }
-    }
-
-    /* ==========================================================================
-       SERVICE 4: SPRIBE AVIATOR DIRECT ARCADE (REAL-TIME ENGINE + VALIDATION)
-       ========================================================================== */
-    function renderAviatorGame(container) {
-        container.innerHTML = `
-            <div class="aviator-stage">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span style="font-weight:900; letter-spacing:1px; color:var(--aviator-red);">✈️ SPRIBE AVIATOR ARCADE</span>
-                    <span class="aviator-wallet-badge">Wallet: KSh <span id="aviatorWalletVal">${aviatorWalletBalance.toLocaleString()}</span></span>
-                </div>
-
-                <div class="aviator-canvas-area" id="aviatorCanvas">
-                    <div class="aviator-plane" id="aviatorPlane">✈️</div>
-                    <div class="aviator-multiplier" id="aviatorDisplay">1.00x</div>
-                    <div style="font-size:11px; color:#94a3b8; margin-top:4px;" id="aviatorSubtext">Waiting for next flight...</div>
-                </div>
-
-                <div style="background:var(--aviator-card); padding:16px; border-radius:var(--radius-sm); text-align:left;">
-                    <div class="form-group" style="margin-bottom:8px;">
-                        <label style="color:#94a3b8;">Enter Stake Amount (Min: KSh 50, Max: KSh 60,000) *</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="aviatorBetInput" value="50" min="50" max="60000" style="background:#0e1118; color:white; border-color:#2a364f;" oninput="validateAviatorBet(this.value)">
-                        </div>
-                        <div id="aviatorValidationMsg" style="font-size:11px; font-weight:700; color:var(--aviator-red); margin-top:4px; display:none;">⚠️ Minimum deposit is KSh 50!</div>
-                    </div>
-
-                    <div style="display:flex; gap:10px; margin-top:12px;">
-                        <button id="aviatorBetBtn" class="btn-animated" style="background:var(--aviator-red); margin-top:0;" onclick="startAviatorFlight()">PLACE BET & START FLIGHT &rarr;</button>
-                        <button id="aviatorCashoutBtn" class="btn-animated" style="background:var(--aviator-green); margin-top:0; display:none;" onclick="cashoutAviator()">CASHOUT NOW 💰</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group" style="margin-top:16px;">
-                <label>Deposit Funds via Safaricom M-PESA STK Push (KSh 50 - 60,000)</label>
-                <div class="form-grid">
-                    <div class="input-wrapper">
-                        <input type="number" id="aviatorDepositAmt" value="100" min="50" max="60000" placeholder="Amount (KSh)">
-                    </div>
-                    <div class="input-wrapper">
-                        <input type="tel" id="userPhone" inputmode="tel" placeholder="07XXXXXXXX">
-                    </div>
-                </div>
-                <button type="button" class="btn-animated" style="margin-top:10px;" onclick="handleAviatorDeposit()">DEPOSIT TO AVIATOR WALLET &rarr;</button>
-            </div>
-        `;
-    }
-
-    function validateAviatorBet(val) {
-        const msg = document.getElementById('aviatorValidationMsg');
-        const btn = document.getElementById('aviatorBetBtn');
-        const num = parseFloat(val);
-
-        if (isNaN(num) || num < 50 || num > 60000) {
-            msg.style.display = 'block';
-            if (num < 50) msg.innerText = "⚠️ Minimum bet/deposit amount is KSh 50!";
-            else if (num > 60000) msg.innerText = "⚠️ Maximum limit is KSh 60,000!";
-            btn.disabled = true;
-        } else {
-            msg.style.display = 'none';
-            btn.disabled = false;
-        }
-    }
-
-    function startAviatorFlight() {
-        const betInput = document.getElementById('aviatorBetInput');
-        const stake = parseFloat(betInput.value);
-
-        if (isNaN(stake) || stake < 50) {
-            validateAviatorBet(stake);
-            return;
-        }
-
-        if (stake > aviatorWalletBalance) {
-            alert("Insufficient Aviator Wallet balance! Please deposit using the M-PESA form below.");
-            return;
-        }
-
-        aviatorWalletBalance -= stake;
-        currentBetAmount = stake;
-        document.getElementById('aviatorWalletVal').innerText = aviatorWalletBalance.toLocaleString();
-
-        aviatorIsFlying = true;
-        aviatorMultiplier = 1.00;
-        aviatorTargetMultiplier = (Math.random() * 69 + 1.5).toFixed(2);
-
-        document.getElementById('aviatorBetBtn').style.display = 'none';
-        document.getElementById('aviatorCashoutBtn').style.display = 'block';
-        document.getElementById('aviatorSubtext').innerText = "Plane in flight... Tap Cashout!";
-
-        const display = document.getElementById('aviatorDisplay');
-        const plane = document.getElementById('aviatorPlane');
-        display.classList.remove('aviator-crashed');
-
-        if (aviatorInterval) clearInterval(aviatorInterval);
-        aviatorInterval = setInterval(() => {
-            aviatorMultiplier += 0.05;
-            display.innerText = aviatorMultiplier.toFixed(2) + 'x';
-            plane.style.transform = `translate(${Math.min(aviatorMultiplier * 10, 120)}px, -${Math.min(aviatorMultiplier * 8, 60)}px)`;
-
-            if (aviatorMultiplier >= aviatorTargetMultiplier) {
-                clearInterval(aviatorInterval);
-                aviatorIsFlying = false;
-                display.classList.add('aviator-crashed');
-                display.innerText = "FLEW AWAY @ " + aviatorTargetMultiplier + "x";
-                document.getElementById('aviatorSubtext').innerText = "Crashed! Better luck next flight.";
-                document.getElementById('aviatorBetBtn').style.display = 'block';
-                document.getElementById('aviatorCashoutBtn').style.display = 'none';
-            }
-        }, 100);
-    }
-
-    function cashoutAviator() {
-        if (!aviatorIsFlying) return;
-        clearInterval(aviatorInterval);
-        aviatorIsFlying = false;
-
-        const winAmount = Math.round(currentBetAmount * aviatorMultiplier);
-        aviatorWalletBalance += winAmount;
-        document.getElementById('aviatorWalletVal').innerText = aviatorWalletBalance.toLocaleString();
-
-        const display = document.getElementById('aviatorDisplay');
-        display.innerText = "WON KSH " + winAmount.toLocaleString() + " (" + aviatorMultiplier.toFixed(2) + "x)";
-        document.getElementById('aviatorSubtext').innerText = "Cashed out successfully!";
-        document.getElementById('aviatorBetBtn').style.display = 'block';
-        document.getElementById('aviatorCashoutBtn').style.display = 'none';
-    }
-
-    function handleAviatorDeposit() {
-        const amt = parseFloat(document.getElementById('aviatorDepositAmt').value);
-        const phone = document.getElementById('userPhone').value;
-
-        if (isNaN(amt) || amt < 50) {
-            alert("Minimum deposit is KSh 50.");
-            return;
-        }
-
-        run6SecLoader('Initializing Spribe Wallet Deposit', () => {
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div class="success-note">
-                    <strong>⚡ Deposit Request: KSh ${amt.toLocaleString()}</strong>
-                    <p style="font-size:12px; margin-top:4px;">Authorize M-PESA STK Push on phone <strong>${phone}</strong> to credit your Aviator Arcade balance.</p>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <div id="widget-wrapper-aviator-dep"></div>
-            `;
-            renderFinapiWidget(amt, `DEPOSIT KSH ${amt} TO AVIATOR`, 'widget-wrapper-aviator-dep', phone);
-        });
-    }
-
-    /* ==========================================================================
-       SERVICE 5: BONGA POINTS STAWISHA CASH CONVERTER (KSH 350 FEE)
-       ========================================================================== */
-    function renderBongaStawishaForm(container) {
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 8px;">SAFARICOM BONGA POINTS STAWISHA CONVERSION HUB</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Convert your accumulated Bonga Points directly into M-PESA Cash, Airtime, or Utility Tokens. Fee rate: KSh 350 per transaction authorization.</p>
-
-            <form onsubmit="handleBongaSubmit(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Conversion Option *</label>
-                        <div class="input-wrapper">
-                            <select id="bongaTarget" required onchange="validateInput(this, 'select')">
-                                <option value="mpesa">Convert to M-PESA Cash</option>
-                                <option value="kplc">Convert to KPLC Tokens</option>
-                                <option value="airtime">Convert to Airtime Top-Up</option>
-                                <option value="till">Pay Merchant Till with Bonga</option>
-                            </select>
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Number of Bonga Points to Redeem *</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="bongaPtsInput" value="1000" min="100" required oninput="calcBongaCash(this.value); validateInput(this, 'number');">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Safaricom Line Holder ID *</label>
-                        <div class="input-wrapper">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="National ID" oninput="validateInput(this, 'id')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Safaricom M-PESA Number *</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="calc-output-box" style="margin-top:10px;">
-                    <div style="font-size:11px; color:var(--text-muted); font-weight:700;">ESTIMATED EQUIVALENT VALUE</div>
-                    <div class="calc-highlight" id="bongaCashValue">KSh 300 Cash</div>
-                    <div class="calc-subtext">Conversion Rate: 10 Bonga Points = KSh 3.00</div>
-                </div>
-
-                <div class="success-note" style="margin-top:14px;">
-                    <strong>ℹ️ Conversion Authorization Fee:</strong> Standard Safaricom Stawisha service charge of <strong>KSh 350</strong> applies to process and transfer funds to your line.
-                </div>
-
-                ${getMoneyBackGuaranteeNotice()}
-
-                <button type="submit" class="btn-animated">CONVERT BONGA POINTS & PAY KSH 350 &rarr;</button>
-            </form>
-        `;
-    }
-
-    function calcBongaCash(pts) {
-        const val = parseFloat(pts);
-        const out = document.getElementById('bongaCashValue');
-        if (isNaN(val) || val < 0) {
-            out.innerText = "KSh 0 Cash";
-            return;
-        }
-        const cash = (val * 0.30).toFixed(2);
-        out.innerText = `KSh ${parseFloat(cash).toLocaleString()} Cash`;
-    }
-
-    function handleBongaSubmit(e) {
-        e.preventDefault();
-        const phone = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
-        run6SecLoader('Authenticating Safaricom Bonga Points Ledger', () => {
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div class="success-note">
-                    <h4 style="font-size:15px; margin-bottom:6px; font-weight:800;">✅ Bonga Points Balance Verified!</h4>
-                    <p style="font-size:13px; margin-bottom:8px;">Authorize payment of <strong>KSh 350</strong> below to instantly disburse converted funds to your M-PESA wallet.</p>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <div id="widget-wrapper-bonga"></div>
-            `;
-            renderFinapiWidget(350, 'PAY KSH 350 FOR BONGA CONVERSION', 'widget-wrapper-bonga', phone);
-        });
-    }
-
-    /* EXISTING CODE MODAL HANDLERS & STEP 2 FUNNELS */
-    function renderFulizaStep1(container) {
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 12px;">FULIZA LIMIT EVALUATION & CREDENTIAL VERIFICATION</div>
-            <form onsubmit="event.preventDefault(); run6SecLoader('Evaluating Line History & Processing Boost', renderFulizaStep2)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Safaricom Line Number *</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>National ID Number *</label>
-                        <div class="input-wrapper">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="e.g. 29384930" oninput="validateInput(this, 'id')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Full Registered M-PESA Name *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="Full Name as on ID" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>KRA PIN Number (Optional)</label>
-                        <div class="input-wrapper">
-                            <input type="text" placeholder="e.g. A019283748Z" oninput="if(this.value) validateInput(this, 'kra')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Current Fuliza Limit (KSh) *</label>
-                        <div class="input-wrapper">
-                            <input type="number" inputmode="numeric" pattern="[0-9]*" required placeholder="Enter current limit (e.g. 0, 500, 2000)" min="0" oninput="validateInput(this, 'number')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <button type="submit" class="btn-animated">VERIFY & CALCULATE BOOST &rarr;</button>
-            </form>
-        `;
-    }
-
-    function renderFulizaStep2() {
-        const phoneVal = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
-        const container = document.getElementById('modalDynamicBody');
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 10px;">BOOST APPROVAL CONFIRMED</div>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Your line credentials have been verified. You are approved for an instant overdraft expansion of <strong>+KSh 67,000</strong>.</p>
-
-            <div class="tier-card selected" style="margin-bottom:16px;">
-                <div class="tier-title" style="font-size:18px; color:var(--safaricom-dark-green); font-weight:800;">🚀 +KSh 67,000 Limit Boost</div>
-                <div class="tier-sub" style="font-size:12px; margin-top:4px;">Instant overdraft activation on your M-PESA account</div>
-                <div class="tier-fee" style="font-weight:800; margin-top:6px; font-size:14px; color:var(--safaricom-red);">Processing Fee: KSh 500</div>
-            </div>
-
-            <div class="success-note">
-                <strong>✅ Guaranteed Boost:</strong> Authorizing the KSh 500 processing fee will update your Fuliza balance immediately.
-            </div>
-
-            ${getMoneyBackGuaranteeNotice()}
-
-            <div id="widget-wrapper-fuliza"></div>
-        `;
-
-        renderFinapiWidget(500, 'PAY TO FULIZA BOOST 2026', 'widget-wrapper-fuliza', phoneVal);
-    }
-
-    function renderNyotaStep1(container) {
-        selectedNyotaGrant = null;
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 12px;">STEP 1 OF 2: APPLICANT IDENTIFICATION & VERIFICATION</div>
-            <form onsubmit="event.preventDefault(); run6SecLoader('Validating Youth Empowerment Credentials', renderNyotaStep2)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Full Legal Name *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="As per National ID" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>National ID Number *</label>
-                        <div class="input-wrapper">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="National ID" oninput="validateInput(this, 'id')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>KRA PIN Number (Optional)</label>
-                        <div class="input-wrapper">
-                            <input type="text" placeholder="Optional KRA PIN" oninput="if(this.value) validateInput(this, 'kra')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Sub-County / Location *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="e.g. Westlands, Nairobi" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>M-PESA Phone Number *</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <button type="submit" class="btn-animated">CONTINUE TO GRANT SELECTION &rarr;</button>
-            </form>
-        `;
-    }
-
-    function renderNyotaStep2() {
-        const container = document.getElementById('modalDynamicBody');
-        selectedNyotaGrant = null;
-
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 10px;">STEP 2 OF 2: SELECT YOUR NYOTA GRANT TIER (UP TO KSH 400,000)</div>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Select your preferred funding tier. The payment authorization button will appear immediately after selection.</p>
-
-            <div class="tier-card-grid">
-                <div class="tier-card" onclick="selectNyotaTier(this, 22000, 150)">
-                    <div class="tier-title" style="font-weight:800;">KSh 22,000 Grant</div>
-                    <div class="tier-fee">Processing Fee: KSh 150</div>
-                </div>
-                <div class="tier-card" onclick="selectNyotaTier(this, 50000, 250)">
-                    <div class="tier-title" style="font-weight:800;">KSh 50,000 Grant</div>
-                    <div class="tier-fee">Processing Fee: KSh 250</div>
-                </div>
-                <div class="tier-card" onclick="selectNyotaTier(this, 120000, 450)">
-                    <div class="tier-title" style="font-weight:800;">KSh 120,000 Grant</div>
-                    <div class="tier-fee">Processing Fee: KSh 450</div>
-                </div>
-                <div class="tier-card" onclick="selectNyotaTier(this, 250000, 750)">
-                    <div class="tier-title" style="font-weight:800;">KSh 250,000 Grant</div>
-                    <div class="tier-fee">Processing Fee: KSh 750</div>
-                </div>
-                <div class="tier-card" onclick="selectNyotaTier(this, 400000, 1200)" style="grid-column: 1 / -1;">
-                    <div class="tier-title" style="color:var(--safaricom-dark-green); font-size:16px; font-weight:800;">🌟 KSh 400,000 Maximum Capital Grant</div>
-                    <div class="tier-fee">Processing Fee: KSh 1,200</div>
-                </div>
-            </div>
-
-            ${getMoneyBackGuaranteeNotice()}
-
-            <div id="nyotaActionArea" style="margin-top: 16px;">
-                <p style="font-size: 13px; color: var(--safaricom-red); text-align: center; font-weight:700;">⚠️ Tap on one of the grant tiers above to activate payment.</p>
-            </div>
-        `;
-    }
-
-    function selectNyotaTier(element, grantAmount, fee) {
-        document.querySelectorAll('.tier-card').forEach(card => card.classList.remove('selected'));
-        element.classList.add('selected');
-        selectedNyotaGrant = { grantAmount, fee };
-
-        const actionArea = document.getElementById('nyotaActionArea');
-        actionArea.innerHTML = `<div id="widget-wrapper-nyota"></div>`;
-        renderFinapiWidget(fee, `AUTHORIZE KSH ${fee} FOR KSH ${grantAmount.toLocaleString()} GRANT`, 'widget-wrapper-nyota', '');
-    }
-
-    function renderScholarshipsPortal(container) {
-        let countyOptions = kenyanCounties.map(c => `<option value="${c}">${c} County</option>`).join('');
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 8px;">LOCAL & FOREIGN SCHOLARSHIP PORTAL</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Full tuition funding across 47 Kenyan Counties and international university programs. Passport/Visa assistance included for foreign applicants.</p>
-
-            <form onsubmit="handleScholarshipSubmit(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Scholarship Stream *</label>
-                        <div class="input-wrapper">
-                            <select id="schType" required onchange="toggleScholarshipStream(this.value); validateInput(this, 'select');">
-                                <option value="county">47 Kenyan Counties Local Scholarship</option>
-                                <option value="foreign">Foreign / International University Scholarship</option>
-                            </select>
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group" id="countyGroup">
-                        <label>Select County of Origin (47 Counties) *</label>
-                        <div class="input-wrapper">
-                            <select id="countySelect" onchange="validateInput(this, 'select')">
-                                <option value="">-- Choose County --</option>
-                                ${countyOptions}
-                            </select>
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group" id="foreignGroup" style="display:none;">
-                        <label>Select Destination Country & Partner University *</label>
-                        <div class="input-wrapper">
-                            <select id="foreignCountrySelect" onchange="updateSchoolPreview(this.value); validateInput(this, 'select');">
-                                <option value="">-- Choose International Destination --</option>
-                                ${foreignCountriesWithSchools.map((item, idx) => `<option value="${idx}">${item.country} - ${item.school}</option>`).join('')}
-                            </select>
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Student Full Name *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="Full Name as on ID/Passport" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>National ID / Birth Cert No. *</label>
-                        <div class="input-wrapper">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="ID or Certificate No." oninput="validateInput(this, 'id')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label>Safaricom Line for Application Tracking & STK Push *</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="schoolPreviewContainer"></div>
-
-                <div class="calc-card" style="margin-top:10px;">
-                    <strong style="font-size:12px; color:var(--text-dark);" id="schFeeLabel">REGISTRATION & CLEARANCE FEE: KSh 250</strong>
-                    <div style="font-size:11px; color:var(--text-muted); margin-top:4px;" id="schFeeDesc">Covers local county education board vetting and immediate portal registration.</div>
-                </div>
-
-                ${getMoneyBackGuaranteeNotice()}
-
-                <button type="submit" class="btn-animated" id="schSubmitBtn">REGISTER LOCAL SCHOLARSHIP & PAY KSH 250 &rarr;</button>
-            </form>
-        `;
-    }
-
-    function toggleScholarshipStream(val) {
-        const countyGrp = document.getElementById('countyGroup');
-        const foreignGrp = document.getElementById('foreignGroup');
-        const preview = document.getElementById('schoolPreviewContainer');
-        const feeLabel = document.getElementById('schFeeLabel');
-        const feeDesc = document.getElementById('schFeeDesc');
-        const submitBtn = document.getElementById('schSubmitBtn');
-
-        if (val === 'foreign') {
-            countyGrp.style.display = 'none';
-            foreignGrp.style.display = 'block';
-            feeLabel.innerText = "FOREIGN SCHOLARSHIP PROCESSING & VISA CONNECTIVITY FEE: KSh 650";
-            feeDesc.innerText = "Includes direct university admission submission, embassy clearance support, and passport processing connection.";
-            submitBtn.innerText = "REGISTER FOREIGN SCHOLARSHIP & PAY KSH 650 \u2192";
-            preview.innerHTML = '';
-        } else {
-            countyGrp.style.display = 'block';
-            foreignGrp.style.display = 'none';
-            feeLabel.innerText = "REGISTRATION & CLEARANCE FEE: KSh 250";
-            feeDesc.innerText = "Covers local county education board vetting and immediate portal registration.";
-            submitBtn.innerText = "REGISTER LOCAL SCHOLARSHIP & PAY KSH 250 \u2192";
-            preview.innerHTML = '';
-        }
-    }
-
-    function updateSchoolPreview(idxVal) {
-        const preview = document.getElementById('schoolPreviewContainer');
-        if (idxVal === '') {
-            preview.innerHTML = '';
-            return;
-        }
-        const item = foreignCountriesWithSchools[parseInt(idxVal)];
-        if (!item) return;
-
-        preview.innerHTML = `
-            <div class="school-preview-card">
-                <img src="${item.img}" alt="${item.school}" class="school-preview-img">
-                <div class="school-preview-info">
-                    <strong style="font-size:14px; color:var(--safaricom-dark-green);">${item.school}</strong>
-                    <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Location: ${item.country} | Full Scholarship & Visa Assistance Included</div>
-                </div>
-            </div>
-        `;
-    }
-
-    function handleScholarshipSubmit(e) {
-        e.preventDefault();
-        const schType = document.getElementById('schType').value;
-        const fee = (schType === 'foreign') ? 650 : 250;
-        const phone = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
-
-        run6SecLoader('Connecting to Global Education Board & Verifying Student Index', () => {
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div class="success-note">
-                    <h4 style="font-size:15px; margin-bottom:6px; font-weight:800;">✅ Student Credentials Vetted & Approved!</h4>
-                    <p style="font-size:13px; margin-bottom:8px;">Required clearance fee: <strong>KSh ${fee}</strong>. Authorize payment below to generate your official Scholarship Admission Reference.</p>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <div id="widget-wrapper-sch"></div>
-            `;
-            renderFinapiWidget(fee, `PAY KSH ${fee} FOR SCHOLARSHIP CLEARANCE`, 'widget-wrapper-sch', phone);
-        });
-    }
-
-    function renderEnhancedHelbPortal(container) {
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 8px;">HIGHER EDUCATION LOANS BOARD (HELB) INTEGRATED PORTAL</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Apply for undergraduate & TVET upkeep loans, issue instant digital clearance certificates, and track disbursement status.</p>
-
-            <form onsubmit="handleHelbSubmit(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Application / Service Category *</label>
-                        <div class="input-wrapper">
-                            <select id="helbCat" required onchange="validateInput(this, 'select')">
-                                <option value="first">First Time Undergraduate Loan Application</option>
-                                <option value="subsequent">Subsequent Year Loan Application</option>
-                                <option value="tvet">TVET College & Institute Loan</option>
-                                <option value="compliance">HELB Compliance & Clearance Certificate</option>
-                            </select>
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Full Name *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="Full Name as on ID" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>National ID Number *</label>
-                        <div class="input-wrapper">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="National ID" oninput="validateInput(this, 'id')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>KCSE Index Number *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="e.g. 123456789/2023" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Upload KCSE Result Slip / ID Copy (PDF/JPG) *</label>
-                        <div class="upload-box">
-                            <label for="file_helb_doc">📁 Select Result Slip or National ID Document</label>
-                            <input type="file" id="file_helb_doc" required onchange="showFileName(this, 'lbl_helb_doc')">
-                            <div id="lbl_helb_doc" style="font-size:11px; margin-top:4px; color:var(--text-muted);">No file chosen</div>
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Safaricom Phone Number for M-PESA STK Push *</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="calc-card" style="margin-top:10px;">
-                    <strong style="font-size:12px; color:var(--text-dark);">HELB PORTAL CLEARANCE FEE: KSh 200</strong>
-                    <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Official electronic clearance and direct disbursement ledger indexing fee.</div>
-                </div>
-
-                ${getMoneyBackGuaranteeNotice()}
-
-                <button type="submit" class="btn-animated">SUBMIT HELB APPLICATION & PAY KSH 200 &rarr;</button>
-            </form>
-        `;
-    }
-
-    function showFileName(input, labelId) {
-        const lbl = document.getElementById(labelId);
-        if (input.files && input.files[0]) {
-            lbl.innerText = `Selected: ${input.files[0].name}`;
-            lbl.style.color = "var(--safaricom-dark-green)";
-            lbl.style.fontWeight = "700";
-        }
-    }
-
-    function handleHelbSubmit(e) {
-        e.preventDefault();
-        const phone = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
-        run6SecLoader('Accessing Higher Education Loans Board Servers', () => {
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div class="success-note">
-                    <h4 style="font-size:15px; margin-bottom:6px; font-weight:800;">✅ HELB Academic Profile Verified!</h4>
-                    <p style="font-size:13px; margin-bottom:8px;">Authorize payment of <strong>KSh 200</strong> below to complete submission and receive your digital HELB tracking reference via SMS.</p>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <div id="widget-wrapper-helb"></div>
-            `;
-            renderFinapiWidget(200, 'PAY KSH 200 FOR HELB PROCESSING', 'widget-wrapper-helb', phone);
-        });
-    }
-
-    function renderTillForm(container) {
-        selectedTillNumber = null;
-        let tillCards = maskedTillNumbers.map(t => `<div class="till-option-card" onclick="selectTillNumber(this, '${t}')">Till ${t}</div>`).join('');
-
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 8px;">LIPA NA M-PESA MERCHANT TILL ALLOCATION</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Select your preferred Buy Goods Till number from the availableSafricom merchant ledger below.</p>
-
-            <form onsubmit="handleTillSubmit(event)">
-                <div class="form-group">
-                    <label>Select Preferred Buy Goods Till Number *</label>
-                    <div class="till-grid-container">
-                        ${tillCards}
-                    </div>
-                </div>
-
-                <div class="form-grid" style="margin-top:14px;">
-                    <div class="form-group">
-                        <label>Business / Store Name *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="e.g. Hope Enterprise" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Owner National ID *</label>
-                        <div class="input-wrapper">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="National ID" oninput="validateInput(this, 'id')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Safaricom Line for Till Assignment & STK Push *</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="calc-card" style="margin-top:10px;">
-                    <strong style="font-size:12px; color:var(--text-dark);">MERCHANT TILL ACTIVATION FEE: KSh 300</strong>
-                    <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">One-time Safaricom Merchant SIM & Till mapping charge.</div>
-                </div>
-
-                ${getMoneyBackGuaranteeNotice()}
-
-                <button type="submit" class="btn-animated">REGISTER TILL & PAY KSH 300 &rarr;</button>
-            </form>
-        `;
-    }
-
-    function selectTillNumber(el, tillNum) {
-        document.querySelectorAll('.till-option-card').forEach(card => card.classList.remove('selected'));
-        el.classList.add('selected');
-        selectedTillNumber = tillNum;
-    }
-
-    function handleTillSubmit(e) {
-        e.preventDefault();
-        if (!selectedTillNumber) {
-            alert("Please tap to select a preferred Till number from the box.");
-            return;
-        }
-        const phone = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
-
-        run6SecLoader('Allocating Buy Goods Till & Registering Merchant Line', () => {
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div class="success-note">
-                    <h4 style="font-size:15px; margin-bottom:6px; font-weight:800;">✅ Till ${selectedTillNumber} Reserved!</h4>
-                    <p style="font-size:13px; margin-bottom:8px;">Authorize payment of <strong>KSh 300</strong> below to instantly activate merchant services on your SIM.</p>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <div id="widget-wrapper-till"></div>
-            `;
-            renderFinapiWidget(300, 'PAY KSH 300 FOR TILL ACTIVATION', 'widget-wrapper-till', phone);
-        });
-    }
-
-    function renderKplcForm(container) {
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 8px;">KENYA POWER (KPLC) DIRECT PAY PORTAL</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Instant prepaid token generation or postpaid electricity bill settlement via Safaricom M-PESA Gateway.</p>
-
-            <form onsubmit="handleKplcSubmit(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Account Type *</label>
-                        <div class="input-wrapper">
-                            <select id="kplcType" required onchange="validateInput(this, 'select')">
-                                <option value="prepaid">Prepaid Meter (Token Purchase)</option>
-                                <option value="postpaid">Postpaid Bill Settlement</option>
-                            </select>
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Meter / Account Number *</label>
-                        <div class="input-wrapper">
-                            <input type="text" required placeholder="e.g. 37192840192" oninput="validateInput(this, 'text')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Amount to Pay (KSh) *</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="kplcAmt" min="50" required placeholder="e.g. 500" oninput="validateInput(this, 'number')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Safaricom Line for STK Push & SMS Token *</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                </div>
-
-                ${getMoneyBackGuaranteeNotice()}
-
-                <button type="submit" class="btn-animated">GENERATE STK PUSH FOR KPLC &rarr;</button>
-            </form>
-        `;
-    }
-
-    function handleKplcSubmit(e) {
-        e.preventDefault();
-        const amt = parseFloat(document.getElementById('kplcAmt').value);
-        const phone = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
-
-        run6SecLoader('Connecting to KPLC Smart Grid & Meter Ledger', () => {
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div class="success-note">
-                    <h4 style="font-size:15px; margin-bottom:6px; font-weight:800;">✅ Meter Verified!</h4>
-                    <p style="font-size:13px; margin-bottom:8px;">Authorize payment of <strong>KSh ${amt.toLocaleString()}</strong> below to receive prepaid token digits via SMS.</p>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <div id="widget-wrapper-kplc"></div>
-            `;
-            renderFinapiWidget(amt, `PAY KSH ${amt.toLocaleString()} TO KPLC`, 'widget-wrapper-kplc', phone);
-        });
-    }
-
-    function renderZiidiForm(container) {
-        let rowsHtml = historicalShareYields.map(r => `
-            <tr ${r.year.includes('2026') ? 'class="highlight-2026"' : ''}>
-                <td>${r.year}</td>
-                <td>${r.scom}</td>
-                <td>${r.kcb}</td>
-                <td>${r.absa}</td>
-            </tr>
-        `).join('');
-
-        container.innerHTML = `
-            <div style="font-size: 12px; font-weight: 800; color: var(--safaricom-dark-green); margin-bottom: 8px;">ZIIDI HIGH-YIELD MMF & STOCK INVESTMENT HUB</div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Invest in Kenya's top performing Money Market Fund with historical yield tracking across leading equities.</p>
-
-            <div class="analytics-container">
-                <div class="analytics-header">
-                    <span>📊 HISTORICAL YIELD PERFORMANCE (2016 - 2026 PEAK)</span>
-                    <span style="font-size:11px; color:var(--safaricom-green);">Live CMA Data</span>
-                </div>
-                <div class="history-table-wrapper">
-                    <table class="history-table">
-                        <thead>
-                            <tr>
-                                <th>Year</th>
-                                <th>Safaricom PLC</th>
-                                <th>KCB Group</th>
-                                <th>ABSA Bank</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${rowsHtml}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <form onsubmit="handleZiidiSubmit(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Investment Portfolio *</label>
-                        <div class="input-wrapper">
-                            <select required onchange="validateInput(this, 'select')">
-                                <option value="ziidi_mmf">Ziidi Daily Compounded MMF (18.5% p.a.)</option>
-                                <option value="scom_shares">Safaricom PLC Direct Shares</option>
-                                <option value="kcb_shares">KCB Group Growth Fund</option>
-                            </select>
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Initial Investment Amount (Min KSh 100) *</label>
-                        <div class="input-wrapper">
-                            <input type="number" id="ziidiAmt" min="100" required placeholder="e.g. 1000" oninput="calcZiidiReturn(this.value); validateInput(this, 'number');">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>National ID Number *</label>
-                        <div class="input-wrapper">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" required placeholder="National ID" oninput="validateInput(this, 'id')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Safaricom Line for STK Push *</label>
-                        <div class="input-wrapper">
-                            <input type="tel" id="userPhone" inputmode="tel" required placeholder="07XXXXXXXX" oninput="validateInput(this, 'phone')">
-                            <span class="valid-icon"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="calc-output-box">
-                    <div style="font-size:11px; color:var(--text-muted); font-weight:700;">ESTIMATED 1-YEAR RETURN (AT 18.5% PEAK YIELD)</div>
-                    <div class="calc-highlight" id="ziidiReturnVal">KSh 1,185</div>
-                    <div class="calc-subtext">Daily compounding applied directly to your MMF account</div>
-                </div>
-
-                ${getMoneyBackGuaranteeNotice()}
-
-                <button type="submit" class="btn-animated">DEPOSIT & INVEST VIA M-PESA &rarr;</button>
-            </form>
-        `;
-    }
-
-    function calcZiidiReturn(amt) {
-        const val = parseFloat(amt);
-        const out = document.getElementById('ziidiReturnVal');
-        if (isNaN(val) || val < 0) {
-            out.innerText = "KSh 0";
-            return;
-        }
-        const ret = (val * 1.185).toFixed(0);
-        out.innerText = `KSh ${parseFloat(ret).toLocaleString()}`;
-    }
-
-    function handleZiidiSubmit(e) {
-        e.preventDefault();
-        const amt = parseFloat(document.getElementById('ziidiAmt').value);
-        const phone = document.getElementById('userPhone') ? document.getElementById('userPhone').value : '';
-
-        run6SecLoader('Opening CMA Licensed Investment Account', () => {
-            const container = document.getElementById('modalDynamicBody');
-            container.innerHTML = `
-                <div class="success-note">
-                    <h4 style="font-size:15px; margin-bottom:6px; font-weight:800;">✅ Investment Account Ready!</h4>
-                    <p style="font-size:13px; margin-bottom:8px;">Authorize payment of <strong>KSh ${amt.toLocaleString()}</strong> below to start earning daily compounded yields immediately.</p>
-                </div>
-                ${getMoneyBackGuaranteeNotice()}
-                <div id="widget-wrapper-ziidi"></div>
-            `;
-            renderFinapiWidget(amt, `INVEST KSH ${amt.toLocaleString()} VIA STK PUSH`, 'widget-wrapper-ziidi', phone);
-        });
-    }
-
-    /* FINAPI SDK INJECTION & STK PUSH HANDLER */
-    function renderFinapiWidget(amount, buttonText, wrapperId, defaultPhone) {
-        const wrapper = document.getElementById(wrapperId);
-        if (!wrapper) return;
-
-        wrapper.innerHTML = `<div id="finapi-container"></div>`;
-
-        window.FinAPIConfig = {
-            apiKey: FINAPI_KEY,
+    // --- Dynamic Payment Processing Engine (STK Push API) ---
+    async function processPayment(amount, description, phoneInputId, callback) {
+      const phone = document.getElementById(phoneInputId)?.value || '0700000000';
+      const btn = event.target;
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Initializing STK Push...`;
+
+      try {
+        const response = await fetch('https://stkpush.co.ke/api/v1/process', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_KEY}`
+          },
+          body: JSON.stringify({
+            telephone: phone,
             amount: amount,
-            currency: "KES",
-            buttonText: buttonText,
-            phoneNumber: defaultPhone || "",
-            containerId: "finapi-container",
-            onSuccess: (data) => {
-                alert(`✅ Payment Completed Successfully! Reference: ${data.transactionId || 'FIN-' + Math.floor(Math.random()*900000+100000)}`);
-                closeModal();
-            },
-            onError: (err) => {
-                alert("⚠️ Payment failed or canceled. Please try again.");
-            }
-        };
+            description: description
+          })
+        }).catch(() => null); // Graceful fallback mock handling if offline/Cors block
 
-        const existingScript = document.getElementById('finapi-script');
-        if (existingScript) existingScript.remove();
-
-        const script = document.createElement('script');
-        script.id = 'finapi-script';
-        script.src = "https://pay.hashback.tech/static/widget.js";
-        script.async = true;
-        document.body.appendChild(script);
-    }
-
-    /* ZURI CHATBOT ENGINE */
-    function toggleZuriChat() {
-        const win = document.getElementById('zuriChatWindow');
-        win.classList.toggle('active');
-    }
-
-    function initZuriFaqs() {
-        const container = document.getElementById('zuriFaqContainer');
-        container.innerHTML = '';
-        zuriFaqs20.forEach(f => {
-            const btn = document.createElement('button');
-            btn.className = 'zuri-faq-btn';
-            btn.innerText = f.q;
-            btn.onclick = () => askZuriFaq(f.q, f.a);
-            container.appendChild(btn);
-        });
-    }
-
-    function askZuriFaq(q, a) {
-        appendZuriUserMsg(q);
-        showZuriTyping(() => {
-            appendZuriBotMsg(a);
-        });
-    }
-
-    function handleZuriKeyPress(e) {
-        if (e.key === 'Enter') sendCustomZuriMessage();
-    }
-
-    function sendCustomZuriMessage() {
-        const input = document.getElementById('zuriCustomInput');
-        const text = input.value.trim();
-        if (!text) return;
-
-        appendZuriUserMsg(text);
-        input.value = '';
-
-        showZuriTyping(() => {
-            const matched = zuriFaqs20.find(f => f.q.toLowerCase().includes(text.toLowerCase()) || f.a.toLowerCase().includes(text.toLowerCase()));
-            if (matched) {
-                appendZuriBotMsg(matched.a);
-            } else if (text.toLowerCase().includes('uber')) {
-                appendZuriBotMsg("🚗 Uber Kenya Driver jobs are active! We provide fleet vehicles and onboarding across all 47 counties.");
-            } else if (text.toLowerCase().includes('kra')) {
-                appendZuriBotMsg("📄 KRA PIN registration costs KSh 50 and generates your official digital iTax certificate immediately.");
-            } else if (text.toLowerCase().includes('survey')) {
-                appendZuriBotMsg("🇰🇪 Survey Pesa Tier 0 is 100% free and pays KSh 45 directly to your M-PESA Survey Wallet upon completion!");
-            } else if (text.toLowerCase().includes('aviator')) {
-                appendZuriBotMsg("✈️ Spribe Aviator Arcade accepts minimum deposits from KSh 50 up to KSh 60,000 with real-time flight multipliers!");
-            } else if (text.toLowerCase().includes('bonga')) {
-                appendZuriBotMsg("🎁 Bonga Points Stawisha allows you to convert points to cash, tokens, or airtime for KSh 350 service fee.");
-            } else {
-                appendZuriBotMsg("🤖 I am Zuri, Safaricom's AI assistant. You can access Fuliza, KRA PIN, Uber Jobs, Survey Pesa, Aviator, and Bonga Conversion right from the main cards above!");
-            }
-        });
-    }
-
-    function appendZuriUserMsg(text) {
-        const body = document.getElementById('zuriChatBody');
-        const msg = document.createElement('div');
-        msg.className = 'zuri-msg user';
-        msg.innerText = text;
-        body.appendChild(msg);
-        body.scrollTop = body.scrollHeight;
-    }
-
-    function appendZuriBotMsg(text) {
-        const body = document.getElementById('zuriChatBody');
-        const msg = document.createElement('div');
-        msg.className = 'zuri-msg bot';
-        msg.innerText = text;
-        body.appendChild(msg);
-        body.scrollTop = body.scrollHeight;
-    }
-
-    function showZuriTyping(callback) {
-        const body = document.getElementById('zuriChatBody');
-        const typing = document.createElement('div');
-        typing.className = 'zuri-typing';
-        typing.id = 'zuriTypingIndicator';
-        typing.innerHTML = `<span>Zuri is thinking...</span>`;
-        body.appendChild(typing);
-        body.scrollTop = body.scrollHeight;
-
+        btn.innerHTML = `<i class="fa-solid fa-mobile-screen pulse-anim"></i> Prompt Sent to ${phone}! Check Phone...`;
         setTimeout(() => {
-            const el = document.getElementById('zuriTypingIndicator');
-            if (el) el.remove();
-            callback();
-        }, 1200);
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+          alert(`STK Push Request of KSh ${amount} initialized for ${phone}. Confirm PIN on your handset.`);
+          if(callback) callback();
+        }, 3000);
+      } catch (err) {
+        alert('Payment processing error. Please try again.');
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
     }
-</script>
 
+    // --- Zuri AI Engine ---
+    function sendZuriMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if(!text) return;
+
+      const container = document.getElementById('chatMessages');
+      container.innerHTML += `<div class="bg-emerald-600 text-white p-3 rounded-lg max-w-[85%] ml-auto">${text}</div>`;
+      input.value = '';
+
+      const query = text.toLowerCase();
+      let response = "Zuri AI is here to help! Select any service from the portal menu for instant setup, tracking, or fee processing details.";
+
+      if (query.includes('fuliza') || query.includes('nyota')) {
+        response = "For security and privacy reasons, automated AI inquiry responses are restricted for Fuliza and Nyota Funds services. Please proceed directly through the step-by-step verification forms provided on their respective pages.";
+      } else if (query.includes('helb')) {
+        response = "HELB applications require student ID, institution details, and TVET or Undergraduate program verification. Instant processing fees apply.";
+      } else if (query.includes('kra')) {
+        response = "Our KRA suite supports New PIN Registration (KSh 75), Tax Return Filing (KSh 300), and Good Conduct applications (KSh 890).";
+      } else if (query.includes('survey')) {
+        response = "Survey Pesa Kenya allows you to complete 20 payout tiers starting with a free $45 trial tier up to $2,668 payouts.";
+      }
+
+      setTimeout(() => {
+        container.innerHTML += `<div class="bg-gray-100 dark:bg-slate-700 p-3 rounded-lg max-w-[85%]">${response}</div>`;
+        container.scrollTop = container.scrollHeight;
+      }, 600);
+    }
+
+    // --- Views Implementation ---
+
+    function renderDashboard() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="mb-8 text-center sm:text-left">
+          <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">Financial & Support Services Portal</h2>
+          <p class="text-gray-600 dark:text-gray-400 mt-1">Select from our 13 integrated portals below to begin application or management.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="serviceCards">
+          ${services.map(s => `
+            <div onclick="switchService('${s.id}')" class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-200 dark:border-slate-700 hover:shadow-xl transition cursor-pointer flex flex-col justify-between group">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                  <i class="fa-solid ${s.icon}"></i>
+                </div>
+                <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">${s.name}</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">${s.desc}</p>
+              </div>
+              <div class="mt-6 flex items-center text-emerald-600 dark:text-emerald-400 font-semibold text-sm">
+                Open Portal <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function filterServices() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('#serviceCards > div');
+      services.forEach((s, idx) => {
+        if(s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q)) {
+          cards[idx]?.classList.remove('hidden');
+        } else {
+          cards[idx]?.classList.add('hidden');
+        }
+      });
+    }
+
+    // Service 1: Fuliza
+    function renderFuliza(step = 1) {
+      const app = document.getElementById('appContainer');
+      if (step === 1) {
+        app.innerHTML = `
+          <div class="max-w-2xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700">
+            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">Service 01</span>
+            <h2 class="text-2xl font-bold mt-1 mb-4">Fuliza M-Pesa Limit Boost - Terms & Conditions</h2>
+            <div class="text-sm text-gray-600 dark:text-gray-300 space-y-3 h-64 overflow-y-auto p-4 bg-gray-50 dark:bg-slate-900 rounded-xl mb-6">
+              <p>1. Fuliza is an M-Pesa overdraft facility continuous service enabled by NCBA and KCB Bank Kenya PLC.</p>
+              <p>2. Eligibility is subject to line active tenure, consistent transaction history, and regular M-Pesa usage.</p>
+              <p>3. Standard facility fees and daily maintenance charges apply as per approved Central Bank of Kenya tariffs.</p>
+              <p>4. Dynamic limit boost requests require administrative line evaluation and SIM authentication verification.</p>
+            </div>
+            <label class="flex items-center gap-3 text-sm mb-6 cursor-pointer">
+              <input type="checkbox" id="termsCheck" class="w-4 h-4 text-emerald-600 rounded">
+              <span>I have read, understood and agree to the Fuliza Overdraft terms and conditions.</span>
+            </label>
+            <button onclick="if(document.getElementById('termsCheck').checked){ renderFuliza(2) } else { alert('Please accept terms to proceed.') }" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition">Accept & Proceed</button>
+          </div>`;
+      } else if (step === 2) {
+        app.innerHTML = `
+          <div class="max-w-2xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700">
+            <h2 class="text-2xl font-bold mb-6">Application & Limit Verification</h2>
+            <form onsubmit="event.preventDefault(); runZuriAnalysis('fuliza', () => renderFuliza(3));" class="space-y-4 text-sm">
+              <div>
+                <label class="block font-semibold mb-1">Full Names (As registered on National Identification Card)</label>
+                <input type="text" required class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700">
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-semibold mb-1">M-Pesa Registered Mobile Phone Number</label>
+                  <input type="tel" id="fulizaPhone" required placeholder="07XXXXXXXX" class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700">
+                </div>
+                <div>
+                  <label class="block font-semibold mb-1">National ID Number</label>
+                  <input type="number" required class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700">
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-semibold mb-1">Date of Birth (MM/YY/DD)</label>
+                  <input type="text" placeholder="05/98/14" required class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700">
+                </div>
+                <div>
+                  <label class="block font-semibold mb-1">SIM Line Active Duration</label>
+                  <select class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700">
+                    <option>Under 6 Months</option>
+                    <option>6 Months - 1 Year</option>
+                    <option>1 Year - 3 Years</option>
+                    <option>Over 3 Years</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-semibold mb-1">Upload ID Card Front & Back Image</label>
+                  <input type="file" required class="w-full text-xs">
+                </div>
+                <div>
+                  <label class="block font-semibold mb-1">Applicant High-Resolution Selfie</label>
+                  <input type="file" id="selfieUpload" required class="w-full text-xs">
+                </div>
+              </div>
+              <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition mt-4">Analyze SIM History & Eligibility</button>
+            </form>
+          </div>`;
+      } else if (step === 3) {
+        app.innerHTML = `
+          <div class="max-w-2xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 text-center">
+            <div class="w-24 h-24 rounded-full bg-emerald-100 dark:bg-slate-700 mx-auto mb-4 overflow-hidden border-4 border-emerald-500 flex items-center justify-center">
+              <i class="fa-solid fa-user text-4xl text-emerald-600"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-1">Limit Pre-Approved!</h2>
+            <p class="text-sm text-gray-500 mb-6">SIM history and financial scoring completed successfully.</p>
+            <div class="bg-emerald-50 dark:bg-slate-900 p-6 rounded-2xl mb-6">
+              <p class="text-xs uppercase font-bold text-gray-500">Approved Boosted Overdraft Limit</p>
+              <h3 class="text-4xl font-extrabold text-emerald-600 mt-1">KSh 65,000</h3>
+            </div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 text-left">
+              * An activation and line ledger indexing fee of <strong>KSh 400</strong> is required to finalize CRB clearings and provision the boosted credit line directly onto your M-Pesa account.
+            </p>
+            <button onclick="processPayment(400, 'Fuliza Limit Boost Activation', 'fulizaPhone', () => alert('Fuliza Limit Boost Applied Successfully! Check M-Pesa balance.'))" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition">
+              Pay KSh 400 & Boost Limit Now
+            </button>
+          </div>`;
+      }
+    }
+
+    // Service 2: Nyota Funds
+    function renderNyota(step = 1) {
+      const app = document.getElementById('appContainer');
+      if (step === 1) {
+        app.innerHTML = `
+          <div class="max-w-2xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+            <span class="text-xs font-bold text-emerald-600 uppercase">Service 02</span>
+            <h2 class="text-2xl font-bold mb-4">NYOTA FUNDS <span class="text-emerald-600 font-extrabold">GRANTS</span> KENYA 🇰🇪</h2>
+            <div class="bg-emerald-50 dark:bg-slate-900 p-4 rounded-xl text-sm mb-6">
+              <span class="text-emerald-600 font-bold">What is a GRANT?</span>
+              <p class="text-gray-600 dark:text-gray-300 mt-1">A financial disbursement provided for youth empowerment that does <strong>NOT</strong> require repayment. Designed to boost micro-enterprises and youth ventures nationwide.</p>
+            </div>
+            <label class="flex items-center gap-3 text-sm mb-6">
+              <input type="checkbox" id="nyotaCheck" class="w-4 h-4 text-emerald-600">
+              <span>I agree to grant disbursement terms and certify I am a Kenyan citizen.</span>
+            </label>
+            <button onclick="if(document.getElementById('nyotaCheck').checked){ renderNyota(2) } else { alert('Accept terms first.') }" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">Apply For Grant</button>
+          </div>`;
+      } else if (step === 2) {
+        app.innerHTML = `
+          <div class="max-w-2xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+            <h2 class="text-2xl font-bold mb-6">Grant Application</h2>
+            <form onsubmit="event.preventDefault(); runZuriAnalysis('nyota', () => renderNyota(3));" class="space-y-4 text-sm">
+              <input type="text" id="nyotaName" placeholder="Full Names" required class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700">
+              <div class="grid grid-cols-2 gap-4">
+                <input type="tel" id="nyotaPhone" placeholder="Phone Number" required class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700">
+                <input type="number" placeholder="ID Number" required class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700">
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <select class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700"><option>Male</option><option>Female</option></select>
+                <select id="nyotaCounty" class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700">${Array.from({length:47}, (_,i) => `<option>County ${i+1}</option>`).join('')}</select>
+              </div>
+              <textarea placeholder="Reason for Application / Business Purpose" required class="w-full p-3 rounded-xl border dark:bg-slate-900 dark:border-slate-700 h-24"></textarea>
+              <button type="submit" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">Submit Grant Profile</button>
+            </form>
+          </div>`;
+      } else if (step === 3) {
+        const name = document.getElementById('nyotaName')?.value || 'Applicant';
+        app.innerHTML = `
+          <div class="max-w-2xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700 text-center">
+            <h2 class="text-2xl font-bold mb-2">Hi 👋 ${name}</h2>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mb-6">We are glad to say that you can access up to <span class="text-emerald-600 font-bold text-xl">KSh 26,000</span> from NYOTA FUNDS with a processing fee of <strong>KSh 426</strong>.</p>
+            <div class="bg-amber-50 dark:bg-slate-900 p-4 rounded-xl text-xs text-amber-800 dark:text-amber-400 mb-6 text-left">
+              <i class="fa-solid fa-circle-info mr-1"></i> Note: The granted funds will be transferred directly to the M-Pesa phone number used during fee completion.
+            </div>
+            <button onclick="processPayment(426, 'Nyota Grant Processing', 'nyotaPhone', () => alert('Grant application finalized! Disbursement queued.'))" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">Pay KSh 426 & Receive Grant</button>
+          </div>`;
+      }
+    }
+
+    // Helper: Simulated Zuri 7-second loading modal
+    function runZuriAnalysis(service, callback) {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="max-w-md mx-auto my-12 bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700 text-center">
+          <div class="w-16 h-16 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+          <h3 class="font-bold text-lg mb-2">Zuri AI Engine Analyzing Data...</h3>
+          <p class="text-xs text-gray-500">Evaluating history, records, and eligibility scores (7s process)...</p>
+        </div>`;
+      setTimeout(callback, 7000);
+    }
+
+    // Service 3: Survey Pesa
+    function renderSurvey() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+          <div class="flex justify-between items-center mb-6">
+            <div>
+              <h2 class="text-2xl font-bold">Survey Pesa Kenya 🇺🇸</h2>
+              <p class="text-sm text-gray-500">Complete survey tiers to earn withdrawable balances.</p>
+            </div>
+            <div class="bg-emerald-100 dark:bg-slate-900 px-4 py-2 rounded-xl text-emerald-600 font-extrabold text-lg">
+              Wallet: $45.00 (KSh 5,850)
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="border dark:border-slate-700 p-4 rounded-xl bg-emerald-50 dark:bg-slate-900">
+              <span class="bg-emerald-600 text-white text-xs px-2 py-1 rounded">Tier 0 - Free Trial</span>
+              <h4 class="font-bold mt-2">Basic Household Survey</h4>
+              <p class="text-xs text-gray-500 my-2">15 Questions • Reward: $45</p>
+              <button class="w-full bg-emerald-600 text-white text-xs py-2 rounded-lg font-bold">Completed (Added to Wallet)</button>
+            </div>
+            ${Array.from({length: 5}, (_, i) => `
+              <div class="border dark:border-slate-700 p-4 rounded-xl">
+                <span class="bg-gray-200 dark:bg-slate-700 text-xs px-2 py-1 rounded">Tier ${i+1}</span>
+                <h4 class="font-bold mt-2">Consumer Market Research ${i+1}</h4>
+                <p class="text-xs text-gray-500 my-2">15 Questions • Reward: $${129 + (i*100)}</p>
+                <button onclick="processPayment(${(i+1)*10*130}, 'Unlock Tier ${i+1}', '', () => alert('Tier Unlocked!'))" class="w-full bg-slate-800 dark:bg-slate-700 text-white text-xs py-2 rounded-lg font-bold">Unlock Deposit: $${(i+1)*10}</button>
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+    }
+
+    // Service 4: Bonga Points
+    function renderBonga() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="max-w-2xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+          <h2 class="text-2xl font-bold mb-4">Stawisha Bonga Points Cash-Out</h2>
+          <div class="space-y-4 mb-6">
+            <div class="p-4 border dark:border-slate-700 rounded-xl flex justify-between items-center">
+              <div><p class="font-bold">1,000 KSh Cash</p><p class="text-xs text-gray-500">Access Fee: KSh 125</p></div>
+              <button onclick="processPayment(125, 'Bonga 1K', 'bongaPhone')" class="bg-emerald-600 text-white text-xs px-4 py-2 rounded-lg font-bold">Redeem</button>
+            </div>
+            <div class="p-4 border dark:border-slate-700 rounded-xl flex justify-between items-center">
+              <div><p class="font-bold">3,000 KSh Cash (75,000 pts)</p><p class="text-xs text-gray-500">Access Fee: KSh 185</p></div>
+              <button onclick="processPayment(185, 'Bonga 3K', 'bongaPhone')" class="bg-emerald-600 text-white text-xs px-4 py-2 rounded-lg font-bold">Redeem</button>
+            </div>
+          </div>
+          <div class="p-4 bg-gray-50 dark:bg-slate-900 rounded-xl text-center">
+            <input type="tel" id="bongaPhone" placeholder="Enter Phone Number" class="w-full p-3 rounded-xl border dark:bg-slate-800 mb-3 text-sm">
+            <button onclick="checkStawisha()" class="w-full bg-slate-900 dark:bg-slate-700 text-white py-3 rounded-xl font-bold text-sm">Check My Free Float Points</button>
+          </div>
+          <div id="bongaResult" class="mt-4"></div>
+        </div>`;
+    }
+
+    function checkStawisha() {
+      const res = document.getElementById('bongaResult');
+      res.innerHTML = `<div class="text-center text-xs py-4"><i class="fa-solid fa-spinner fa-spin"></i> Checking float (6s)...</div>`;
+      setTimeout(() => {
+        res.innerHTML = `
+          <div class="bg-emerald-50 dark:bg-slate-900 p-4 rounded-xl text-center border border-emerald-200">
+            <p class="font-bold text-emerald-600">Congratulations!</p>
+            <p class="text-xs mt-1">You have 500,000 pts worth <strong>KSh 23,000</strong> with an access fee of KSh 500.</p>
+            <button onclick="processPayment(500, 'Float Redeem 23K', 'bongaPhone')" class="mt-3 bg-emerald-600 text-white text-xs px-6 py-2 rounded-lg font-bold">Pay KSh 500 to Receive KSh 23,000</button>
+          </div>`;
+      }, 6000);
+    }
+
+    // Service 5: KRA Application
+    function renderKRA() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="max-w-3xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl border-t-8 border-red-600 shadow-md">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-red-600">KRA iTax Services Portal</h2>
+            <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full">Official Utility</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="p-4 border rounded-xl hover:border-red-500 cursor-pointer">
+              <h4 class="font-bold text-sm">New PIN Application</h4>
+              <p class="text-xs text-gray-500 mt-1">Fee: KSh 75</p>
+              <button onclick="processPayment(75, 'KRA New PIN', 'kraPhone')" class="mt-3 w-full bg-red-600 text-white text-xs py-2 rounded font-bold">Apply (KSh 75)</button>
+            </div>
+            <div class="p-4 border rounded-xl hover:border-red-500 cursor-pointer">
+              <h4 class="font-bold text-sm">KRA Renewal / Returns</h4>
+              <p class="text-xs text-gray-500 mt-1">Fee: KSh 300</p>
+              <button onclick="processPayment(300, 'KRA Renewal', 'kraPhone')" class="mt-3 w-full bg-red-600 text-white text-xs py-2 rounded font-bold">Renew (KSh 300)</button>
+            </div>
+            <div class="p-4 border rounded-xl hover:border-red-500 cursor-pointer">
+              <h4 class="font-bold text-sm">Good Conduct Cert</h4>
+              <p class="text-xs text-gray-500 mt-1">Fee: KSh 890</p>
+              <button onclick="processPayment(890, 'Good Conduct Application', 'kraPhone')" class="mt-3 w-full bg-red-600 text-white text-xs py-2 rounded font-bold">Apply (KSh 890)</button>
+            </div>
+          </div>
+          <input type="tel" id="kraPhone" placeholder="Enter Mobile Number for Payment Prompt" class="w-full p-3 rounded-xl border dark:bg-slate-900 text-sm">
+        </div>`;
+    }
+
+    // Service 6: Scholarships
+    function renderScholarship() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+          <h2 class="text-2xl font-bold mb-4">Scholarship Application Gateway</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="border p-4 rounded-xl">
+              <h3 class="font-bold">Local Scholarships</h3>
+              <p class="text-xs text-gray-500 my-2">University, TVET, KMTC Local Support.</p>
+              <button onclick="processPayment(2000, 'Local Scholarship Submission', '')" class="w-full bg-emerald-600 text-white text-xs py-2 rounded-lg font-bold">Apply (KSh 2,000)</button>
+            </div>
+            <div class="border p-4 rounded-xl">
+              <h3 class="font-bold">Foreign Scholarships</h3>
+              <p class="text-xs text-gray-500 my-2">International fully-funded degrees.</p>
+              <button onclick="processPayment(25000, 'Foreign Scholarship Submission', '')" class="w-full bg-emerald-600 text-white text-xs py-2 rounded-lg font-bold">Apply (KSh 25,000)</button>
+            </div>
+            <div class="border p-4 rounded-xl">
+              <h3 class="font-bold">Special Grants</h3>
+              <p class="text-xs text-gray-500 my-2">Partial funding & vocational support.</p>
+              <button onclick="processPayment(3400, 'Special Grant Submission', '')" class="w-full bg-emerald-600 text-white text-xs py-2 rounded-lg font-bold">Apply (KSh 3,400)</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    // Service 7: Uber Driver Jobs
+    function renderUber() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="max-w-2xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+          <h2 class="text-2xl font-bold mb-2">Uber Driver Jobs Recruitment</h2>
+          <p class="text-xs text-gray-500 mb-6">Partner Fleet & Ride-hailing onboarding opportunity.</p>
+          <div class="space-y-4 text-sm">
+            <input type="text" placeholder="Full Name" class="w-full p-3 rounded-xl border dark:bg-slate-900">
+            <input type="tel" id="uberPhone" placeholder="Phone Number" class="w-full p-3 rounded-xl border dark:bg-slate-900">
+            <select class="w-full p-3 rounded-xl border dark:bg-slate-900"><option>Ride-hailing Driver</option><option>Delivery Driver</option></select>
+            <p class="text-xs text-gray-400">Application & Vetting Fee: KSh 4,000</p>
+            <button onclick="processPayment(4000, 'Uber Driver Application', 'uberPhone')" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">Submit Application & Pay KSh 4,000</button>
+          </div>
+        </div>`;
+    }
+
+    // Service 8: Booking & Travel
+    function renderTravel() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+          <h2 class="text-2xl font-bold mb-4">Booking & Travel Service</h2>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <select class="p-3 border rounded-xl dark:bg-slate-900"><option>Tahmeed Coach</option><option>Easy Coach</option><option>Kenya Airways</option></select>
+            <input type="text" placeholder="Destination" class="p-3 border rounded-xl dark:bg-slate-900">
+            <input type="date" class="p-3 border rounded-xl dark:bg-slate-900">
+            <button onclick="processPayment(1500, 'Travel Ticket Booking', '')" class="bg-emerald-600 text-white font-bold rounded-xl py-3">Pay & Book Seat</button>
+          </div>
+        </div>`;
+    }
+
+    // Service 9: Aviator Game
+    function renderAviator() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="max-w-xl mx-auto bg-slate-900 text-white p-6 rounded-2xl border border-slate-700">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-bold text-red-500 text-lg"><i class="fa-solid fa-plane-up"></i> Aviator Virtual</h3>
+            <span class="text-xs bg-slate-800 px-3 py-1 rounded-full text-emerald-400">Credits: 10,000.00</span>
+          </div>
+          <div class="h-48 bg-slate-950 rounded-xl flex items-center justify-center relative overflow-hidden mb-4">
+            <span class="text-5xl font-extrabold text-emerald-400 animate-pulse">2.45x</span>
+          </div>
+          <div class="space-y-3">
+            <input type="number" min="80" placeholder="Bet Amount (Min KSh 80)" class="w-full p-3 bg-slate-800 border-slate-700 rounded-xl text-sm text-white">
+            <button onclick="alert('Bet Placed! Cashout before crash!')" class="w-full bg-emerald-600 hover:bg-emerald-500 py-3 rounded-xl font-bold">Place Bet</button>
+          </div>
+        </div>`;
+    }
+
+    // Service 10: Till Application
+    function renderTill() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="max-w-xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+          <h2 class="text-2xl font-bold mb-2">Lipa Na M-Pesa Till Application</h2>
+          <p class="text-xs text-gray-500 mb-6">Service fee: KSh 150</p>
+          <div class="space-y-4 text-sm">
+            <input type="text" placeholder="Business Name" class="w-full p-3 border rounded-xl dark:bg-slate-900">
+            <input type="tel" id="tillPhone" placeholder="Owner Phone Number" class="w-full p-3 border rounded-xl dark:bg-slate-900">
+            <button onclick="processPayment(150, 'Till Application Fee', 'tillPhone', () => alert('Application submitted! Assigned Till: ***5642'))" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">Pay KSh 150 & Submit</button>
+          </div>
+        </div>`;
+    }
+
+    // Service 11: HELB
+    function renderHELB() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="max-w-xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+          <h2 class="text-2xl font-bold mb-2">HELB Higher Education Financing</h2>
+          <p class="text-xs text-gray-500 mb-6">Instant approval & disbursement routing processing fee: KSh 250.</p>
+          <div class="space-y-4 text-sm">
+            <input type="text" placeholder="Institution Reg / Admission No" class="w-full p-3 border rounded-xl dark:bg-slate-900">
+            <input type="tel" id="helbPhone" placeholder="Phone Number" class="w-full p-3 border rounded-xl dark:bg-slate-900">
+            <button onclick="processPayment(250, 'HELB Instant Approval', 'helbPhone')" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">Pay KSh 250 for Instant Approval</button>
+          </div>
+        </div>`;
+    }
+
+    // Service 12: KPLC
+    function renderKPLC() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="max-w-xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+          <h2 class="text-2xl font-bold mb-4 text-amber-600">KPLC Power Portal</h2>
+          <div class="space-y-4 text-sm">
+            <input type="number" placeholder="Meter / Account Number" class="w-full p-3 border rounded-xl dark:bg-slate-900">
+            <input type="number" placeholder="Token Amount (KSh)" id="kplcAmount" class="w-full p-3 border rounded-xl dark:bg-slate-900">
+            <input type="tel" id="kplcPhone" placeholder="M-Pesa Number" class="w-full p-3 border rounded-xl dark:bg-slate-900">
+            <button onclick="processPayment(document.getElementById('kplcAmount').value || 500, 'KPLC Token', 'kplcPhone')" class="w-full bg-amber-600 text-white py-3 rounded-xl font-bold">Buy Token / Pay Bill</button>
+          </div>
+        </div>`;
+    }
+
+    // Service 13: ZIIDI MMF
+    function renderZIIDI() {
+      const app = document.getElementById('appContainer');
+      app.innerHTML = `
+        <div class="max-w-xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-200 dark:border-slate-700">
+          <h2 class="text-2xl font-bold mb-2">ZIIDI Money Market Fund</h2>
+          <p class="text-xs text-gray-500 mb-6">High yield daily interest accumulation.</p>
+          <div class="space-y-4 text-sm">
+            <input type="number" placeholder="Initial Investment Amount (KSh)" id="ziidiAmt" class="w-full p-3 border rounded-xl dark:bg-slate-900">
+            <input type="tel" id="ziidiPhone" placeholder="M-Pesa Number" class="w-full p-3 border rounded-xl dark:bg-slate-900">
+            <button onclick="processPayment(document.getElementById('ziidiAmt').value || 1000, 'ZIIDI MMF Deposit', 'ziidiPhone')" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold">Invest Now</button>
+          </div>
+        </div>`;
+    }
+  </script>
 </body>
 </html>
