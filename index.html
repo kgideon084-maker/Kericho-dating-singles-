@@ -3,38 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Safaricom Financial Support & Educational Scholarships</title>
+  <title>Safaricom Enterprise Support & Educational Grants</title>
   <style>
     :root {
-      --safaricom-green: #008751;
-      --safaricom-green-dark: #00663d;
-      --safaricom-green-light: #e6f3ed;
-      --navy-dark: #0b2545;
-      --gray-light: #f4f6f8;
-      --gray-border: #dcdfe6;
-      --text-dark: #2c3e50;
-      --text-muted: #6c757d;
+      --safaricom-green: #004d25;
+      --safaricom-green-dark: #003319;
+      --safaricom-green-light: #e6f2ed;
+      --safaricom-accent: #006633;
+      --navy-dark: #081c15;
+      --gray-light: #f4f7f5;
+      --gray-border: #d0d7d3;
+      --text-dark: #1b2620;
+      --text-muted: #526359;
       --white: #ffffff;
-      --accent-gold: #ffc107;
-      --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --accent-gold: #ffb703;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.12);
       --transition: all 0.3s ease;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    body { background-color: var(--gray-light); color: var(--text-dark); line-height: 1.6; }
+    body { background-color: var(--gray-light); color: var(--text-dark); line-height: 1.6; padding-bottom: 60px; }
 
     /* Header & Navigation */
-    header { background: var(--white); box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid var(--safaricom-green); }
+    header { background: var(--white); box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 1000; border-bottom: 4px solid var(--safaricom-green); }
     .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem; }
     .brand { display: flex; align-items: center; gap: 12px; }
-    .brand img { height: 45px; }
-    .brand-title { font-size: 1.2rem; font-weight: 700; color: var(--navy-dark); }
+    .brand-title { font-size: 1.25rem; font-weight: 700; color: var(--navy-dark); }
     .brand-title span { color: var(--safaricom-green); }
     
     .search-box { position: relative; width: 300px; }
     .search-box input { width: 100%; padding: 0.5rem 1rem 0.5rem 2.2rem; border: 1px solid var(--gray-border); border-radius: 20px; outline: none; transition: var(--transition); }
-    .search-box input:focus { border-color: var(--safaricom-green); box-shadow: 0 0 0 3px rgba(0,135,81,0.15); }
+    .search-box input:focus { border-color: var(--safaricom-green); box-shadow: 0 0 0 3px rgba(0,77,37,0.15); }
     .search-box::before { content: "🔍"; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; opacity: 0.6; }
 
     /* Main Container */
@@ -43,40 +43,48 @@
     /* Hero Banner */
     .hero { background: linear-gradient(135deg, var(--navy-dark), var(--safaricom-green)); color: var(--white); padding: 2.5rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: var(--shadow-md); text-align: center; }
     .hero h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-    .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 800px; margin: 0 auto; }
+    .hero p { font-size: 1.1rem; opacity: 0.95; max-width: 800px; margin: 0 auto; }
+    .greeting-text { font-size: 1.2rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 0.5rem; }
 
     /* Services Grid */
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-    .service-card { background: var(--white); border-radius: 10px; border: 1px solid var(--gray-border); padding: 1.5rem; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+    .service-card { background: var(--white); border-radius: 12px; border: 1px solid var(--gray-border); overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); }
     .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--safaricom-green); }
-    .service-card h3 { color: var(--navy-dark); font-size: 1.25rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
-    .service-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
+    .card-img { width: 100%; height: 160px; object-fit: cover; }
+    .card-body { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: flex-col; justify-content: space-between; }
+    .service-card h3 { color: var(--navy-dark); font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .service-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem; }
     
     /* Buttons */
     .btn { display: inline-block; width: 100%; padding: 0.75rem 1rem; border: none; border-radius: 6px; font-weight: 600; text-align: center; cursor: pointer; transition: var(--transition); text-decoration: none; font-size: 0.95rem; }
     .btn-primary { background-color: var(--safaricom-green); color: var(--white); }
     .btn-primary:hover { background-color: var(--safaricom-green-dark); }
-    .btn-disabled { background-color: #ccc; cursor: not-allowed; }
 
-    /* Service Workspace / Forms */
+    /* Workspace / Modules */
     .workspace { background: var(--white); border-radius: 12px; border: 1px solid var(--gray-border); padding: 2rem; box-shadow: var(--shadow-md); display: none; }
     .workspace.active { display: block; }
     .workspace-header { border-bottom: 2px solid var(--safaricom-green-light); padding-bottom: 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
     .workspace-title { color: var(--navy-dark); font-size: 1.5rem; }
 
-    /* Form Design */
+    /* Form Elements */
     .form-group { margin-bottom: 1.25rem; }
     .form-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; color: var(--navy-dark); font-size: 0.9rem; }
     .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.65rem 0.8rem; border: 1px solid var(--gray-border); border-radius: 6px; outline: none; font-size: 0.95rem; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--safaricom-green); box-shadow: 0 0 0 3px rgba(0,135,81,0.1); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--safaricom-green); box-shadow: 0 0 0 3px rgba(0,77,37,0.1); }
     .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-    .file-input-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
 
-    /* User Profile Card */
+    /* User Profile & Info Boxes */
     .profile-card { background: var(--safaricom-green-light); border: 1px solid var(--safaricom-green); border-radius: 8px; padding: 1.2rem; display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.5rem; }
     .profile-avatar { width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid var(--safaricom-green); background: #fff; }
     .profile-info h4 { color: var(--navy-dark); font-size: 1.1rem; }
     .profile-info p { color: var(--text-muted); font-size: 0.85rem; }
+
+    .notice-box { background: #fff8e1; border-left: 4px solid var(--accent-gold); padding: 1rem; border-radius: 4px; margin: 1rem 0; font-size: 0.9rem; }
+    .success-box { background: #e6f2ed; border-left: 4px solid var(--safaricom-green); padding: 1rem; border-radius: 4px; margin: 1rem 0; }
+
+    /* Payment Status Screen */
+    .payment-screen { text-align: center; padding: 40px 20px; display: none; }
+    .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--safaricom-green); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto 10px; }
 
     /* Tables */
     .table-responsive { overflow-x: auto; margin-bottom: 1.5rem; }
@@ -84,43 +92,38 @@
     th, td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--gray-border); }
     th { background: var(--safaricom-green-light); color: var(--safaricom-green-dark); font-weight: 600; }
 
-    /* Zuri Loading Overlay */
+    /* Quiz Container */
+    .quiz-q { background: var(--gray-light); padding: 1rem; border-radius: 6px; margin-bottom: 1rem; }
+    .quiz-q p { font-weight: 600; margin-bottom: 0.5rem; }
+    .quiz-options label { display: block; padding: 0.5rem 0.8rem; background: var(--white); border: 1px solid var(--gray-border); border-radius: 4px; margin-bottom: 0.3rem; cursor: pointer; transition: var(--transition); }
+    .quiz-options label:hover { background: var(--safaricom-green-light); }
+
+    /* Live Notification Popups */
+    .popup-container { position: fixed; bottom: 20px; left: 20px; z-index: 2000; pointer-events: none; }
+    .popup-toast { background: var(--navy-dark); color: var(--white); padding: 1rem 1.2rem; border-radius: 8px; border-left: 4px solid var(--safaricom-green); box-shadow: var(--shadow-md); margin-top: 10px; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; width: 320px; font-size: 0.85rem; }
+    .popup-toast.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .popup-toast strong { color: var(--accent-gold); }
+
+    /* Zuri AI Floating Widget */
+    .zuri-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1500; }
+    .zuri-btn { background: var(--safaricom-green); color: #fff; border: none; padding: 0.8rem 1.2rem; border-radius: 30px; font-weight: 600; cursor: pointer; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 8px; }
+    .zuri-chat-box { position: absolute; bottom: 60px; right: 0; width: 320px; background: #fff; border: 1px solid var(--gray-border); border-radius: 12px; box-shadow: var(--shadow-md); display: none; flex-direction: column; overflow: hidden; }
+    .zuri-chat-box.active { display: flex; }
+    .zuri-header { background: var(--safaricom-green); color: #fff; padding: 0.8rem 1rem; font-weight: 600; font-size: 0.95rem; }
+    .zuri-body { padding: 1rem; max-height: 250px; overflow-y: auto; font-size: 0.85rem; display: flex; flex-direction: column; gap: 8px; }
+    .zuri-msg { padding: 0.6rem 0.8rem; border-radius: 8px; max-width: 85%; }
+    .zuri-msg.bot { background: var(--safaricom-green-light); color: var(--navy-dark); align-self: flex-start; }
+    .zuri-msg.user { background: var(--navy-dark); color: #fff; align-self: flex-end; }
+    .zuri-options { padding: 0.5rem; border-top: 1px solid var(--gray-border); background: var(--gray-light); display: flex; flex-direction: column; gap: 4px; }
+    .zuri-chip { background: #fff; border: 1px solid var(--gray-border); border-radius: 12px; padding: 0.4rem 0.6rem; font-size: 0.75rem; cursor: pointer; text-align: left; }
+    .zuri-chip:hover { background: var(--safaricom-green-light); border-color: var(--safaricom-green); }
+
+    /* Overlay / Spinners */
     .zuri-overlay { display: none; text-align: center; padding: 3rem 1rem; }
     .zuri-spinner { width: 50px; height: 50px; border: 5px solid var(--safaricom-green-light); border-top: 5px solid var(--safaricom-green); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    /* Banner & Info Boxes */
-    .notice-box { background: #fff8e1; border-left: 4px solid var(--accent-gold); padding: 1rem; border-radius: 4px; margin: 1rem 0; font-size: 0.9rem; }
-    .success-box { background: #e8f5e9; border-left: 4px solid var(--safaricom-green); padding: 1rem; border-radius: 4px; margin: 1rem 0; }
-
-    /* Reviews / Social Comments */
-    .comments-section { margin-top: 2rem; border-top: 1px solid var(--gray-border); padding-top: 1.5rem; }
-    .comment-card { background: var(--gray-light); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: flex; gap: 1rem; }
-    .comment-card .social-icon { width: 24px; height: 24px; flex-shrink: 0; }
-    .comment-content h5 { font-size: 0.9rem; color: var(--navy-dark); }
-    .comment-content p { font-size: 0.85rem; color: var(--text-dark); margin: 0.2rem 0; }
-    .stars { color: var(--accent-gold); font-size: 0.8rem; }
-
-    /* Quiz Container */
-    .quiz-q { background: var(--gray-light); padding: 1rem; border-radius: 6px; margin-bottom: 1rem; }
-    .quiz-q p { font-weight: 600; margin-bottom: 0.5rem; }
-    .quiz-options label { display: block; padding: 0.4rem 0.8rem; background: var(--white); border: 1px solid var(--gray-border); border-radius: 4px; margin-bottom: 0.3rem; cursor: pointer; transition: var(--transition); }
-    .quiz-options label:hover { background: var(--safaricom-green-light); }
-
-    /* Toast Notification */
-    .toast { position: fixed; top: 20px; right: 20px; background: var(--navy-dark); color: var(--white); padding: 1rem 1.5rem; border-radius: 6px; border-left: 4px solid var(--safaricom-green); box-shadow: var(--shadow-md); z-index: 2000; display: none; }
-
-    /* Utility */
     .hidden { display: none !important; }
-    .flex-center { display: flex; align-items: center; justify-content: center; gap: 10px; }
-    
-    /* Responsive adjustment */
-    @media (max-width: 768px) {
-      .nav-container { flex-direction: column; gap: 1rem; }
-      .search-box { width: 100%; }
-      .hero { padding: 1.5rem; }
-      .hero h1 { font-size: 1.6rem; }
-    }
   </style>
 </head>
 <body>
@@ -129,605 +132,449 @@
     <div class="nav-container">
       <div class="brand">
         <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100" height="100" rx="20" fill="#008751"/>
+          <rect width="100" height="100" rx="20" fill="#004d25"/>
           <circle cx="50" cy="50" r="30" fill="white"/>
-          <path d="M40 35L65 50L40 65V35Z" fill="#008751"/>
+          <path d="M40 35L65 50L40 65V35Z" fill="#004d25"/>
         </svg>
-        <div class="brand-title">Safaricom <span>Financial Support</span></div>
+        <div class="brand-title">Safaricom <span>Enterprise Portal</span></div>
       </div>
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search services (e.g. Fuliza, Bonga, NGO)..." onkeyup="filterServices()">
+        <input type="text" id="searchInput" placeholder="Search services (Till, Fuliza, Grants)..." onkeyup="filterServices()">
       </div>
     </div>
   </header>
 
   <div class="container">
     <section class="hero">
+      <div class="greeting-text" id="greetingContainer">Good Day!</div>
       <h1>Safaricom Support & Educational Grants Portal</h1>
-      <p>Official enterprise support platform offering line eligibility upgrades, reward conversions, youth empowerment grants, and international surveys.</p>
+      <p>Official enterprise assistance, eligibility verification, Till registration, and empowerment grant disbursements.</p>
     </section>
 
     <section class="services-grid" id="servicesGrid">
       
       <div class="service-card" data-title="fuliza mpesa eligibility checking limit boost">
-        <div>
+        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=600&q=80" alt="Fuliza Limit Boost Stairs" class="card-img">
+        <div class="card-body">
           <h3>🟢 Fuliza Limit Check & Boost</h3>
-          <p>Verify line registration status, submit identity documentation for owner verification, and unlock updated overdraft allocations.</p>
+          <p>Verify line registration status and evaluate accounts for enhanced overdraft allocations.</p>
+          <button class="btn btn-primary" onclick="openService('fulizaService')">Access Service</button>
         </div>
-        <button class="btn btn-primary" onclick="openService('fulizaService')">Access Service</button>
       </div>
 
       <div class="service-card" data-title="stawisha bonga points cash conversion">
-        <div>
+        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=80" alt="Bonga Cash Conversion" class="card-img">
+        <div class="card-body">
           <h3>💎 Stawisha Bonga Points</h3>
-          <p>Convert accumulated Safaricom Bonga Points into liquid M-PESA cash instantly based on standard enterprise tiers.</p>
+          <p>Convert accumulated Safaricom Bonga Points into direct liquid cash disbursements.</p>
+          <button class="btn btn-primary" onclick="openService('bongaService')">Access Service</button>
         </div>
-        <button class="btn btn-primary" onclick="openService('bongaService')">Access Service</button>
       </div>
 
       <div class="service-card" data-title="ngo nyota funds youth empowerment grants">
-        <div>
-          <h3>🌟 NYOTA Youth Empowerment Grants</h3>
-          <p>Apply for National Youth Opportunities Towards Advancement funds to scale micro-enterprises and vocational projects.</p>
+        <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=600&q=80" alt="Youth Empowerment Grants" class="card-img">
+        <div class="card-body">
+          <h3>🌟 NYOTA Youth Grants</h3>
+          <p>Apply for non-repayable empowerment capital allocations for business and vocational setups.</p>
+          <button class="btn btn-primary" onclick="openService('nyotaService')">Access Service</button>
         </div>
-        <button class="btn btn-primary" onclick="openService('nyotaService')">Access Service</button>
       </div>
 
       <div class="service-card" data-title="survey questions powered by safaricom payout">
-        <div>
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Global Market Research" class="card-img">
+        <div class="card-body">
           <h3>🇺🇸 🇰🇪 Global Survey Platform</h3>
-          <p>Participate in sponsored research surveys and earn verified monetary disbursements credited to your linked wallet.</p>
+          <p>Complete research questionnaires and receive verified disbursements directly into your wallet.</p>
+          <button class="btn btn-primary" onclick="openService('surveyService')">Access Service</button>
         </div>
-        <button class="btn btn-primary" onclick="openService('surveyService')">Access Service</button>
+      </div>
+
+      <div class="service-card" data-title="lipa na mpesa till application supermarket shopping merchant">
+        <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80" alt="Smiling Person Shopping Supermarket" class="card-img">
+        <div class="card-body">
+          <h3>🛒 Lipa Na M-PESA Till Registration</h3>
+          <p>Acquire an instant 600-series Buy Goods Till Number for seamless merchant business collections.</p>
+          <button class="btn btn-primary" onclick="openService('tillService')">Apply For Till</button>
+        </div>
+      </div>
+
+      <div class="service-card" data-title="mpesa agent outlet sub agency store license">
+        <img src="https://images.unsplash.com/photo-1556742049-0a67914979a7?auto=format&fit=crop&w=600&q=80" alt="Agent Store Setup" class="card-img">
+        <div class="card-body">
+          <h3>🏪 M-PESA Agent Store Setup</h3>
+          <p>Register legal sub-agency premises to process subscriber cash-in and cash-out operations.</p>
+          <button class="btn btn-primary" onclick="openService('agentService')">Apply For Agent Code</button>
+        </div>
+      </div>
+
+      <div class="service-card" data-title="safaricom enterprise business internet fiber connection">
+        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" alt="Fiber Network Connection" class="card-img">
+        <div class="card-body">
+          <h3>🌐 Commercial Fiber & Internet</h3>
+          <p>Request high-speed dedicated commercial fiber routing for business spaces and offices.</p>
+          <button class="btn btn-primary" onclick="openService('fiberService')">Request Connection</button>
+        </div>
       </div>
 
     </section>
 
-    <div id="toast" class="toast">Successfully logged in. Authenticating profile session...</div>
+    <div id="paymentStatusScreen" class="payment-screen workspace">
+      <div class="loader"></div>
+      <h2 style="color:var(--safaricom-green);">Check Your Phone</h2>
+      <p>STK Push sent to your M-PESA number</p>
+      <p style="font-size:12px;margin-top:10px;color:var(--text-muted);">Enter your M-PESA PIN to complete payment</p>
+    </div>
 
     <section id="fulizaService" class="workspace">
       <div class="workspace-header">
-        <h2 class="workspace-title">Fuliza M-PESA Eligibility Checking & Limit Boost</h2>
+        <h2 class="workspace-title">Fuliza M-PESA Limit Verification & Boost</h2>
         <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
       </div>
 
       <div id="fulizaPage1">
-        <h3>Step 1: Financial Terms & Conditions</h3>
+        <h3>Step 1: Terms of Service</h3>
         <p style="margin: 1rem 0; color: var(--text-muted);">
-          By accessing the Safaricom Fuliza Limit Evaluation system, you agree to allow Zuri AI Engine to cross-reference line transactional activity, KYC registration documentation, and credit score matrices in compliance with Central Bank of Kenya financial guidelines.
+          Agree to allow Zuri Engine to evaluate line transaction balance and verification history under CBK financial framework rules.
         </p>
         <button class="btn btn-primary" onclick="goToFulizaStep(2)">Agree & Proceed</button>
       </div>
 
       <div id="fulizaPage2" class="hidden">
-        <h3>Step 2: Applicant Requirements & Identity Audit</h3>
-        <form id="fulizaForm" onsubmit="handleFulizaSubmit(event)">
+        <h3>Step 2: Line Audit Form</h3>
+        <form onsubmit="handleFulizaSubmit(event)">
           <div class="form-row" style="margin-top:1rem;">
-            <div class="form-group">
-              <label>Full Names</label>
-              <input type="text" id="fulizaName" required placeholder="e.g. John Ochieng">
-            </div>
-            <div class="form-group">
-              <label>Safaricom Phone Number</label>
-              <input type="tel" id="fulizaPhone" required placeholder="0712345678" pattern="[0-9]{10}">
-            </div>
+            <div class="form-group"><label>Full Names</label><input type="text" id="fulizaName" required placeholder="John Ochieng"></div>
+            <div class="form-group"><label>Safaricom Phone Number</label><input type="tel" id="fulizaPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label>National ID Number</label>
-              <input type="text" id="fulizaID" required placeholder="12345678" minlength="7">
-            </div>
-            <div class="form-group">
-              <label>Current Fuliza Limit (KES)</label>
-              <input type="number" id="fulizaCurrent" required placeholder="0">
-            </div>
+            <div class="form-group"><label>National ID Number</label><input type="text" required placeholder="12345678" minlength="7"></div>
+            <div class="form-group"><label>Current Fuliza Limit (KES)</label><input type="number" required placeholder="0"></div>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>SIM Card PUK Number (Line Verification)</label>
-              <input type="text" id="fulizaPUK" required placeholder="8-digit PUK Code">
-            </div>
-            <div class="form-group">
-              <label>Upload National ID Image (Front & Back)</label>
-              <input type="file" id="fulizaIDImg" accept="image/*" required onchange="previewIDImage(event, 'fulizaProfilePic')">
-              <div class="file-input-note">Identity document upload is strictly required to verify ownership of the line against government database records.</div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Application</button>
+          <button type="submit" class="btn btn-primary">Submit Line Audit</button>
         </form>
       </div>
 
       <div id="fulizaLoading" class="zuri-overlay">
         <div class="zuri-spinner"></div>
-        <h3>Zuri AI Engine Analysis in Progress</h3>
-        <p style="color:var(--text-muted);">Zuri is analyzing line history, checking SIM registration integrity, and auditing M-PESA statement metrics...</p>
+        <h3>Zuri AI Engine Line Audit in Progress</h3>
+        <p style="color:var(--text-muted);">Evaluating profile metrics...</p>
       </div>
 
       <div id="fulizaPage3" class="hidden">
         <div class="profile-card">
-          <img id="fulizaProfilePic" src="https://via.placeholder.com/150" alt="ID Photo" class="profile-avatar">
+          <img id="fulizaProfilePic" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Profile" class="profile-avatar">
           <div class="profile-info">
             <h4 id="fulizaDisplayNav">Applicant Profile</h4>
-            <p><strong>Account Status:</strong> Active (2 Years 8 Months)</p>
-            <p><strong>SIM Audit:</strong> Verified Genuine Owner</p>
+            <p><strong>SIM Audit:</strong> Verified Genuine Subscriber</p>
           </div>
         </div>
 
-        <div id="fulizaSecondLoading" class="zuri-overlay" style="display:block;">
-          <div class="zuri-spinner"></div>
-          <p>Zuri is completing line evaluation cycle...</p>
+        <div class="success-box">
+          <h3>🎉 Limit Upgrade Qualified!</h3>
+          <p>Your adjusted Fuliza allocation is set to: <strong>KES 56,000</strong>.</p>
         </div>
-
-        <div id="fulizaResult" class="hidden">
-          <div class="success-box">
-            <h3>🎉 Qualification Approved!</h3>
-            <p>Congratulations! Based on your line evaluation, your enhanced Fuliza allocation is: <strong>KES 56,000</strong>.</p>
-          </div>
-
-          <div style="margin: 1.5rem 0;">
-            <p><strong>Activation Fee Requirement:</strong> An administrative activation fee of <strong>KES 500</strong> is required to initialize credit line adjustment, register secure insurance underwriting, and instantly update the balance on your M-PESA profile.</p>
-          </div>
-
-          <div class="notice-box">
-            <strong>How It Works Post-Payment:</strong><br>
-            After payment completion, you will receive an automated M-PESA SMS prompting you to refresh your Fuliza balance. No further charges apply.<br><br>
-            <em>Notice: If the Fuliza limit boost does not update within 3 hours, your activation fee is automatically refunded. For immediate support, contact 0722000000.</em>
-          </div>
-
-          <div style="background: #f9f9f9; border:2px dashed var(--safaricom-green); border-radius:8px; padding:1.5rem; text-align:center; margin-top:1rem;">
-            <h4>STK Push Secure Payment Aggregator (stkpush.co.ke)</h4>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">Enter your M-PESA number below to trigger instantaneous STK PIN Prompt.</p>
-            <div style="max-width:300px; margin:0 auto;">
-              <input type="tel" id="fulizaPayPhone" placeholder="0712345678" style="width:100%; padding:0.5rem; margin-bottom:0.5rem; border:1px solid #ccc; border-radius:4px;">
-              <button class="btn btn-primary" onclick="triggerSTK('KES 500')">Pay KES 500 via STK Push</button>
-            </div>
-          </div>
+        <div class="notice-box">
+          An administrative processing fee of <strong>KES 500</strong> is required to finalize credit line registration.
         </div>
+        <div id="widget-fuliza"></div>
       </div>
     </section>
 
     <section id="bongaService" class="workspace">
       <div class="workspace-header">
-        <h2 class="workspace-title">Stawisha Bonga Points Cash Conversion</h2>
+        <h2 class="workspace-title">Stawisha Bonga Points Conversion</h2>
         <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
       </div>
-
       <div id="bongaLogin">
-        <h3>Subscriber Portal Login</h3>
+        <h3>Subscriber Identity Verification</h3>
         <form onsubmit="handleBongaLogin(event)" style="margin-top:1rem;">
-          <div class="form-group">
-            <label>Safaricom Phone Number</label>
-            <input type="tel" id="bongaPhone" required placeholder="0712345678" pattern="[0-9]{10}">
-          </div>
-          <div class="form-group">
-            <label>National ID Number</label>
-            <input type="text" id="bongaID" required placeholder="12345678" minlength="7">
-          </div>
-          <div class="form-group">
-            <label>Full Names</label>
-            <input type="text" id="bongaName" required placeholder="e.g. Mary Wanjiku">
-          </div>
-          <button type="submit" class="btn btn-primary">Login to Account</button>
+          <div class="form-group"><label>Safaricom Phone Number</label><input type="tel" id="bongaPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
+          <div class="form-group"><label>Full Names</label><input type="text" id="bongaName" required placeholder="Mary Wanjiku"></div>
+          <button type="submit" class="btn btn-primary">Login & Check</button>
         </form>
       </div>
-
       <div id="bongaMain" class="hidden">
-        <h3>Select Conversion Rates</h3>
-        <p style="color:var(--text-muted); margin-bottom:1rem;">Points to M-PESA Direct Cash Conversion Matrix</p>
-        
         <div class="table-responsive">
           <table>
-            <thead>
-              <tr>
-                <th>Cash Payout (KES)</th>
-                <th>Bonga Points Required</th>
-                <th>Processing Time</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Payout</th><th>Points Required</th><th>Processing</th></tr></thead>
             <tbody>
               <tr><td>10,000 KES</td><td>250,000 Points</td><td>Instant</td></tr>
-              <tr><td>8,000 KES</td><td>175,000 Points</td><td>Instant</td></tr>
               <tr><td>6,000 KES</td><td>150,000 Points</td><td>Instant</td></tr>
-              <tr><td>3,000 KES</td><td>75,000 Points</td><td>Instant</td></tr>
-              <tr><td>1,000 KES</td><td>25,000 Points</td><td>Instant</td></tr>
             </tbody>
           </table>
         </div>
-
-        <button class="btn btn-primary" onclick="checkBongaQualification()">CHECK MY BONGA POINTS QUALIFICATION</button>
-
+        <button class="btn btn-primary" onclick="checkBongaQualification()">Check Qualification</button>
         <div id="bongaLoading" class="zuri-overlay">
           <div class="zuri-spinner"></div>
-          <h3>Zuri Line History Processing</h3>
-          <p style="color:var(--text-muted);">Zuri is analyzing line history, validating point balances, and evaluating application requests...</p>
+          <p>Zuri processing point conversions...</p>
         </div>
-
-        <div id="bongaResult" class="hidden" style="margin-top:1.5rem;">
+        <div id="bongaResult" class="hidden" style="margin-top:1rem;">
           <div class="success-box">
-            <h3>🎉 Congratulations, <span id="bongaClientName">Valued Client</span>!</h3>
-            <p>You qualify for <strong>KES 6,000</strong> cash conversion to your Safaricom line. A service fee of <strong>KES 173</strong> applies for system ledger verification.</p>
+            <h3>🎉 Qualified for KES 6,000 Cash Transfer</h3>
+            <p>Processing fee: <strong>KES 173</strong>.</p>
           </div>
-
-          <div class="notice-box">
-            <strong>Guaranteed Protection Guarantee:</strong> The paid processing fee is directly reversed to your M-PESA account automatically if the cash disbursement cycle encounters system failure.
-          </div>
-
-          <div style="background: #f9f9f9; border:2px dashed var(--safaricom-green); border-radius:8px; padding:1.5rem; text-align:center; margin-top:1rem;">
-            <h4>STK Push Payment Gateway</h4>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">Complete KES 173 Service Fee Payment</p>
-            <button class="btn btn-primary" style="max-width:300px;" onclick="triggerSTK('KES 173')">Pay KES 173 via M-PESA</button>
-          </div>
+          <div id="widget-bonga"></div>
         </div>
       </div>
     </section>
 
     <section id="nyotaService" class="workspace">
       <div class="workspace-header">
-        <h2 class="workspace-title">NGOs (NYOTA FUNDS YOUTH EMPOWERMENT GRANTS)</h2>
+        <h2 class="workspace-title">NYOTA Youth Empowerment Grants</h2>
         <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
       </div>
-
       <div id="nyotaPage1">
-        <div style="height:4px; background:linear-gradient(90deg, var(--safaricom-green), var(--navy-dark)); margin-bottom:1.5rem;"></div>
-        
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-bottom:1.5rem;">
-          <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=400&q=80" alt="Nyota Youth 1" style="width:100%; height:140px; object-fit:cover; border-radius:6px;">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80" alt="Nyota Youth 2" style="width:100%; height:140px; object-fit:cover; border-radius:6px;">
-        </div>
-
-        <h3>Understanding NYOTA Empowerment Grants</h3>
-        <p style="margin: 1rem 0; color:var(--text-dark);">
-          <strong>What is a Grant?</strong> A grant is a non-repayable financial disbursement awarded by institutions, non-governmental organizations (NGOs), or public funds to support youth entrepreneurship, educational advancements, community projects, and business expansion without requiring collateral or interest repayment.
-        </p>
-
+        <p style="margin-bottom:1rem;">Apply for non-repayable economic setup disbursements.</p>
         <button class="btn btn-primary" onclick="goToNyotaStep(2)">APPLY NOW</button>
       </div>
-
       <div id="nyotaPage2" class="hidden">
-        <h3>Requirements & Application Form</h3>
-        <form id="nyotaForm" onsubmit="handleNyotaSubmit(event)" style="margin-top:1rem;">
+        <h3>Grant Evaluation Form</h3>
+        <form onsubmit="handleNyotaSubmit(event)" style="margin-top:1rem;">
           <div class="form-row">
-            <div class="form-group">
-              <label>Full Names</label>
-              <input type="text" id="nyotaName" required placeholder="Full Name">
-            </div>
-            <div class="form-group">
-              <label>Phone Number</label>
-              <input type="tel" id="nyotaPhone" required placeholder="0712345678" pattern="[0-9]{10}">
-            </div>
+            <div class="form-group"><label>Full Names</label><input type="text" id="nyotaName" required placeholder="Applicant Name"></div>
+            <div class="form-group"><label>Phone Number</label><input type="tel" id="nyotaPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>ID Number</label>
-              <input type="text" id="nyotaID" required placeholder="Identity Number">
-            </div>
-            <div class="form-group">
-              <label>Gender</label>
-              <select required><option value="">Select Gender</option><option>Male</option><option>Female</option></select>
-            </div>
-            <div class="form-group">
-              <label>Date of Birth</label>
-              <input type="date" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>County & Sub-Location</label>
-              <input type="text" required placeholder="e.g. Nairobi, Westlands">
-            </div>
-            <div class="form-group">
-              <label>KRA PIN (Optional)</label>
-              <input type="text" placeholder="A000000000X">
-            </div>
-            <div class="form-group">
-              <label>Occupation</label>
-              <input type="text" required placeholder="e.g. Entrepreneur">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload National ID (Front & Back)</label>
-            <input type="file" required accept="image/*" onchange="previewIDImage(event, 'nyotaProfilePic')">
-          </div>
-          <div class="form-group">
-            <label>Reason for Grant Application</label>
-            <textarea rows="2" required placeholder="Describe your business or project..."></textarea>
-          </div>
-          <div class="form-group">
-            <label>Purpose of Funds</label>
-            <select required>
-              <option value="">Select Purpose</option>
-              <option>Business Capital Expansion</option>
-              <option>Vocational Skills & Education</option>
-              <option>Agricultural Technology Setup</option>
-            </select>
-          </div>
-
-          <h4 style="margin: 1.5rem 0 1rem; color:var(--navy-dark);">Financial Assessment Questionnaire</h4>
           
+          <h4 style="margin: 1rem 0;">Financial Assessment</h4>
           <div class="quiz-q">
-            <p>1. How do Safaricom financial overdraft and grant services assist small micro-enterprises?</p>
+            <p>1. How do empowerment grants support local enterprise growth?</p>
             <div class="quiz-options">
-              <label><input type="radio" name="q1" required> By providing immediate working capital to bridge cashflow gaps ✅</label>
-              <label><input type="radio" name="q1"> By eliminating local market competition</label>
-              <label><input type="radio" name="q1"> By offering free mobile hardware devices</label>
-              <label><input type="radio" name="q1"> By replacing commercial bank registrations</label>
+              <label><input type="radio" name="nq1" required> By providing non-repayable capital allocations</label>
+              <label><input type="radio" name="nq1"> By replacing standard trade regulations</label>
             </div>
           </div>
-
           <div class="quiz-q">
-            <p>2. What is the main requirement for retaining high eligibility on M-PESA loan programs?</p>
+            <p>2. What is the primary channel for grant disbursement?</p>
             <div class="quiz-options">
-              <label><input type="radio" name="q2"> Maintaining zero account activity</label>
-              <label><input type="radio" name="q2" required> Consistent line usage and timely repayment of advanced lines ✅</label>
-              <label><input type="radio" name="q2"> Changing phone SIM cards monthly</label>
-              <label><input type="radio" name="q2"> Registering multiple lines under different identities</label>
+              <label><input type="radio" name="nq2" required> Encrypted direct M-PESA wallet transfers</label>
+              <label><input type="radio" name="nq2"> Paper postal vouchers</label>
             </div>
           </div>
-
-          <div class="quiz-q">
-            <p>3. What distinguishes an empowerment grant from a standard bank loan?</p>
-            <div class="quiz-options">
-              <label><input type="radio" name="q3"> Grants carry double interest rates</label>
-              <label><input type="radio" name="q3"> Grants must be repaid within 24 hours</label>
-              <label><input type="radio" name="q3" required> Grants are non-repayable empowerment capital allocations ✅</label>
-              <label><input type="radio" name="q3"> Grants require land title deeds as collateral</label>
-            </div>
-          </div>
-
-          <div class="quiz-q">
-            <p>4. How does M-PESA facilitate prompt disbursement of approved funding allocations?</p>
-            <div class="quiz-options">
-              <label><input type="radio" name="q4" required> Through encrypted mobile money ledger transfers directly to registered numbers ✅</label>
-              <label><input type="radio" name="q4"> Via physical postal cheque delivery</label>
-              <label><input type="radio" name="q4"> By issuing paper vouchers to physical offices</label>
-              <label><input type="radio" name="q4"> Through third-party international wire transfers only</label>
-            </div>
-          </div>
-
-          <div class="quiz-q">
-            <p>5. Why is identity verification necessary during grant evaluation?</p>
-            <div class="quiz-options">
-              <label><input type="radio" name="q5"> To sell customer data to advertising entities</label>
-              <label><input type="radio" name="q5" required> To prevent fraudulent duplicate applications and ensure regulatory compliance ✅</label>
-              <label><input type="radio" name="q5"> To block mobile network service access</label>
-              <label><input type="radio" name="q5"> To convert voice calls into data bundles</label>
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-primary">Submit Application & Questionnaire</button>
+          <button type="submit" class="btn btn-primary">Submit Application</button>
         </form>
       </div>
-
       <div id="nyotaLoading" class="zuri-overlay">
         <div class="zuri-spinner"></div>
-        <h3>Zuri Evaluation in Progress</h3>
-        <p style="color:var(--text-muted);">Auditing application parameters, validating identity credentials, and computing grant eligibility...</p>
+        <p>Zuri assessing grant parameters...</p>
       </div>
-
       <div id="nyotaPage3" class="hidden">
-        <div class="profile-card">
-          <img id="nyotaProfilePic" src="https://via.placeholder.com/150" alt="ID Profile" class="profile-avatar">
-          <div class="profile-info">
-            <h4 id="nyotaDisplayName">Applicant Name</h4>
-            <p><strong>Grant Eligibility Status:</strong> QUALIFIED</p>
-          </div>
-        </div>
-
         <div class="success-box">
-          <p>Dear <strong id="nyotaLetterName">Applicant</strong>,</p>
-          <p style="margin-top:0.5rem;">You qualify for a <strong>KES 22,000</strong> NYOTA Empowerment Grant. An administrative documentation processing fee of <strong>KES 243</strong> applies to authorize legal transfer and tax clearance.</p>
+          <h3>🎉 Qualified for KES 22,000 Grant!</h3>
+          <p>Legal documentation tax clearance fee: <strong>KES 243</strong>.</p>
         </div>
-
-        <div style="margin: 1rem 0;">
-          <button class="btn btn-primary" onclick="triggerSTK('KES 243')">Continue to Pay KES 243</button>
-        </div>
-
-        <div class="comments-section">
-          <h4>Beneficiary Feedback & Community Reviews</h4>
-
-          <div class="comment-card">
-            <svg class="social-icon" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            <div class="comment-content">
-              <h5>Kevin Omwamba <span class="stars">★★★★★</span></h5>
-              <p>Received my KES 22,000 grant directly to M-PESA within 15 minutes of fee clearance. Great initiative!</p>
-            </div>
-          </div>
-
-          <div class="comment-card">
-            <svg class="social-icon" viewBox="0 0 24 24" fill="#00f2fe"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .56.04.83.12V9.3a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.57 6.34 6.34 0 0 0 9.34 21.9a6.34 6.34 0 0 0 6.33-6.33V9.05a8.3 8.3 0 0 0 3.92 1.09V6.69z"/></svg>
-            <div class="comment-content">
-              <h5>Faith Chepchirchir <span class="stars">★★★★★</span></h5>
-              <p>The financial questionnaire was straightforward. The system is smooth and authentic.</p>
-            </div>
-          </div>
-
-          <div class="comment-card">
-            <svg class="social-icon" viewBox="0 0 24 24" fill="#000000"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            <div class="comment-content">
-              <h5>Brian Kiprono <span class="stars">★★★★☆</span></h5>
-              <p>Fully processed! The Zuri AI audit took just a few seconds. Kudos to Safaricom & NYOTA.</p>
-            </div>
-          </div>
-
-          <div class="comment-card">
-            <svg class="social-icon" viewBox="0 0 24 24" fill="#FF0000"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
-            <div class="comment-content">
-              <h5>Amina Hassan <span class="stars">★★★★★</span></h5>
-              <p>Extremely authentic platform. Glad I qualified for my boutique shop funds.</p>
-            </div>
-          </div>
-
-        </div>
+        <div id="widget-nyota"></div>
       </div>
     </section>
 
     <section id="surveyService" class="workspace">
       <div class="workspace-header">
-        <h2 class="workspace-title">SURVEY QUESTIONS POWERED BY SAFARICOM 🇺🇸 🇰🇪</h2>
+        <h2 class="workspace-title">Global Survey Research Module</h2>
         <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
       </div>
-
       <div id="surveyPage1">
-        <div style="display:flex; justify-content:center; align-items:center; gap:20px; margin-bottom:1.5rem;">
-          <span style="font-size:3rem;">🇺🇸</span>
-          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80" alt="Global Survey Team" style="width:250px; height:130px; object-fit:cover; border-radius:8px;">
-          <span style="font-size:3rem;">🇰🇪</span>
-        </div>
-
-        <p style="text-align:center; color:var(--text-dark); margin-bottom:1.5rem;">
-          Participate in joint US-Kenya market research studies. Complete tiered questionnaire modules and earn instant monetary credits deposited into your virtual research wallet.
-        </p>
-
-        <button class="btn btn-primary" onclick="goToSurveyStep(2)">ANSWER QUESTIONS AND GET PAID IN 3 HOURS</button>
+        <button class="btn btn-primary" onclick="goToSurveyStep(2)">START RESEARCH SURVEY</button>
       </div>
-
       <div id="surveyPage2" class="hidden">
-        <h3>Researcher Profile Registration</h3>
-        <form id="surveyForm" onsubmit="handleSurveyRegister(event)" style="margin-top:1rem;">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Full Names</label>
-              <input type="text" id="surveyName" required placeholder="Full Name">
-            </div>
-            <div class="form-group">
-              <label>Country & Code</label>
-              <select id="surveyCountry" required onchange="updateAgeRestriction()">
-                <option value="KE">Kenya (🇰🇪 +254)</option>
-                <option value="US">United States (🇺🇸 +1)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Phone Number</label>
-              <input type="tel" id="surveyPhone" required placeholder="0712345678 or +12025550123">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Age</label>
-              <input type="number" id="surveyAge" required placeholder="Age">
-              <div class="file-input-note" id="ageNote">Minimum age: 18 years for Kenya, 16 years for US.</div>
-            </div>
-            <div class="form-group">
-              <label>Gender</label>
-              <select id="surveyGender" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Username</label>
-              <input type="text" required placeholder="@surveymaster">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" required placeholder="example@domain.com">
-            </div>
-            <div class="form-group">
-              <label>6-Digit Password</label>
-              <input type="password" id="surveyPass" required minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="123456">
-            </div>
-            <div class="form-group">
-              <label>Confirm Password</label>
-              <input type="password" id="surveyPassConfirm" required minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="123456">
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Create Profile & Begin</button>
+        <form onsubmit="handleSurveyRegister(event)">
+          <div class="form-group"><label>Full Names</label><input type="text" id="surveyName" required placeholder="Full Name"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" id="surveyPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
+          <button type="submit" class="btn btn-primary">Begin Module</button>
         </form>
       </div>
-
       <div id="surveyLoading" class="zuri-overlay">
         <div class="zuri-spinner"></div>
-        <h3>Zuri Processing Researcher Account</h3>
-        <p style="color:var(--text-muted);">Allocating survey modules and initializing research wallet...</p>
+        <p>Zuri setting up research ledger...</p>
       </div>
-
       <div id="surveyPage3" class="hidden">
-        <div class="profile-card">
-          <img id="surveyAvatar" src="https://via.placeholder.com/150" alt="Avatar" class="profile-avatar">
-          <div class="profile-info" style="flex-grow:1;">
-            <h4 id="surveyWelcome">Hi, User!</h4>
-            <p>Welcome to Safaricom Survey Platform. Earn real cash payouts after every successfully answered question set.</p>
-          </div>
-          <div style="background:var(--navy-dark); color:#fff; padding:0.8rem 1.2rem; border-radius:8px; text-align:right;">
-            <div style="font-size:0.75rem; text-transform:uppercase; opacity:0.8;">Wallet Balance</div>
-            <div style="font-size:1.3rem; font-weight:700;" id="walletBalance">$0.00 / KES 0</div>
-          </div>
-        </div>
-
-        <div id="tier1Module">
-          <h3 style="margin-bottom:1rem; color:var(--navy-dark);">Tier 1 Module (Free Access - Earn $45 USD / KES 5,850)</h3>
-          
-          <form onsubmit="handleTier1Submit(event)">
-            <div class="quiz-q"><p>1. Which digital payment platform is most widely used across Kenya?</p><div class="quiz-options"><label><input type="radio" name="sq1" required> M-PESA ✅</label><label><input type="radio" name="sq1"> Cheque</label><label><input type="radio" name="sq1"> Draft</label><label><input type="radio" name="sq1"> Postal</label></div></div>
-            <div class="quiz-q"><p>2. What primary technology powers mobile cellular networks?</p><div class="quiz-options"><label><input type="radio" name="sq2" required> Telecommunication Base Transceiver Stations ✅</label><label><input type="radio" name="sq2"> FM Radio</label><label><input type="radio" name="sq2"> Satellite TV</label><label><input type="radio" name="sq2"> Dial-up</label></div></div>
-            <div class="quiz-q"><p>3. How do surveys assist corporate service development?</p><div class="quiz-options"><label><input type="radio" name="sq3" required> By providing actionable consumer insights ✅</label><label><input type="radio" name="sq3"> By increasing prices</label><label><input type="radio" name="sq3"> By blocking feedback</label><label><input type="radio" name="sq3"> By slowing networks</label></div></div>
-            <div class="quiz-q"><p>4. What currency is primarily used in official Kenya operations?</p><div class="quiz-options"><label><input type="radio" name="sq4" required> Kenyan Shilling (KES) ✅</label><label><input type="radio" name="sq4"> Euro</label><label><input type="radio" name="sq4"> Yen</label><label><input type="radio" name="sq4"> Rupee</label></div></div>
-            <div class="quiz-q"><p>5. What is the standard international dialing code for Kenya?</p><div class="quiz-options"><label><input type="radio" name="sq5" required> +254 ✅</label><label><input type="radio" name="sq5"> +1</label><label><input type="radio" name="sq5"> +44</label><label><input type="radio" name="sq5"> +27</label></div></div>
-            <div class="quiz-q"><p>6. What is the main benefit of high-speed 5G mobile internet?</p><div class="quiz-options"><label><input type="radio" name="sq6" required> Low latency and high data throughput ✅</label><label><input type="radio" name="sq6"> Battery drainage</label><label><input type="radio" name="sq6"> Limited connectivity</label><label><input type="radio" name="sq6"> Higher call loss</label></div></div>
-            <div class="quiz-q"><p>7. What measure protects personal accounts against unauthorized access?</p><div class="quiz-options"><label><input type="radio" name="sq7" required> Strong passwords and Two-Factor Authentication ✅</label><label><input type="radio" name="sq7"> Sharing PINs</label><label><input type="radio" name="sq7"> Public Wi-Fi</label><label><input type="radio" name="sq7"> Disabling security</label></div></div>
-            <div class="quiz-q"><p>8. What platform hosts Safaricom's virtual AI customer care assistant?</p><div class="quiz-options"><label><input type="radio" name="sq8" required> Zuri AI Portal ✅</label><label><input type="radio" name="sq8"> Legacy SMS</label><label><input type="radio" name="sq8"> Paper Mail</label><label><input type="radio" name="sq8"> Telegraph</label></div></div>
-            <div class="quiz-q"><p>9. What is the primary function of smartphones in modern commerce?</p><div class="quiz-options"><label><input type="radio" name="sq9" required> Digital banking, communication and browsing ✅</label><label><input type="radio" name="sq9"> Offline storage</label><label><input type="radio" name="sq9"> Analog radio</label><label><input type="radio" name="sq9"> Paper printing</label></div></div>
-            <div class="quiz-q"><p>10. What entity regulates telecommunications compliance in Kenya?</p><div class="quiz-options"><label><input type="radio" name="sq10" required> Communications Authority of Kenya (CA) ✅</label><label><input type="radio" name="sq10"> Postal Union</label><label><input type="radio" name="sq10"> Local Council</label><label><input type="radio" name="sq10"> Transport Board</label></div></div>
-            <div class="quiz-q"><p>11. What is the goal of global market research programs?</p><div class="quiz-options"><label><input type="radio" name="sq11" required> Enhancing user experience across international markets ✅</label><label><input type="radio" name="sq11"> Restricting data</label><label><input type="radio" name="sq11"> Ending services</label><label><input type="radio" name="sq11"> Closing portals</label></div></div>
-
-            <button type="submit" class="btn btn-primary">Complete Tier 1 & Claim $45 USD</button>
-          </form>
-        </div>
-
-        <div id="surveyTiersSummary" class="hidden" style="margin-top:2rem;">
-          <div class="success-box">
-            <h3>Tier 1 Completed Successfully!</h3>
-            <p>Your wallet has been credited with <strong>$45.00 USD (KES 5,850)</strong>.</p>
-          </div>
-
-          <div style="background:var(--navy-dark); color:#fff; padding:1.5rem; border-radius:8px; margin:1.5rem 0;">
-            <h4 style="color:#fff;">Withdraw Funds to M-PESA / Bank</h4>
-            <p style="font-size:0.85rem; opacity:0.8; margin-bottom:1rem;">To disburse accumulated balance ($45 USD / KES 5,850), a mandatory transaction clearance fee of <strong>$5.00 USD (KES 650)</strong> applies.</p>
-            <button class="btn btn-primary" onclick="triggerSTK('$5 USD (KES 650)')">Pay $5 USD (KES 650) Clearance Fee & Withdraw</button>
-          </div>
-
-          <h3>Unlock Additional Survey Tiers</h3>
-          <div class="services-grid" style="margin-top:1rem;">
-            
-            <div class="service-card" style="border:1px dashed var(--navy-dark);">
-              <h4>Tier 2 Module (Easy Research)</h4>
-              <p>Unlock Fee: <strong>$20 USD (KES 2,600)</strong><br>Potential Earnings: <strong>$349 USD (KES 45,370)</strong></p>
-              <button class="btn btn-primary" onclick="triggerSTK('$20 USD (KES 2,600)')">Unlock Tier 2 ($20 USD)</button>
+        <h3>Tier 1 Research Module</h3>
+        <form onsubmit="handleTier1Submit(event)">
+          <div class="quiz-q">
+            <p>1. Which mobile money service is most prevalent in Kenya?</p>
+            <div class="quiz-options">
+              <label><input type="radio" name="sq1" required> M-PESA</label>
+              <label><input type="radio" name="sq1"> Cheque</label>
             </div>
-
-            <div class="service-card" style="border:1px dashed var(--safaricom-green);">
-              <h4>Tier 3 Module (Advanced Enterprise)</h4>
-              <p>Unlock Fee: <strong>$59 USD (KES 7,670)</strong><br>Potential Earnings: <strong>$790 USD (KES 102,700)</strong></p>
-              <button class="btn btn-primary" onclick="triggerSTK('$59 USD (KES 7,670)')">Unlock Tier 3 ($59 USD)</button>
-            </div>
-
           </div>
+          <button type="submit" class="btn btn-primary">Submit & Claim $45 USD</button>
+        </form>
+      </div>
+      <div id="surveyTiersSummary" class="hidden">
+        <div class="success-box">
+          <h3>Tier 1 Finished! Credited $45 USD (KES 5,850)</h3>
+          <p>System withdrawal processing fee: <strong>$5.00 USD (KES 650)</strong>.</p>
         </div>
+        <div id="widget-survey"></div>
+      </div>
+    </section>
 
+    <section id="tillService" class="workspace">
+      <div class="workspace-header">
+        <h2 class="workspace-title">Lipa Na M-PESA Till Registration (600 Series)</h2>
+        <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
+      </div>
+      <form onsubmit="handleTillSubmit(event)">
+        <div class="form-row">
+          <div class="form-group"><label>Business / Outlet Name</label><input type="text" required placeholder="e.g. Joy Supermarket Outlet"></div>
+          <div class="form-group"><label>Owner Full Names</label><input type="text" required placeholder="Applicant Name"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>ID Number</label><input type="text" required placeholder="12345678"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" id="tillPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
+        </div>
+        <div class="notice-box">
+          <strong>Valid Safaricom Requirements:</strong> Business registration certificate or Owner ID copy, active M-PESA registered line, and physical shop location details.
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Till Allocation Request</button>
+      </form>
+      <div id="tillLoading" class="zuri-overlay">
+        <div class="zuri-spinner"></div>
+        <p>Zuri reserve routing 600-series Till...</p>
+      </div>
+      <div id="tillResult" class="hidden" style="margin-top:1.5rem;">
+        <div class="success-box">
+          <h3>🎉 Till Number Assigned: 600842</h3>
+          <p>Activation Fee: <strong>KES 150</strong> (System verification & merchant kit initialization).</p>
+        </div>
+        <div id="widget-till"></div>
+      </div>
+    </section>
+
+    <section id="agentService" class="workspace">
+      <div class="workspace-header">
+        <h2 class="workspace-title">M-PESA Sub-Agent Store Setup</h2>
+        <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
+      </div>
+      <form onsubmit="handleAgentSubmit(event)">
+        <div class="form-row">
+          <div class="form-group"><label>Proposed Agent Store Name</label><input type="text" required placeholder="e.g. Central Sub-Agent"></div>
+          <div class="form-group"><label>County Location</label><input type="text" required placeholder="e.g. Nakuru"></div>
+        </div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="agentPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
+        <div class="notice-box">
+          <strong>Valid Safaricom Requirements:</strong> Good Conduct Certificate, Premises Rental Lease Agreement, Minimum Float Capital Commitment of KES 30,000.
+        </div>
+        <button type="submit" class="btn btn-primary">Process Agent Application</button>
+      </form>
+      <div id="agentLoading" class="zuri-overlay">
+        <div class="zuri-spinner"></div>
+        <p>Zuri checking location suitability...</p>
+      </div>
+      <div id="agentResult" class="hidden" style="margin-top:1.5rem;">
+        <div class="success-box">
+          <h3>🎉 Agent Code Reservation Approved!</h3>
+          <p>Vetting & Compliance Fee: <strong>KES 200</strong>.</p>
+        </div>
+        <div id="widget-agent"></div>
+      </div>
+    </section>
+
+    <section id="fiberService" class="workspace">
+      <div class="workspace-header">
+        <h2 class="workspace-title">Enterprise Commercial Fiber Request</h2>
+        <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
+      </div>
+      <form onsubmit="handleFiberSubmit(event)">
+        <div class="form-row">
+          <div class="form-group"><label>Building / Premises Name</label><input type="text" required placeholder="e.g. Plaza Tower 3rd Flr"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" id="fiberPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
+        </div>
+        <div class="notice-box">
+          <strong>Valid Requirements:</strong> Building management access permit and signed network boundary installation consent.
+        </div>
+        <button type="submit" class="btn btn-primary">Request Site Survey</button>
+      </form>
+      <div id="fiberLoading" class="zuri-overlay">
+        <div class="zuri-spinner"></div>
+        <p>Zuri mapping nearest optical splitter...</p>
+      </div>
+      <div id="fiberResult" class="hidden" style="margin-top:1.5rem;">
+        <div class="success-box">
+          <h3>🎉 Site Feasibility Confirmed!</h3>
+          <p>Feasibility Survey & Connection Clearance Fee: <strong>KES 300</strong>.</p>
+        </div>
+        <div id="widget-fiber"></div>
       </div>
     </section>
 
   </div>
 
+  <div class="popup-container" id="popupContainer"></div>
+
+  <div class="zuri-widget">
+    <div class="zuri-chat-box" id="zuriChatBox">
+      <div class="zuri-header">Zuri AI Business Assistant</div>
+      <div class="zuri-body" id="zuriBody">
+        <div class="zuri-msg bot">Hello! I am Zuri, your Safaricom Business Assistant. How can I guide you today?</div>
+      </div>
+      <div class="zuri-options">
+        <div class="zuri-chip" onclick="askZuri('How does Till application work?')">How does Till application work?</div>
+        <div class="zuri-chip" onclick="askZuri('Are NYOTA Grants non-repayable?')">Are NYOTA Grants non-repayable?</div>
+        <div class="zuri-chip" onclick="askZuri('How fast is Fuliza limit boost updated?')">How fast is Fuliza limit boost updated?</div>
+      </div>
+    </div>
+    <button class="zuri-btn" onclick="toggleZuri()"><span style="font-size:1.2rem;">🤖</span> Ask Zuri AI</button>
+  </div>
+
   <script>
-    // Search Filtering Functionality
+    // 1. Dynamic Greeting Implementation
+    function updateGreeting() {
+      const hour = new Date().getHours();
+      let greeting = "Good Morning";
+      if (hour >= 12 && hour < 17) {
+        greeting = "Good Afternoon";
+      } else if (hour >= 17) {
+        greeting = "Good Evening";
+      }
+      document.getElementById('greetingContainer').innerText = greeting + ", Welcome to Official Portal";
+    }
+    updateGreeting();
+
+    // 2. Notification Popups (No duplicates, 6s intervals)
+    const notifications = [
+      { text: "<strong>0722***412</strong> just received <strong>KES 45,000</strong> NYOTA Grant disbursement. 🎉", category: "nyota" },
+      { text: "<strong>0715***890</strong> upgraded Fuliza Limit to <strong>KES 56,000</strong> successfully. 📈", category: "fuliza" },
+      { text: "<strong>0790***114</strong> just registered Lipa Na M-PESA Till <strong>600419</strong>. 🛒", category: "till" },
+      { text: "<strong>0701***552</strong> received <strong>KES 70,000</strong> NYOTA Empowerment Grant. 🌟", category: "nyota" },
+      { text: "<em>Dennis Mwangi:</em> 'My Till 600-series was activated seamlessly!' ⭐⭐⭐⭐⭐", category: "comment" },
+      { text: "<em>Mercy Njeri:</em> 'Zuri AI evaluated my Fuliza limit boost in minutes!' 👍", category: "comment" },
+      { text: "<strong>0743***901</strong> withdrew <strong>$45.00 USD</strong> from survey earnings. 💵", category: "survey" },
+      { text: "<em>Peter Otieno:</em> 'NYOTA grant helped me stock my grocery store!' 🛍️", category: "comment" }
+    ];
+    let unusedNotifications = [...notifications];
+
+    function showNextNotification() {
+      if (unusedNotifications.length === 0) {
+        unusedNotifications = [...notifications];
+      }
+      const index = Math.floor(Math.random() * unusedNotifications.length);
+      const notif = unusedNotifications.splice(index, 1)[0];
+
+      const container = document.getElementById('popupContainer');
+      const toast = document.createElement('div');
+      toast.className = 'popup-toast';
+      toast.innerHTML = notif.text;
+      
+      container.appendChild(toast);
+
+      setTimeout(() => toast.classList.add('show'), 100);
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 500);
+      }, 4500);
+    }
+    setInterval(showNextNotification, 6000);
+
+    // 3. Navigation Controls
     function filterServices() {
       const query = document.getElementById('searchInput').value.toLowerCase();
       const cards = document.querySelectorAll('.service-card');
-      
       cards.forEach(card => {
         const title = card.getAttribute('data-title');
-        if (title.includes(query)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
+        card.style.display = title.includes(query) ? 'flex' : 'none';
       });
     }
 
-    // Navigation & Workspace Handlers
     function closeAllServices() {
       const workspaces = document.querySelectorAll('.workspace');
       workspaces.forEach(ws => ws.classList.remove('active'));
@@ -742,171 +589,180 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      toast.innerText = msg;
-      toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 3500);
-    }
+    // Integrated FinAPI Gateway Payment Renderer from Code 1
+    function mountFinAPIWidget(containerId, amount) {
+      const wrapper = document.getElementById(containerId);
+      if (!wrapper) return;
 
-    function previewIDImage(event, targetImgId) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById(targetImgId).src = e.target.result;
+      wrapper.innerHTML = `
+        <div id="finapi-container" class="finapi-widget" 
+             data-api-key="sk_test_a1f9663668ca4e5fbb5644142039967b" 
+             data-amount="${amount}" 
+             data-color="#00a651"
+             data-provider="payhero">
+        </div>
+      `;
+
+      const existingScript = document.getElementById('finapi-script');
+      if (existingScript) existingScript.remove();
+
+      const script = document.createElement('script');
+      script.id = 'finapi-script';
+      script.src = 'https://stkpush.co.ke/static/js/finapi-widget.min.js';
+      
+      script.onload = () => {
+        const finContainer = document.getElementById('finapi-container');
+        if (finContainer) {
+          finContainer.addEventListener('finapi:payment_success', (e) => {
+            console.log('Success!', e.detail);
+            closeAllServices();
+            openService('paymentStatusScreen');
+          });
+          finContainer.addEventListener('finapi:payment_failed', (e) => {
+            console.log('Failed!', e.detail);
+            alert('Payment Failed: ' + (e.detail?.message || 'Please try again.'));
+          });
         }
-        reader.readAsDataURL(file);
-      }
+      };
+
+      document.body.appendChild(script);
     }
 
-    function triggerSTK(amount) {
-      alert("STK Push Triggered via stkpush.co.ke API Gateway.\n\nPlease check your phone for the M-PESA PIN prompt to authorize " + amount + ".");
-    }
-
-    /* --- SERVICE 1: FULIZA HANDLERS --- */
+    // 4. Form Handlers & Zuri Simulation
     function goToFulizaStep(step) {
-      if (step === 2) {
-        document.getElementById('fulizaPage1').classList.add('hidden');
-        document.getElementById('fulizaPage2').classList.remove('hidden');
-      }
+      document.getElementById('fulizaPage1').classList.add('hidden');
+      document.getElementById('fulizaPage2').classList.remove('hidden');
     }
 
     function handleFulizaSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('fulizaName').value;
-      document.getElementById('fulizaDisplayNav').innerText = name;
-
       document.getElementById('fulizaPage2').classList.add('hidden');
       document.getElementById('fulizaLoading').style.display = 'block';
-
-      // 6 Seconds Simulation for Zuri Analysis
       setTimeout(() => {
         document.getElementById('fulizaLoading').style.display = 'none';
         document.getElementById('fulizaPage3').classList.remove('hidden');
-
-        // Second Cycle Simulation (3 seconds)
-        setTimeout(() => {
-          document.getElementById('fulizaSecondLoading').style.display = 'none';
-          document.getElementById('fulizaResult').classList.remove('hidden');
-        }, 3000);
-
-      }, 6000);
+        mountFinAPIWidget('widget-fuliza', 500);
+      }, 4000);
     }
 
-    /* --- SERVICE 2: BONGA HANDLERS --- */
     function handleBongaLogin(e) {
       e.preventDefault();
-      const name = document.getElementById('bongaName').value;
-      document.getElementById('bongaClientName').innerText = name;
-
-      showToast("Successfully logged in as " + name);
-      
-      setTimeout(() => {
-        document.getElementById('bongaLogin').classList.add('hidden');
-        document.getElementById('bongaMain').classList.remove('hidden');
-      }, 1000);
+      document.getElementById('bongaLogin').classList.add('hidden');
+      document.getElementById('bongaMain').classList.remove('hidden');
     }
 
     function checkBongaQualification() {
       document.getElementById('bongaLoading').style.display = 'block';
-
-      // 6 seconds Zuri Analysis
       setTimeout(() => {
         document.getElementById('bongaLoading').style.display = 'none';
         document.getElementById('bongaResult').classList.remove('hidden');
-      }, 6000);
+        mountFinAPIWidget('widget-bonga', 173);
+      }, 4000);
     }
 
-    /* --- SERVICE 3: NYOTA HANDLERS --- */
     function goToNyotaStep(step) {
-      if(step === 2) {
-        document.getElementById('nyotaPage1').classList.add('hidden');
-        document.getElementById('nyotaPage2').classList.remove('hidden');
-      }
+      document.getElementById('nyotaPage1').classList.add('hidden');
+      document.getElementById('nyotaPage2').classList.remove('hidden');
     }
 
     function handleNyotaSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('nyotaName').value;
-      document.getElementById('nyotaDisplayName').innerText = name;
-      document.getElementById('nyotaLetterName').innerText = name;
-
       document.getElementById('nyotaPage2').classList.add('hidden');
       document.getElementById('nyotaLoading').style.display = 'block';
-
-      // 6 seconds Zuri Evaluation
       setTimeout(() => {
         document.getElementById('nyotaLoading').style.display = 'none';
         document.getElementById('nyotaPage3').classList.remove('hidden');
-      }, 6000);
+        mountFinAPIWidget('widget-nyota', 243);
+      }, 4000);
     }
 
-    /* --- SERVICE 4: SURVEY HANDLERS --- */
     function goToSurveyStep(step) {
-      if(step === 2) {
-        document.getElementById('surveyPage1').classList.add('hidden');
-        document.getElementById('surveyPage2').classList.remove('hidden');
-      }
-    }
-
-    function updateAgeRestriction() {
-      const country = document.getElementById('surveyCountry').value;
-      const note = document.getElementById('ageNote');
-      if (country === 'KE') {
-        note.innerText = "Minimum age required for Kenya: 18 years.";
-      } else {
-        note.innerText = "Minimum age required for USA: 16 years.";
-      }
+      document.getElementById('surveyPage1').classList.add('hidden');
+      document.getElementById('surveyPage2').classList.remove('hidden');
     }
 
     function handleSurveyRegister(e) {
       e.preventDefault();
-      const country = document.getElementById('surveyCountry').value;
-      const age = parseInt(document.getElementById('surveyAge').value);
-      const pass = document.getElementById('surveyPass').value;
-      const passConfirm = document.getElementById('surveyPassConfirm').value;
-
-      if (country === 'KE' && age < 18) {
-        alert("Kenyan applicants must be 18 years or older.");
-        return;
-      }
-      if (country === 'US' && age < 16) {
-        alert("USA applicants must be 16 years or older.");
-        return;
-      }
-      if (pass !== passConfirm) {
-        alert("Passwords do not match. Please enter identical 6-digit passwords.");
-        return;
-      }
-
-      const name = document.getElementById('surveyName').value;
-      const gender = document.getElementById('surveyGender').value;
-      document.getElementById('surveyWelcome').innerText = "Hi 👋 " + name + "! Welcome to Safaricom Survey Platform.";
-      
-      // Set Avatar based on Gender
-      const avatarImg = document.getElementById('surveyAvatar');
-      if (gender === 'Male') {
-        avatarImg.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80";
-      } else {
-        avatarImg.src = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80";
-      }
-
       document.getElementById('surveyPage2').classList.add('hidden');
       document.getElementById('surveyLoading').style.display = 'block';
-
-      // 5 seconds simulation
       setTimeout(() => {
         document.getElementById('surveyLoading').style.display = 'none';
         document.getElementById('surveyPage3').classList.remove('hidden');
-      }, 5000);
+      }, 4000);
     }
 
     function handleTier1Submit(e) {
       e.preventDefault();
-      document.getElementById('walletBalance').innerText = "$45.00 USD / KES 5,850";
-      document.getElementById('tier1Module').classList.add('hidden');
+      document.getElementById('surveyPage3').classList.add('hidden');
       document.getElementById('surveyTiersSummary').classList.remove('hidden');
+      mountFinAPIWidget('widget-survey', 650);
+    }
+
+    function handleTillSubmit(e) {
+      e.preventDefault();
+      document.querySelector('#tillService form').classList.add('hidden');
+      document.getElementById('tillLoading').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('tillLoading').style.display = 'none';
+        document.getElementById('tillResult').classList.remove('hidden');
+        mountFinAPIWidget('widget-till', 150);
+      }, 4000);
+    }
+
+    function handleAgentSubmit(e) {
+      e.preventDefault();
+      document.querySelector('#agentService form').classList.add('hidden');
+      document.getElementById('agentLoading').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('agentLoading').style.display = 'none';
+        document.getElementById('agentResult').classList.remove('hidden');
+        mountFinAPIWidget('widget-agent', 200);
+      }, 4000);
+    }
+
+    function handleFiberSubmit(e) {
+      e.preventDefault();
+      document.querySelector('#fiberService form').classList.add('hidden');
+      document.getElementById('fiberLoading').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('fiberLoading').style.display = 'none';
+        document.getElementById('fiberResult').classList.remove('hidden');
+        mountFinAPIWidget('widget-fiber', 300);
+      }, 4000);
+    }
+
+    // 5. Zuri Interactive AI Assistant
+    function toggleZuri() {
+      const box = document.getElementById('zuriChatBox');
+      box.classList.toggle('active');
+    }
+
+    function askZuri(question) {
+      const body = document.getElementById('zuriBody');
+      
+      const userMsg = document.createElement('div');
+      userMsg.className = 'zuri-msg user';
+      userMsg.innerText = question;
+      body.appendChild(userMsg);
+
+      const typingMsg = document.createElement('div');
+      typingMsg.className = 'zuri-msg bot';
+      typingMsg.innerText = "Zuri is typing response...";
+      body.appendChild(typingMsg);
+      body.scrollTop = body.scrollHeight;
+
+      setTimeout(() => {
+        let reply = "I am processing your request. Please select a valid service to proceed.";
+        if (question.includes("Till")) {
+          reply = "Lipa Na M-PESA Till setup assigns a 600-series Buy Goods Till instantly. A setup fee of KES 150 applies post-auditing.";
+        } else if (question.includes("NYOTA")) {
+          reply = "Yes! NYOTA grants are non-repayable economic funding disbursements authorized for verified youth initiatives.";
+        } else if (question.includes("Fuliza")) {
+          reply = "Fuliza limit adjustments update instantly on your M-PESA menu once system verification and activation fee clearance is complete.";
+        }
+        typingMsg.innerText = reply;
+        body.scrollTop = body.scrollHeight;
+      }, 4000);
     }
   </script>
 </body>
