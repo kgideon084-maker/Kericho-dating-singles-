@@ -6,20 +6,20 @@
 <title>Safaricom Fuliza Limit Management Portal</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-  body { background: #f4f6f9; color: #333; line-height: 1.5; }
+  body { background: #f4f6f9; color: #333; line-height: 1.5; padding-bottom: 90px; }
   
   .header { background: #008541; color: #fff; padding: 15px; text-align: center; font-size: 18px; font-weight: 700; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
   .header-title { font-size: 18px; font-weight: 700; text-align: center; flex-grow: 1; }
   .close-btn { background: none; border: none; color: white; font-size: 22px; cursor: pointer; font-weight: bold; padding: 0 10px; }
   
-  .screen { display: none; min-height: 100vh; padding-bottom: 80px; }
+  .screen { display: none; min-height: 100vh; padding-bottom: 20px; }
   .screen.active { display: block; }
   .container { padding: 15px; max-width: 600px; margin: 0 auto; }
   
   .card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e1e4e8; }
   
   .hero-banner { background: linear-gradient(135deg, #00a651 0%, #006837 100%); color: #fff; border-radius: 12px; padding: 30px 20px; margin-bottom: 15px; box-shadow: 0 6px 16px rgba(0,166,81,0.25); text-align: center; }
-  .hero-banner h2 { color: #fff; font-size: 24px; margin-bottom: 10px; font-weight: 800; }
+  .hero-banner h2 { color: #fff; font-size: 22px; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
   .hero-banner p { color: #e6f9ee; margin-bottom: 20px; font-size: 14px; opacity: 0.95; }
   
   .stats-grid { display: flex; justify-content: space-between; gap: 10px; margin-top: 15px; }
@@ -31,9 +31,16 @@
   h2 { font-size: 18px; text-align: center; margin-bottom: 15px; color: #1a1a1a; }
   p { color: #555; line-height: 1.6; margin-bottom: 15px; font-size: 14px; }
   
-  .btn { width: 100%; background: #00a651; color: #fff; border: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 3px 6px rgba(0,166,81,0.2); }
-  .btn:hover { background: #008541; transform: translateY(-1px); }
-  .btn:disabled { background: #cccccc !important; cursor: not-allowed; box-shadow: none; transform: none; }
+  /* Continuous Pulsing Button Animation */
+  .btn { width: 100%; background: #00a651; color: #fff; border: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 3px 6px rgba(0,166,81,0.2); animation: pulseBtn 2.2s infinite ease-in-out; }
+  .btn:hover { background: #008541; }
+  .btn:disabled { background: #cccccc !important; cursor: not-allowed; box-shadow: none; animation: none !important; }
+  
+  @keyframes pulseBtn {
+    0% { transform: scale(1); box-shadow: 0 3px 6px rgba(0,166,81,0.2); }
+    50% { transform: scale(1.02); box-shadow: 0 8px 18px rgba(0,166,81,0.45); }
+    100% { transform: scale(1); box-shadow: 0 3px 6px rgba(0,166,81,0.2); }
+  }
   
   .form-group { margin-bottom: 15px; text-align: left; }
   .form-group label { display: block; font-size: 13px; color: #444; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
@@ -56,12 +63,22 @@
   .limit-option.selected { border-color: #00a651; background: #e6f9ee; box-shadow: 0 4px 10px rgba(0,166,81,0.15); }
   .limit-option.selected::after { content: "✓"; position: absolute; top: 10px; right: 15px; color: #00a651; font-weight: bold; font-size: 18px; }
   
-  /* Zuri AI Overlay System */
-  .zuri-card { background: #f0f7f4; border: 1px solid #cce5d8; border-radius: 10px; padding: 15px; margin: 15px 0; display: flex; gap: 12px; align-items: flex-start; }
-  .zuri-avatar { width: 40px; height: 40px; border-radius: 50%; background: #00a651; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-  .zuri-content h4 { color: #006837; font-size: 14px; margin-bottom: 4px; }
-  .zuri-content p { color: #333; font-size: 13px; margin: 0; text-align: left; }
+  /* Floating Zuri AI Widget */
+  .zuri-floating-btn { position: fixed; bottom: 85px; right: 20px; width: 60px; height: 60px; background: #00a651; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,166,81,0.4); cursor: pointer; z-index: 999; animation: floatBounce 3s infinite ease-in-out; border: 2px solid #fff; }
+  @keyframes floatBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
   
+  .zuri-chat-window { position: fixed; bottom: 155px; right: 20px; width: 320px; max-width: 90vw; background: #fff; border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.2); border: 1px solid #cce5d8; display: none; flex-direction: column; overflow: hidden; z-index: 1000; }
+  .zuri-chat-header { background: #008541; color: #fff; padding: 12px; font-weight: 700; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .zuri-chat-body { padding: 12px; max-height: 250px; overflow-y: auto; font-size: 13px; background: #f9fbf9; }
+  .zuri-msg { background: #e6f9ee; color: #006837; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; border-left: 3px solid #00a651; text-align: left; line-height: 1.4; }
+  .zuri-typing { display: none; font-style: italic; color: #888; margin-bottom: 8px; text-align: left; padding: 4px 8px; font-weight: 600; }
+  .zuri-prompts { display: flex; flex-direction: column; gap: 6px; padding: 10px; background: #fff; border-top: 1px solid #eee; }
+  .zuri-prompt-btn { background: #f0f7f4; border: 1px solid #cce5d8; color: #008541; padding: 6px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; text-align: left; transition: background 0.2s; }
+  .zuri-prompt-btn:hover { background: #e6f9ee; }
+
   /* Analysis Overlay */
   .analysis-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; }
   .analysis-modal { background: #fff; border-radius: 16px; padding: 30px 20px; width: 100%; max-width: 400px; text-align: center; }
@@ -76,9 +93,11 @@
   .loader { border: 3px solid #f3f3f3; border-top: 3px solid #00a651; border-radius: 50%; width: 36px; height: 36px; animation: spin 1s linear infinite; margin: 15px auto; }
   @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   
-  .footer { background: #ffffff; border-top: 1px solid #e1e4e8; color: #666; text-align: center; padding: 15px; font-size: 11px; position: fixed; bottom: 0; width: 100%; z-index: 990; }
-  .footer-links { margin-top: 5px; }
-  .footer-links a { color: #00a651; text-decoration: none; margin: 0 8px; }
+  /* Universal Fixed Footer across all pages */
+  .footer { background: #ffffff; border-top: 1px solid #e1e4e8; color: #666; text-align: center; padding: 12px 15px; font-size: 11px; position: fixed; bottom: 0; left: 0; right: 0; width: 100%; z-index: 990; box-shadow: 0 -2px 5px rgba(0,0,0,0.03); }
+  .footer-inquiry { color: #008541; font-weight: bold; margin-bottom: 4px; font-size: 12px; }
+  .footer-links { margin-top: 3px; }
+  .footer-links a { color: #00a651; text-decoration: none; margin: 0 8px; font-weight: 600; }
   
   .top-notif { position: fixed; top: 0; left: 0; right: 0; background: #fff; padding: 10px 15px; display: none; align-items: center; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 9999; border-bottom: 3px solid #00a651; }
   .top-notif .avatar { width: 32px; height: 32px; font-size: 14px; background: #00a651; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
@@ -106,7 +125,7 @@
 <div id="topNotif" class="top-notif">
   <div class="avatar">✓</div>
   <div>
-    <div class="text"><b id="notPhone">070167***29</b> limit increased to KSh <b id="notAmt">45,715</b></div>
+    <div class="text"><b id="notName">Peter K.</b> (<b id="notPhone">070167***29</b>) limit increased to KSh <b id="notAmt">45,715</b></div>
     <div class="time" id="notTime">Just now</div>
   </div>
 </div>
@@ -119,7 +138,7 @@
   </div>
   <div class="container">
     <div class="hero-banner">
-      <h2>Automated Fuliza Limit Elevation</h2>
+      <h2>SAFARICOM FULIZA MPESA PORTAL 2026</h2>
       <p>Secure, Instant & Powered by AI Scoring Engine</p>
       <div class="stats-grid">
         <div class="stat-box"><div class="num">100%</div><div class="label">Automated</div></div>
@@ -132,15 +151,6 @@
       <h1>Increase Your Fuliza Limit Today</h1>
       <p>Upgrade your daily overdraft facility instantaneously. Our automated assessment engine processes credit history, line activity, and usage consistency to optimize limits without lengthy delays.</p>
       <button class="btn" onclick="show(2)">Check Eligibility & Limit Upgrade</button>
-    </div>
-
-    <!-- Zuri AI Intro -->
-    <div class="zuri-card">
-      <div class="zuri-avatar">Z</div>
-      <div class="zuri-content">
-        <h4>Zuri AI Assistant</h4>
-        <p>"Hello! I'm Zuri. I analyze your Safaricom network usage history securely to evaluate your maximum overdraft eligibility within seconds."</p>
-      </div>
     </div>
 
     <!-- 15 FAQs Section -->
@@ -219,16 +229,8 @@
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">Who do I contact for additional support? <span>+</span></button>
-        <div class="faq-answer">Support is accessible via our customer care channels directly from the standard helpline 100 or 234.</div>
+        <div class="faq-answer">Support is accessible via our customer care channels directly from the standard helpline 0722000000.</div>
       </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    © 2026 Safaricom Fuliza Portal. All rights reserved.
-    <div class="footer-links">
-      <a href="#" onclick="openModal('termsModal')">Terms & Conditions</a> | 
-      <a href="#" onclick="openModal('privacyModal')">Privacy Policy</a>
     </div>
   </div>
 </div>
@@ -290,18 +292,9 @@
       </div>
     </div>
 
-    <!-- Zuri AI Response -->
-    <div class="zuri-card">
-      <div class="zuri-avatar">Z</div>
-      <div class="zuri-content">
-        <h4>Zuri AI Recommendation</h4>
-        <p id="zuriAdvice">"Your line performance qualifies for an instant overdraft upgrade. Select your desired limit tier below and tap 'Continue' to activate."</p>
-      </div>
-    </div>
-
     <h2>Select Your Desired Limit Tier</h2>
 
-    <!-- Tiers (8,000 Ksh mapped to 250 Ksh Activation Fee as requested) -->
+    <!-- Tiers -->
     <div class="limit-option" onclick="selectLimit(8000, 250, this)">
       <h3>KSh 8,000</h3>
       <p>Activation Fee: KSh 250</p>
@@ -378,10 +371,29 @@
   </div>
 </div>
 
+<!-- Floating Zuri AI Floating Widget Component -->
+<div class="zuri-floating-btn" onclick="toggleZuriChat()">Z</div>
+
+<div id="zuriChatWindow" class="zuri-chat-window">
+  <div class="zuri-chat-header">
+    <span>Zuri AI Assistant</span>
+    <span style="cursor:pointer;" onclick="toggleZuriChat()">×</span>
+  </div>
+  <div class="zuri-chat-body" id="zuriChatBody">
+    <div class="zuri-msg">Hello! I am Zuri AI. Tap any query below to check your line parameters!</div>
+    <div class="zuri-typing" id="zuriTyping">Zuri is typing.........</div>
+  </div>
+  <div class="zuri-prompts">
+    <button class="zuri-prompt-btn" onclick="askZuri('eligibility')">How is my limit evaluated?</button>
+    <button class="zuri-prompt-btn" onclick="askZuri('approval')">How fast is the limit applied?</button>
+    <button class="zuri-prompt-btn" onclick="askZuri('safety')">Is my M-PESA PIN safe?</button>
+  </div>
+</div>
+
 <!-- 6-Second Zuri AI Analysis Overlay -->
 <div id="analysisOverlay" class="analysis-overlay">
   <div class="analysis-modal">
-    <div class="zuri-avatar" style="margin: 0 auto 10px auto;">Z</div>
+    <div class="zuri-avatar" style="width:45px; height:45px; border-radius:50%; background:#00a651; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px; margin: 0 auto 10px auto;">Z</div>
     <h3 style="color:#00a651; font-size:18px; margin-bottom:5px;">Zuri AI Analysis in Progress</h3>
     <p style="font-size:12px; color:#666;">Analyzing line parameters & credit eligibility...</p>
     <div class="loader"></div>
@@ -414,14 +426,26 @@
   </div>
 </div>
 
+<!-- Global Universal Footer on every screen -->
+<div class="footer">
+  <div class="footer-inquiry">For any inquiries call us via 0722000000</div>
+  © 2026 Safaricom Fuliza Portal. All rights reserved.
+  <div class="footer-links">
+    <a href="#" onclick="openModal('termsModal')">Terms & Conditions</a> | 
+    <a href="#" onclick="openModal('privacyModal')">Privacy Policy</a>
+  </div>
+</div>
+
 <script>
 let selectedLimit = 0;
 let selectedFee = 0;
 let userData = {};
 
-const phones = ["072345***78", "071234***56", "074567***12", "070167***29", "073456***90"];
-const amounts = [45715, 32100, 85000, 15000, 65000];
-const timeAgo = ["Just now", "1 min ago", "2 mins ago", "3 mins ago"];
+// Expanded realistic Kenyan names and masked numbers for popups
+const names = ["Peter K.", "Faith W.", "James M.", "Mercy C.", "Kevin O.", "Brian N.", "Grace A.", "Dennis K."];
+const phones = ["072345***78", "071234***56", "074567***12", "070167***29", "073456***90", "079012***44", "075678***31"];
+const amounts = [15000, 25000, 35000, 45715, 55000, 65000, 85000];
+const timeAgo = ["Just now", "1 min ago", "2 mins ago", "3 mins ago", "4 mins ago"];
 
 function show(screenNum) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -597,7 +621,42 @@ function closeModal(id) {
   document.getElementById(id).style.display = "none";
 }
 
+/* Dynamic Zuri Floating Chat Toggle & Typing Logic */
+function toggleZuriChat() {
+  const win = document.getElementById("zuriChatWindow");
+  win.style.display = win.style.display === "flex" ? "none" : "flex";
+}
+
+function askZuri(type) {
+  const chatBody = document.getElementById("zuriChatBody");
+  const typing = document.getElementById("zuriTyping");
+  
+  typing.style.display = "block";
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  setTimeout(() => {
+    typing.style.display = "none";
+    let replyText = "";
+    if (type === 'eligibility') {
+      replyText = "I evaluate your M-PESA history, voice usage, and repayment speed automatically!";
+    } else if (type === 'approval') {
+      replyText = "Limits are instantly computed and reflected on your Safaricom account immediately processing completes!";
+    } else if (type === 'safety') {
+      replyText = "Your M-PESA PIN is 100% private. You only input it inside the official handset STK popup prompt.";
+    }
+
+    const newMsg = document.createElement("div");
+    newMsg.className = "zuri-msg";
+    newMsg.innerText = replyText;
+    chatBody.insertBefore(newMsg, typing);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }, 3000);
+}
+
+/* Enhanced Pop-up Notifications Functionality */
 function showTopNotif() {
+  const randIndex = Math.floor(Math.random() * names.length);
+  document.getElementById("notName").innerText = names[randIndex];
   document.getElementById("notPhone").innerText = phones[Math.floor(Math.random() * phones.length)];
   document.getElementById("notAmt").innerText = amounts[Math.floor(Math.random() * amounts.length)].toLocaleString();
   document.getElementById("notTime").innerText = timeAgo[Math.floor(Math.random() * timeAgo.length)];
