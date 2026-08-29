@@ -1,769 +1,615 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Safaricom Enterprise Support & Educational Grants</title>
-  <style>
-    :root {
-      --safaricom-green: #004d25;
-      --safaricom-green-dark: #003319;
-      --safaricom-green-light: #e6f2ed;
-      --safaricom-accent: #006633;
-      --navy-dark: #081c15;
-      --gray-light: #f4f7f5;
-      --gray-border: #d0d7d3;
-      --text-dark: #1b2620;
-      --text-muted: #526359;
-      --white: #ffffff;
-      --accent-gold: #ffb703;
-      --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
-      --shadow-md: 0 4px 14px rgba(0,0,0,0.12);
-      --transition: all 0.3s ease;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    body { background-color: var(--gray-light); color: var(--text-dark); line-height: 1.6; padding-bottom: 60px; }
-
-    /* Header & Navigation */
-    header { background: var(--white); box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 1000; border-bottom: 4px solid var(--safaricom-green); }
-    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem; }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-title { font-size: 1.25rem; font-weight: 700; color: var(--navy-dark); }
-    .brand-title span { color: var(--safaricom-green); }
-    
-    .search-box { position: relative; width: 300px; }
-    .search-box input { width: 100%; padding: 0.5rem 1rem 0.5rem 2.2rem; border: 1px solid var(--gray-border); border-radius: 20px; outline: none; transition: var(--transition); }
-    .search-box input:focus { border-color: var(--safaricom-green); box-shadow: 0 0 0 3px rgba(0,77,37,0.15); }
-    .search-box::before { content: "🔍"; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; opacity: 0.6; }
-
-    /* Main Container */
-    .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
-    
-    /* Hero Banner */
-    .hero { background: linear-gradient(135deg, var(--navy-dark), var(--safaricom-green)); color: var(--white); padding: 2.5rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: var(--shadow-md); text-align: center; }
-    .hero h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-    .hero p { font-size: 1.1rem; opacity: 0.95; max-width: 800px; margin: 0 auto; }
-    .greeting-text { font-size: 1.2rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 0.5rem; }
-
-    /* Services Grid */
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-    .service-card { background: var(--white); border-radius: 12px; border: 1px solid var(--gray-border); overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); }
-    .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--safaricom-green); }
-    .card-img { width: 100%; height: 160px; object-fit: cover; }
-    .card-body { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: flex-col; justify-content: space-between; }
-    .service-card h3 { color: var(--navy-dark); font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .service-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem; }
-    
-    /* Buttons */
-    .btn { display: inline-block; width: 100%; padding: 0.75rem 1rem; border: none; border-radius: 6px; font-weight: 600; text-align: center; cursor: pointer; transition: var(--transition); text-decoration: none; font-size: 0.95rem; }
-    .btn-primary { background-color: var(--safaricom-green); color: var(--white); }
-    .btn-primary:hover { background-color: var(--safaricom-green-dark); }
-
-    /* Workspace / Modules */
-    .workspace { background: var(--white); border-radius: 12px; border: 1px solid var(--gray-border); padding: 2rem; box-shadow: var(--shadow-md); display: none; }
-    .workspace.active { display: block; }
-    .workspace-header { border-bottom: 2px solid var(--safaricom-green-light); padding-bottom: 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-    .workspace-title { color: var(--navy-dark); font-size: 1.5rem; }
-
-    /* Form Elements */
-    .form-group { margin-bottom: 1.25rem; }
-    .form-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; color: var(--navy-dark); font-size: 0.9rem; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.65rem 0.8rem; border: 1px solid var(--gray-border); border-radius: 6px; outline: none; font-size: 0.95rem; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--safaricom-green); box-shadow: 0 0 0 3px rgba(0,77,37,0.1); }
-    .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-
-    /* User Profile & Info Boxes */
-    .profile-card { background: var(--safaricom-green-light); border: 1px solid var(--safaricom-green); border-radius: 8px; padding: 1.2rem; display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.5rem; }
-    .profile-avatar { width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid var(--safaricom-green); background: #fff; }
-    .profile-info h4 { color: var(--navy-dark); font-size: 1.1rem; }
-    .profile-info p { color: var(--text-muted); font-size: 0.85rem; }
-
-    .notice-box { background: #fff8e1; border-left: 4px solid var(--accent-gold); padding: 1rem; border-radius: 4px; margin: 1rem 0; font-size: 0.9rem; }
-    .success-box { background: #e6f2ed; border-left: 4px solid var(--safaricom-green); padding: 1rem; border-radius: 4px; margin: 1rem 0; }
-
-    /* Payment Status Screen */
-    .payment-screen { text-align: center; padding: 40px 20px; display: none; }
-    .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--safaricom-green); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto 10px; }
-
-    /* Tables */
-    .table-responsive { overflow-x: auto; margin-bottom: 1.5rem; }
-    table { width: 100%; border-collapse: collapse; text-align: left; }
-    th, td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--gray-border); }
-    th { background: var(--safaricom-green-light); color: var(--safaricom-green-dark); font-weight: 600; }
-
-    /* Quiz Container */
-    .quiz-q { background: var(--gray-light); padding: 1rem; border-radius: 6px; margin-bottom: 1rem; }
-    .quiz-q p { font-weight: 600; margin-bottom: 0.5rem; }
-    .quiz-options label { display: block; padding: 0.5rem 0.8rem; background: var(--white); border: 1px solid var(--gray-border); border-radius: 4px; margin-bottom: 0.3rem; cursor: pointer; transition: var(--transition); }
-    .quiz-options label:hover { background: var(--safaricom-green-light); }
-
-    /* Live Notification Popups */
-    .popup-container { position: fixed; bottom: 20px; left: 20px; z-index: 2000; pointer-events: none; }
-    .popup-toast { background: var(--navy-dark); color: var(--white); padding: 1rem 1.2rem; border-radius: 8px; border-left: 4px solid var(--safaricom-green); box-shadow: var(--shadow-md); margin-top: 10px; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; width: 320px; font-size: 0.85rem; }
-    .popup-toast.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    .popup-toast strong { color: var(--accent-gold); }
-
-    /* Zuri AI Floating Widget */
-    .zuri-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1500; }
-    .zuri-btn { background: var(--safaricom-green); color: #fff; border: none; padding: 0.8rem 1.2rem; border-radius: 30px; font-weight: 600; cursor: pointer; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 8px; }
-    .zuri-chat-box { position: absolute; bottom: 60px; right: 0; width: 320px; background: #fff; border: 1px solid var(--gray-border); border-radius: 12px; box-shadow: var(--shadow-md); display: none; flex-direction: column; overflow: hidden; }
-    .zuri-chat-box.active { display: flex; }
-    .zuri-header { background: var(--safaricom-green); color: #fff; padding: 0.8rem 1rem; font-weight: 600; font-size: 0.95rem; }
-    .zuri-body { padding: 1rem; max-height: 250px; overflow-y: auto; font-size: 0.85rem; display: flex; flex-direction: column; gap: 8px; }
-    .zuri-msg { padding: 0.6rem 0.8rem; border-radius: 8px; max-width: 85%; }
-    .zuri-msg.bot { background: var(--safaricom-green-light); color: var(--navy-dark); align-self: flex-start; }
-    .zuri-msg.user { background: var(--navy-dark); color: #fff; align-self: flex-end; }
-    .zuri-options { padding: 0.5rem; border-top: 1px solid var(--gray-border); background: var(--gray-light); display: flex; flex-direction: column; gap: 4px; }
-    .zuri-chip { background: #fff; border: 1px solid var(--gray-border); border-radius: 12px; padding: 0.4rem 0.6rem; font-size: 0.75rem; cursor: pointer; text-align: left; }
-    .zuri-chip:hover { background: var(--safaricom-green-light); border-color: var(--safaricom-green); }
-
-    /* Overlay / Spinners */
-    .zuri-overlay { display: none; text-align: center; padding: 3rem 1rem; }
-    .zuri-spinner { width: 50px; height: 50px; border: 5px solid var(--safaricom-green-light); border-top: 5px solid var(--safaricom-green); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-    .hidden { display: none !important; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safaricom Fuliza Limit Management Portal</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  body { background: #f4f6f9; color: #333; line-height: 1.5; }
+  
+  .header { background: #008541; color: #fff; padding: 15px; text-align: center; font-size: 18px; font-weight: 700; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
+  .header-title { font-size: 18px; font-weight: 700; text-align: center; flex-grow: 1; }
+  .close-btn { background: none; border: none; color: white; font-size: 22px; cursor: pointer; font-weight: bold; padding: 0 10px; }
+  
+  .screen { display: none; min-height: 100vh; padding-bottom: 80px; }
+  .screen.active { display: block; }
+  .container { padding: 15px; max-width: 600px; margin: 0 auto; }
+  
+  .card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e1e4e8; }
+  
+  .hero-banner { background: linear-gradient(135deg, #00a651 0%, #006837 100%); color: #fff; border-radius: 12px; padding: 30px 20px; margin-bottom: 15px; box-shadow: 0 6px 16px rgba(0,166,81,0.25); text-align: center; }
+  .hero-banner h2 { color: #fff; font-size: 24px; margin-bottom: 10px; font-weight: 800; }
+  .hero-banner p { color: #e6f9ee; margin-bottom: 20px; font-size: 14px; opacity: 0.95; }
+  
+  .stats-grid { display: flex; justify-content: space-between; gap: 10px; margin-top: 15px; }
+  .stat-box { background: rgba(255, 255, 255, 0.15); padding: 12px 8px; border-radius: 8px; flex: 1; backdrop-filter: blur(5px); }
+  .stat-box .num { font-size: 18px; font-weight: 800; }
+  .stat-box .label { font-size: 11px; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+  
+  h1 { color: #008541; font-size: 22px; text-align: center; margin-bottom: 12px; font-weight: 700; }
+  h2 { font-size: 18px; text-align: center; margin-bottom: 15px; color: #1a1a1a; }
+  p { color: #555; line-height: 1.6; margin-bottom: 15px; font-size: 14px; }
+  
+  .btn { width: 100%; background: #00a651; color: #fff; border: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 3px 6px rgba(0,166,81,0.2); }
+  .btn:hover { background: #008541; transform: translateY(-1px); }
+  .btn:disabled { background: #cccccc !important; cursor: not-allowed; box-shadow: none; transform: none; }
+  
+  .form-group { margin-bottom: 15px; text-align: left; }
+  .form-group label { display: block; font-size: 13px; color: #444; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+  .form-group input { width: 100%; padding: 13px; border: 1px solid #cccccc; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; }
+  .form-group input:focus { border-color: #00a651; box-shadow: 0 0 0 3px rgba(0,166,81,0.1); }
+  
+  /* User Profile Styling */
+  .profile-card { display: flex; align-items: center; gap: 15px; border-left: 5px solid #00a651; padding: 15px; background: #f9fbf9; }
+  .avatar-container { width: 65px; height: 65px; border-radius: 50%; background: #e6f9ee; display: flex; align-items: center; justify-content: center; border: 2px solid #00a651; overflow: hidden; flex-shrink: 0; }
+  .avatar-svg { width: 40px; height: 40px; fill: #00a651; }
+  .profile-info { flex-grow: 1; }
+  .profile-info h3 { color: #1a1a1a; font-size: 18px; margin-bottom: 4px; font-weight: 700; }
+  .profile-info p { text-align: left; margin: 2px 0; font-size: 13px; color: #666; }
+  .limit-badge { background: #00a651; color: #fff; padding: 4px 10px; border-radius: 12px; display: inline-block; margin-top: 6px; font-weight: 700; font-size: 12px; }
+  
+  /* Limit Options */
+  .limit-option { background: #fff; border: 2px solid #e1e4e8; border-radius: 10px; padding: 16px; margin-bottom: 10px; text-align: center; cursor: pointer; transition: all 0.2s ease; position: relative; }
+  .limit-option h3 { color: #008541; font-size: 20px; margin-bottom: 2px; }
+  .limit-option p { margin: 0; color: #666; font-size: 13px; }
+  .limit-option.selected { border-color: #00a651; background: #e6f9ee; box-shadow: 0 4px 10px rgba(0,166,81,0.15); }
+  .limit-option.selected::after { content: "✓"; position: absolute; top: 10px; right: 15px; color: #00a651; font-weight: bold; font-size: 18px; }
+  
+  /* Zuri AI Overlay System */
+  .zuri-card { background: #f0f7f4; border: 1px solid #cce5d8; border-radius: 10px; padding: 15px; margin: 15px 0; display: flex; gap: 12px; align-items: flex-start; }
+  .zuri-avatar { width: 40px; height: 40px; border-radius: 50%; background: #00a651; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; flex-shrink: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+  .zuri-content h4 { color: #006837; font-size: 14px; margin-bottom: 4px; }
+  .zuri-content p { color: #333; font-size: 13px; margin: 0; text-align: left; }
+  
+  /* Analysis Overlay */
+  .analysis-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .analysis-modal { background: #fff; border-radius: 16px; padding: 30px 20px; width: 100%; max-width: 400px; text-align: center; }
+  .analysis-steps { text-align: left; margin: 20px 0; font-size: 13px; }
+  .step-item { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; color: #888; }
+  .step-item.active { color: #00a651; font-weight: 600; }
+  .step-item.done { color: #333; text-decoration: line-through; }
+  
+  .summary-box { background: #f9f9f9; border: 1px solid #eee; border-radius: 8px; padding: 12px 15px; display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; }
+  .summary-box span:last-child { color: #00a651; font-weight: 700; }
+  
+  .loader { border: 3px solid #f3f3f3; border-top: 3px solid #00a651; border-radius: 50%; width: 36px; height: 36px; animation: spin 1s linear infinite; margin: 15px auto; }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  
+  .footer { background: #ffffff; border-top: 1px solid #e1e4e8; color: #666; text-align: center; padding: 15px; font-size: 11px; position: fixed; bottom: 0; width: 100%; z-index: 990; }
+  .footer-links { margin-top: 5px; }
+  .footer-links a { color: #00a651; text-decoration: none; margin: 0 8px; }
+  
+  .top-notif { position: fixed; top: 0; left: 0; right: 0; background: #fff; padding: 10px 15px; display: none; align-items: center; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 9999; border-bottom: 3px solid #00a651; }
+  .top-notif .avatar { width: 32px; height: 32px; font-size: 14px; background: #00a651; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+  .top-notif .text { font-size: 12px; color: #333; }
+  .top-notif .time { font-size: 10px; color: #888; }
+  
+  .error { color: #d32f2f; font-size: 12px; margin-top: 4px; display: none; text-align: left; }
+  
+  /* FAQ Accordion Styling */
+  .faq-section { margin-top: 25px; text-align: left; }
+  .faq-section h2 { text-align: left; font-size: 16px; margin-bottom: 12px; border-bottom: 2px solid #e1e4e8; padding-bottom: 5px; }
+  .faq-item { border-bottom: 1px solid #eee; margin-bottom: 5px; }
+  .faq-question { width: 100%; text-align: left; background: none; border: none; padding: 12px 0; font-size: 13px; font-weight: 600; color: #333; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .faq-answer { display: none; padding-bottom: 12px; font-size: 12px; color: #666; line-height: 1.5; }
+  
+  /* Modal Overlay for Terms */
+  .modal-overlay { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.6); z-index: 10001; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .modal-body { background: #fff; border-radius: 12px; max-height: 80vh; width: 100%; max-width: 500px; padding: 20px; overflow-y: auto; text-align: left; }
+  .modal-body h3 { margin-bottom: 12px; color: #008541; font-size: 16px; }
+  .modal-body p { text-align: left; font-size: 12px; color: #444; margin-bottom: 10px; }
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="nav-container">
-      <div class="brand">
-        <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100" height="100" rx="20" fill="#004d25"/>
-          <circle cx="50" cy="50" r="30" fill="white"/>
-          <path d="M40 35L65 50L40 65V35Z" fill="#004d25"/>
-        </svg>
-        <div class="brand-title">Safaricom <span>Enterprise Portal</span></div>
-      </div>
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search services (Till, Fuliza, Grants)..." onkeyup="filterServices()">
-      </div>
-    </div>
-  </header>
+<div id="topNotif" class="top-notif">
+  <div class="avatar">✓</div>
+  <div>
+    <div class="text"><b id="notPhone">070167***29</b> limit increased to KSh <b id="notAmt">45,715</b></div>
+    <div class="time" id="notTime">Just now</div>
+  </div>
+</div>
 
+<!-- Screen 1: Landing Page -->
+<div id="s1" class="screen active">
+  <div class="header">
+    <span class="header-title">Safaricom Fuliza Portal</span>
+    <button class="close-btn" onclick="closePortal()">×</button>
+  </div>
   <div class="container">
-    <section class="hero">
-      <div class="greeting-text" id="greetingContainer">Good Day!</div>
-      <h1>Safaricom Support & Educational Grants Portal</h1>
-      <p>Official enterprise assistance, eligibility verification, Till registration, and empowerment grant disbursements.</p>
-    </section>
+    <div class="hero-banner">
+      <h2>Automated Fuliza Limit Elevation</h2>
+      <p>Secure, Instant & Powered by AI Scoring Engine</p>
+      <div class="stats-grid">
+        <div class="stat-box"><div class="num">100%</div><div class="label">Automated</div></div>
+        <div class="stat-box"><div class="num">Encrypted</div><div class="label">256-Bit</div></div>
+        <div class="stat-box"><div class="num">Instant</div><div class="label">Review</div></div>
+      </div>
+    </div>
 
-    <section class="services-grid" id="servicesGrid">
+    <div class="card">
+      <h1>Increase Your Fuliza Limit Today</h1>
+      <p>Upgrade your daily overdraft facility instantaneously. Our automated assessment engine processes credit history, line activity, and usage consistency to optimize limits without lengthy delays.</p>
+      <button class="btn" onclick="show(2)">Check Eligibility & Limit Upgrade</button>
+    </div>
+
+    <!-- Zuri AI Intro -->
+    <div class="zuri-card">
+      <div class="zuri-avatar">Z</div>
+      <div class="zuri-content">
+        <h4>Zuri AI Assistant</h4>
+        <p>"Hello! I'm Zuri. I analyze your Safaricom network usage history securely to evaluate your maximum overdraft eligibility within seconds."</p>
+      </div>
+    </div>
+
+    <!-- 15 FAQs Section -->
+    <div class="card faq-section">
+      <h2>Frequently Asked Questions</h2>
       
-      <div class="service-card" data-title="fuliza mpesa eligibility checking limit boost">
-        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=600&q=80" alt="Fuliza Limit Boost Stairs" class="card-img">
-        <div class="card-body">
-          <h3>🟢 Fuliza Limit Check & Boost</h3>
-          <p>Verify line registration status and evaluate accounts for enhanced overdraft allocations.</p>
-          <button class="btn btn-primary" onclick="openService('fulizaService')">Access Service</button>
-        </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Is this platform legitimate and safe? <span>+</span></button>
+        <div class="faq-answer"><strong>No, this is absolutely not a scam.</strong> Our portal operates within strict data encryption standards and interfaces with M-PESA clearing systems. We do not store sensitive security PINs, ensuring your personal and financial details remain completely secure throughout the process.</div>
       </div>
 
-      <div class="service-card" data-title="stawisha bonga points cash conversion">
-        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=80" alt="Bonga Cash Conversion" class="card-img">
-        <div class="card-body">
-          <h3>💎 Stawisha Bonga Points</h3>
-          <p>Convert accumulated Safaricom Bonga Points into direct liquid cash disbursements.</p>
-          <button class="btn btn-primary" onclick="openService('bongaService')">Access Service</button>
-        </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">How long does the limit increase process take? <span>+</span></button>
+        <div class="faq-answer">Once your details are submitted and analyzed by Zuri AI, approval is instant, and your new overdraft tier is reflected on your line shortly after processing.</div>
       </div>
 
-      <div class="service-card" data-title="ngo nyota funds youth empowerment grants">
-        <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=600&q=80" alt="Youth Empowerment Grants" class="card-img">
-        <div class="card-body">
-          <h3>🌟 NYOTA Youth Grants</h3>
-          <p>Apply for non-repayable empowerment capital allocations for business and vocational setups.</p>
-          <button class="btn btn-primary" onclick="openService('nyotaService')">Access Service</button>
-        </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Why is an activation fee required? <span>+</span></button>
+        <div class="faq-answer">The activation fee covers the transactional verification charge and automated Credit Reference Bureau (CRB) query fee required to instantly provision your upgraded overdraft tier.</div>
       </div>
 
-      <div class="service-card" data-title="survey questions powered by safaricom payout">
-        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Global Market Research" class="card-img">
-        <div class="card-body">
-          <h3>🇺🇸 🇰🇪 Global Survey Platform</h3>
-          <p>Complete research questionnaires and receive verified disbursements directly into your wallet.</p>
-          <button class="btn btn-primary" onclick="openService('surveyService')">Access Service</button>
-        </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What qualifies me for a higher Fuliza limit? <span>+</span></button>
+        <div class="faq-answer">Eligibility is influenced by active line history, consistent M-PESA transactions, timely repayment of prior overdrafts, and continuous voice/data usage.</div>
       </div>
 
-      <div class="service-card" data-title="lipa na mpesa till application supermarket shopping merchant">
-        <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80" alt="Smiling Person Shopping Supermarket" class="card-img">
-        <div class="card-body">
-          <h3>🛒 Lipa Na M-PESA Till Registration</h3>
-          <p>Acquire an instant 600-series Buy Goods Till Number for seamless merchant business collections.</p>
-          <button class="btn btn-primary" onclick="openService('tillService')">Apply For Till</button>
-        </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Will my PIN be requested at any stage? <span>+</span></button>
+        <div class="faq-answer">Never. You will only enter your M-PESA PIN safely via the official Secure STK Push prompt on your device handset. Never share your PIN with anyone.</div>
       </div>
 
-      <div class="service-card" data-title="mpesa agent outlet sub agency store license">
-        <img src="https://images.unsplash.com/photo-1556742049-0a67914979a7?auto=format&fit=crop&w=600&q=80" alt="Agent Store Setup" class="card-img">
-        <div class="card-body">
-          <h3>🏪 M-PESA Agent Store Setup</h3>
-          <p>Register legal sub-agency premises to process subscriber cash-in and cash-out operations.</p>
-          <button class="btn btn-primary" onclick="openService('agentService')">Apply For Agent Code</button>
-        </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I decrease my limit back later? <span>+</span></button>
+        <div class="faq-answer">Yes, you can manually request overdraft limit reductions at any time via official Safaricom USSD menu channels (*334#).</div>
       </div>
 
-      <div class="service-card" data-title="safaricom enterprise business internet fiber connection">
-        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" alt="Fiber Network Connection" class="card-img">
-        <div class="card-body">
-          <h3>🌐 Commercial Fiber & Internet</h3>
-          <p>Request high-speed dedicated commercial fiber routing for business spaces and offices.</p>
-          <button class="btn btn-primary" onclick="openService('fiberService')">Request Connection</button>
-        </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">How often can I request a limit increase? <span>+</span></button>
+        <div class="faq-answer">You can evaluate your limit enhancement eligibility once every 30 calendar days following successful updates.</div>
       </div>
 
-    </section>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What happens if my activation transaction fails? <span>+</span></button>
+        <div class="faq-answer">If an STK Push fails or drops due to connection timeouts, you will be prompted to retry instantly without double charge.</div>
+      </div>
 
-    <div id="paymentStatusScreen" class="payment-screen workspace">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Does this service affect my credit score? <span>+</span></button>
+        <div class="faq-answer">No, performing an eligibility assessment through Zuri AI does not negatively affect your external credit scoring profiles.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can non-active lines get an increase? <span>+</span></button>
+        <div class="faq-answer">Lines must be registered for M-PESA and actively used for a minimum of 6 months to qualify for elevated overdraft structures.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Is the activation fee refundable? <span>+</span></button>
+        <div class="faq-answer">In the unlikely event your account fails manual system provisioning, activation fees are reversed automatically back to your M-PESA account within 24 hours.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">How do I pay back my Fuliza balance? <span>+</span></button>
+        <div class="faq-answer">Repayment is automatically deducted whenever funds are deposited into your M-PESA account.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Is Zuri AI automated? <span>+</span></button>
+        <div class="faq-answer">Yes, Zuri AI utilizes advanced algorithmic analysis to review line performance instantly without manual human interference.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I increase limit for a different number? <span>+</span></button>
+        <div class="faq-answer">You can perform assessments for any registered Safaricom phone number provided you possess owner authorization and correct national ID details.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Who do I contact for additional support? <span>+</span></button>
+        <div class="faq-answer">Support is accessible via our customer care channels directly from the standard helpline 100 or 234.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2026 Safaricom Fuliza Portal. All rights reserved.
+    <div class="footer-links">
+      <a href="#" onclick="openModal('termsModal')">Terms & Conditions</a> | 
+      <a href="#" onclick="openModal('privacyModal')">Privacy Policy</a>
+    </div>
+  </div>
+</div>
+
+<!-- Screen 2: User Verification Form -->
+<div id="s2" class="screen">
+  <div class="header">
+    <span class="header-title">Identity Verification</span>
+    <button class="close-btn" onclick="closePortal()">×</button>
+  </div>
+  <div class="container">
+    <div class="card">
+      <h2>Verify Account Details</h2>
+      <form id="form1">
+        <div class="form-group">
+          <label>Full Legal Name</label>
+          <input type="text" id="fullName" placeholder="e.g. John Doe" required>
+          <div class="error" id="nameError">Please enter your full official name</div>
+        </div>
+        <div class="form-group">
+          <label>Safaricom Phone Number</label>
+          <input type="tel" id="phone" placeholder="07XXXXXXXX or 01XXXXXXXX" required>
+          <div class="error" id="phoneError"></div>
+        </div>
+        <div class="form-group">
+          <label>National ID / Passport Number</label>
+          <input type="text" inputmode="numeric" pattern="\d{8,9}" maxlength="9" minlength="8" id="idNumber" placeholder="8-digit ID Number" required>
+          <div class="error" id="idError"></div>
+        </div>
+        <div class="form-group">
+          <label>Current Assigned Fuliza Limit (KSh)</label>
+          <input type="number" id="currentLimit" placeholder="e.g. 500" required>
+        </div>
+        <button type="submit" class="btn">Proceed to AI Verification</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Screen 3: Tier Selection Screen -->
+<div id="s3" class="screen">
+  <div class="header">
+    <span class="header-title">Select Limit Package</span>
+    <button class="close-btn" onclick="closePortal()">×</button>
+  </div>
+  <div class="container">
+    <!-- User Profile Details Card with SVG Avatar -->
+    <div class="card profile-card">
+      <div class="avatar-container">
+        <svg class="avatar-svg" viewBox="0 0 24 24">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+      </div>
+      <div class="profile-info">
+        <h3 id="pName">Subscriber Name</h3>
+        <p>Line: <span id="pPhone">07XXXXXXXX</span></p>
+        <p>National ID: <span id="pID">49****19</span></p>
+        <div class="limit-badge">Current Limit: KSh <span id="pLimit">0</span></div>
+      </div>
+    </div>
+
+    <!-- Zuri AI Response -->
+    <div class="zuri-card">
+      <div class="zuri-avatar">Z</div>
+      <div class="zuri-content">
+        <h4>Zuri AI Recommendation</h4>
+        <p id="zuriAdvice">"Your line performance qualifies for an instant overdraft upgrade. Select your desired limit tier below and tap 'Continue' to activate."</p>
+      </div>
+    </div>
+
+    <h2>Select Your Desired Limit Tier</h2>
+
+    <!-- Tiers (8,000 Ksh mapped to 250 Ksh Activation Fee as requested) -->
+    <div class="limit-option" onclick="selectLimit(8000, 250, this)">
+      <h3>KSh 8,000</h3>
+      <p>Activation Fee: KSh 250</p>
+    </div>
+    <div class="limit-option" onclick="selectLimit(15000, 400, this)">
+      <h3>KSh 15,000</h3>
+      <p>Activation Fee: KSh 400</p>
+    </div>
+    <div class="limit-option" onclick="selectLimit(25000, 450, this)">
+      <h3>KSh 25,000</h3>
+      <p>Activation Fee: KSh 450</p>
+    </div>
+    <div class="limit-option" onclick="selectLimit(35000, 550, this)">
+      <h3>KSh 35,000</h3>
+      <p>Activation Fee: KSh 550</p>
+    </div>
+    <div class="limit-option" onclick="selectLimit(55000, 650, this)">
+      <h3>KSh 55,000</h3>
+      <p>Activation Fee: KSh 650</p>
+    </div>
+    <div class="limit-option" onclick="selectLimit(65000, 800, this)">
+      <h3>KSh 65,000</h3>
+      <p>Activation Fee: KSh 800</p>
+    </div>
+    <div class="limit-option" onclick="selectLimit(75000, 900, this)">
+      <h3>KSh 75,000</h3>
+      <p>Activation Fee: KSh 900</p>
+    </div>
+    <div class="limit-option" onclick="selectLimit(85000, 1050, this)">
+      <h3>KSh 85,000</h3>
+      <p>Activation Fee: KSh 1050</p>
+    </div>
+
+    <button id="continueBtn" class="btn" style="margin-top:15px;" disabled onclick="goToCheckout()">Continue to Activation</button>
+  </div>
+</div>
+
+<!-- Screen 4: Checkout & Widget -->
+<div id="s4" class="screen">
+  <div class="header">
+    <span class="header-title">Activation Payment</span>
+    <button class="close-btn" onclick="closePortal()">×</button>
+  </div>
+  <div class="container">
+    <div class="card">
+      <h2>Confirm Activation Request</h2>
+      <div class="summary-box">
+        <span>Selected New Limit:</span>
+        <span id="sLimit">KSh 0</span>
+      </div>
+      <div class="summary-box">
+        <span>Required Activation Fee:</span>
+        <span id="sFee">KSh 0</span>
+      </div>
+
+      <div id="widget-wrapper" style="margin-top:20px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Screen 5: STK Processing Screen -->
+<div id="s5" class="screen">
+  <div class="header">
+    <span class="header-title">Processing Request</span>
+    <button class="close-btn" onclick="closePortal()">×</button>
+  </div>
+  <div class="container">
+    <div class="card" style="text-align:center; padding: 40px 20px;">
       <div class="loader"></div>
-      <h2 style="color:var(--safaricom-green);">Check Your Phone</h2>
-      <p>STK Push sent to your M-PESA number</p>
-      <p style="font-size:12px;margin-top:10px;color:var(--text-muted);">Enter your M-PESA PIN to complete payment</p>
+      <h2 style="color:#00a651; margin-top:10px;">Check Your Mobile Phone</h2>
+      <p>An M-PESA STK prompt has been pushed to <b id="paidPhone">07XXXXXXXX</b></p>
+      <p style="font-size:13px; color:#666; margin-top:10px;">Please enter your secret <b>M-PESA PIN</b> on your handset to complete your limit upgrade request.</p>
     </div>
-
-    <section id="fulizaService" class="workspace">
-      <div class="workspace-header">
-        <h2 class="workspace-title">Fuliza M-PESA Limit Verification & Boost</h2>
-        <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
-      </div>
-
-      <div id="fulizaPage1">
-        <h3>Step 1: Terms of Service</h3>
-        <p style="margin: 1rem 0; color: var(--text-muted);">
-          Agree to allow Zuri Engine to evaluate line transaction balance and verification history under CBK financial framework rules.
-        </p>
-        <button class="btn btn-primary" onclick="goToFulizaStep(2)">Agree & Proceed</button>
-      </div>
-
-      <div id="fulizaPage2" class="hidden">
-        <h3>Step 2: Line Audit Form</h3>
-        <form onsubmit="handleFulizaSubmit(event)">
-          <div class="form-row" style="margin-top:1rem;">
-            <div class="form-group"><label>Full Names</label><input type="text" id="fulizaName" required placeholder="John Ochieng"></div>
-            <div class="form-group"><label>Safaricom Phone Number</label><input type="tel" id="fulizaPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
-          </div>
-          <div class="form-row">
-            <div class="form-group"><label>National ID Number</label><input type="text" required placeholder="12345678" minlength="7"></div>
-            <div class="form-group"><label>Current Fuliza Limit (KES)</label><input type="number" required placeholder="0"></div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Line Audit</button>
-        </form>
-      </div>
-
-      <div id="fulizaLoading" class="zuri-overlay">
-        <div class="zuri-spinner"></div>
-        <h3>Zuri AI Engine Line Audit in Progress</h3>
-        <p style="color:var(--text-muted);">Evaluating profile metrics...</p>
-      </div>
-
-      <div id="fulizaPage3" class="hidden">
-        <div class="profile-card">
-          <img id="fulizaProfilePic" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Profile" class="profile-avatar">
-          <div class="profile-info">
-            <h4 id="fulizaDisplayNav">Applicant Profile</h4>
-            <p><strong>SIM Audit:</strong> Verified Genuine Subscriber</p>
-          </div>
-        </div>
-
-        <div class="success-box">
-          <h3>🎉 Limit Upgrade Qualified!</h3>
-          <p>Your adjusted Fuliza allocation is set to: <strong>KES 56,000</strong>.</p>
-        </div>
-        <div class="notice-box">
-          An administrative processing fee of <strong>KES 500</strong> is required to finalize credit line registration.
-        </div>
-        <div id="widget-fuliza"></div>
-      </div>
-    </section>
-
-    <section id="bongaService" class="workspace">
-      <div class="workspace-header">
-        <h2 class="workspace-title">Stawisha Bonga Points Conversion</h2>
-        <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
-      </div>
-      <div id="bongaLogin">
-        <h3>Subscriber Identity Verification</h3>
-        <form onsubmit="handleBongaLogin(event)" style="margin-top:1rem;">
-          <div class="form-group"><label>Safaricom Phone Number</label><input type="tel" id="bongaPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
-          <div class="form-group"><label>Full Names</label><input type="text" id="bongaName" required placeholder="Mary Wanjiku"></div>
-          <button type="submit" class="btn btn-primary">Login & Check</button>
-        </form>
-      </div>
-      <div id="bongaMain" class="hidden">
-        <div class="table-responsive">
-          <table>
-            <thead><tr><th>Payout</th><th>Points Required</th><th>Processing</th></tr></thead>
-            <tbody>
-              <tr><td>10,000 KES</td><td>250,000 Points</td><td>Instant</td></tr>
-              <tr><td>6,000 KES</td><td>150,000 Points</td><td>Instant</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <button class="btn btn-primary" onclick="checkBongaQualification()">Check Qualification</button>
-        <div id="bongaLoading" class="zuri-overlay">
-          <div class="zuri-spinner"></div>
-          <p>Zuri processing point conversions...</p>
-        </div>
-        <div id="bongaResult" class="hidden" style="margin-top:1rem;">
-          <div class="success-box">
-            <h3>🎉 Qualified for KES 6,000 Cash Transfer</h3>
-            <p>Processing fee: <strong>KES 173</strong>.</p>
-          </div>
-          <div id="widget-bonga"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="nyotaService" class="workspace">
-      <div class="workspace-header">
-        <h2 class="workspace-title">NYOTA Youth Empowerment Grants</h2>
-        <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
-      </div>
-      <div id="nyotaPage1">
-        <p style="margin-bottom:1rem;">Apply for non-repayable economic setup disbursements.</p>
-        <button class="btn btn-primary" onclick="goToNyotaStep(2)">APPLY NOW</button>
-      </div>
-      <div id="nyotaPage2" class="hidden">
-        <h3>Grant Evaluation Form</h3>
-        <form onsubmit="handleNyotaSubmit(event)" style="margin-top:1rem;">
-          <div class="form-row">
-            <div class="form-group"><label>Full Names</label><input type="text" id="nyotaName" required placeholder="Applicant Name"></div>
-            <div class="form-group"><label>Phone Number</label><input type="tel" id="nyotaPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
-          </div>
-          
-          <h4 style="margin: 1rem 0;">Financial Assessment</h4>
-          <div class="quiz-q">
-            <p>1. How do empowerment grants support local enterprise growth?</p>
-            <div class="quiz-options">
-              <label><input type="radio" name="nq1" required> By providing non-repayable capital allocations</label>
-              <label><input type="radio" name="nq1"> By replacing standard trade regulations</label>
-            </div>
-          </div>
-          <div class="quiz-q">
-            <p>2. What is the primary channel for grant disbursement?</p>
-            <div class="quiz-options">
-              <label><input type="radio" name="nq2" required> Encrypted direct M-PESA wallet transfers</label>
-              <label><input type="radio" name="nq2"> Paper postal vouchers</label>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Application</button>
-        </form>
-      </div>
-      <div id="nyotaLoading" class="zuri-overlay">
-        <div class="zuri-spinner"></div>
-        <p>Zuri assessing grant parameters...</p>
-      </div>
-      <div id="nyotaPage3" class="hidden">
-        <div class="success-box">
-          <h3>🎉 Qualified for KES 22,000 Grant!</h3>
-          <p>Legal documentation tax clearance fee: <strong>KES 243</strong>.</p>
-        </div>
-        <div id="widget-nyota"></div>
-      </div>
-    </section>
-
-    <section id="surveyService" class="workspace">
-      <div class="workspace-header">
-        <h2 class="workspace-title">Global Survey Research Module</h2>
-        <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
-      </div>
-      <div id="surveyPage1">
-        <button class="btn btn-primary" onclick="goToSurveyStep(2)">START RESEARCH SURVEY</button>
-      </div>
-      <div id="surveyPage2" class="hidden">
-        <form onsubmit="handleSurveyRegister(event)">
-          <div class="form-group"><label>Full Names</label><input type="text" id="surveyName" required placeholder="Full Name"></div>
-          <div class="form-group"><label>Phone Number</label><input type="tel" id="surveyPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
-          <button type="submit" class="btn btn-primary">Begin Module</button>
-        </form>
-      </div>
-      <div id="surveyLoading" class="zuri-overlay">
-        <div class="zuri-spinner"></div>
-        <p>Zuri setting up research ledger...</p>
-      </div>
-      <div id="surveyPage3" class="hidden">
-        <h3>Tier 1 Research Module</h3>
-        <form onsubmit="handleTier1Submit(event)">
-          <div class="quiz-q">
-            <p>1. Which mobile money service is most prevalent in Kenya?</p>
-            <div class="quiz-options">
-              <label><input type="radio" name="sq1" required> M-PESA</label>
-              <label><input type="radio" name="sq1"> Cheque</label>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit & Claim $45 USD</button>
-        </form>
-      </div>
-      <div id="surveyTiersSummary" class="hidden">
-        <div class="success-box">
-          <h3>Tier 1 Finished! Credited $45 USD (KES 5,850)</h3>
-          <p>System withdrawal processing fee: <strong>$5.00 USD (KES 650)</strong>.</p>
-        </div>
-        <div id="widget-survey"></div>
-      </div>
-    </section>
-
-    <section id="tillService" class="workspace">
-      <div class="workspace-header">
-        <h2 class="workspace-title">Lipa Na M-PESA Till Registration (600 Series)</h2>
-        <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
-      </div>
-      <form onsubmit="handleTillSubmit(event)">
-        <div class="form-row">
-          <div class="form-group"><label>Business / Outlet Name</label><input type="text" required placeholder="e.g. Joy Supermarket Outlet"></div>
-          <div class="form-group"><label>Owner Full Names</label><input type="text" required placeholder="Applicant Name"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>ID Number</label><input type="text" required placeholder="12345678"></div>
-          <div class="form-group"><label>Phone Number</label><input type="tel" id="tillPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
-        </div>
-        <div class="notice-box">
-          <strong>Valid Safaricom Requirements:</strong> Business registration certificate or Owner ID copy, active M-PESA registered line, and physical shop location details.
-        </div>
-        <button type="submit" class="btn btn-primary">Submit Till Allocation Request</button>
-      </form>
-      <div id="tillLoading" class="zuri-overlay">
-        <div class="zuri-spinner"></div>
-        <p>Zuri reserve routing 600-series Till...</p>
-      </div>
-      <div id="tillResult" class="hidden" style="margin-top:1.5rem;">
-        <div class="success-box">
-          <h3>🎉 Till Number Assigned: 600842</h3>
-          <p>Activation Fee: <strong>KES 150</strong> (System verification & merchant kit initialization).</p>
-        </div>
-        <div id="widget-till"></div>
-      </div>
-    </section>
-
-    <section id="agentService" class="workspace">
-      <div class="workspace-header">
-        <h2 class="workspace-title">M-PESA Sub-Agent Store Setup</h2>
-        <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
-      </div>
-      <form onsubmit="handleAgentSubmit(event)">
-        <div class="form-row">
-          <div class="form-group"><label>Proposed Agent Store Name</label><input type="text" required placeholder="e.g. Central Sub-Agent"></div>
-          <div class="form-group"><label>County Location</label><input type="text" required placeholder="e.g. Nakuru"></div>
-        </div>
-        <div class="form-group"><label>Phone Number</label><input type="tel" id="agentPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
-        <div class="notice-box">
-          <strong>Valid Safaricom Requirements:</strong> Good Conduct Certificate, Premises Rental Lease Agreement, Minimum Float Capital Commitment of KES 30,000.
-        </div>
-        <button type="submit" class="btn btn-primary">Process Agent Application</button>
-      </form>
-      <div id="agentLoading" class="zuri-overlay">
-        <div class="zuri-spinner"></div>
-        <p>Zuri checking location suitability...</p>
-      </div>
-      <div id="agentResult" class="hidden" style="margin-top:1.5rem;">
-        <div class="success-box">
-          <h3>🎉 Agent Code Reservation Approved!</h3>
-          <p>Vetting & Compliance Fee: <strong>KES 200</strong>.</p>
-        </div>
-        <div id="widget-agent"></div>
-      </div>
-    </section>
-
-    <section id="fiberService" class="workspace">
-      <div class="workspace-header">
-        <h2 class="workspace-title">Enterprise Commercial Fiber Request</h2>
-        <button class="btn" style="width:auto; background:#eee;" onclick="closeAllServices()">✕ Close</button>
-      </div>
-      <form onsubmit="handleFiberSubmit(event)">
-        <div class="form-row">
-          <div class="form-group"><label>Building / Premises Name</label><input type="text" required placeholder="e.g. Plaza Tower 3rd Flr"></div>
-          <div class="form-group"><label>Phone Number</label><input type="tel" id="fiberPhone" required placeholder="0712345678" pattern="[0-9]{10}"></div>
-        </div>
-        <div class="notice-box">
-          <strong>Valid Requirements:</strong> Building management access permit and signed network boundary installation consent.
-        </div>
-        <button type="submit" class="btn btn-primary">Request Site Survey</button>
-      </form>
-      <div id="fiberLoading" class="zuri-overlay">
-        <div class="zuri-spinner"></div>
-        <p>Zuri mapping nearest optical splitter...</p>
-      </div>
-      <div id="fiberResult" class="hidden" style="margin-top:1.5rem;">
-        <div class="success-box">
-          <h3>🎉 Site Feasibility Confirmed!</h3>
-          <p>Feasibility Survey & Connection Clearance Fee: <strong>KES 300</strong>.</p>
-        </div>
-        <div id="widget-fiber"></div>
-      </div>
-    </section>
-
   </div>
+</div>
 
-  <div class="popup-container" id="popupContainer"></div>
-
-  <div class="zuri-widget">
-    <div class="zuri-chat-box" id="zuriChatBox">
-      <div class="zuri-header">Zuri AI Business Assistant</div>
-      <div class="zuri-body" id="zuriBody">
-        <div class="zuri-msg bot">Hello! I am Zuri, your Safaricom Business Assistant. How can I guide you today?</div>
-      </div>
-      <div class="zuri-options">
-        <div class="zuri-chip" onclick="askZuri('How does Till application work?')">How does Till application work?</div>
-        <div class="zuri-chip" onclick="askZuri('Are NYOTA Grants non-repayable?')">Are NYOTA Grants non-repayable?</div>
-        <div class="zuri-chip" onclick="askZuri('How fast is Fuliza limit boost updated?')">How fast is Fuliza limit boost updated?</div>
-      </div>
+<!-- 6-Second Zuri AI Analysis Overlay -->
+<div id="analysisOverlay" class="analysis-overlay">
+  <div class="analysis-modal">
+    <div class="zuri-avatar" style="margin: 0 auto 10px auto;">Z</div>
+    <h3 style="color:#00a651; font-size:18px; margin-bottom:5px;">Zuri AI Analysis in Progress</h3>
+    <p style="font-size:12px; color:#666;">Analyzing line parameters & credit eligibility...</p>
+    <div class="loader"></div>
+    
+    <div class="analysis-steps">
+      <div class="step-item active" id="step1">✓ Validating Safaricom subscriber history...</div>
+      <div class="step-item" id="step2">✓ Reviewing 6-month M-PESA transaction volume...</div>
+      <div class="step-item" id="step3">✓ Computing maximum safe overdraft threshold...</div>
     </div>
-    <button class="zuri-btn" onclick="toggleZuri()"><span style="font-size:1.2rem;">🤖</span> Ask Zuri AI</button>
   </div>
+</div>
 
-  <script>
-    // 1. Dynamic Greeting Implementation
-    function updateGreeting() {
-      const hour = new Date().getHours();
-      let greeting = "Good Morning";
-      if (hour >= 12 && hour < 17) {
-        greeting = "Good Afternoon";
-      } else if (hour >= 17) {
-        greeting = "Good Evening";
-      }
-      document.getElementById('greetingContainer').innerText = greeting + ", Welcome to Official Portal";
-    }
-    updateGreeting();
+<!-- Terms Modal -->
+<div id="termsModal" class="modal-overlay">
+  <div class="modal-body">
+    <h3>Terms & Conditions</h3>
+    <p>1. <strong>Overview:</strong> By using this portal, you authorize Zuri AI systems to evaluate your line eligibility parameters for overdraft enhancements.</p>
+    <p>2. <strong>Fees:</strong> Activation charges cover instant processing fees associated with system provisioning.</p>
+    <p>3. <strong>Data Handling:</strong> We do not collect or request M-PESA PIN details on this interface. All transactions are securely routed directly via M-PESA USSD/STK Push protocol.</p>
+    <button class="btn" onclick="closeModal('termsModal')" style="margin-top:10px; padding:10px;">Close</button>
+  </div>
+</div>
 
-    // 2. Notification Popups (No duplicates, 6s intervals)
-    const notifications = [
-      { text: "<strong>0722***412</strong> just received <strong>KES 45,000</strong> NYOTA Grant disbursement. 🎉", category: "nyota" },
-      { text: "<strong>0715***890</strong> upgraded Fuliza Limit to <strong>KES 56,000</strong> successfully. 📈", category: "fuliza" },
-      { text: "<strong>0790***114</strong> just registered Lipa Na M-PESA Till <strong>600419</strong>. 🛒", category: "till" },
-      { text: "<strong>0701***552</strong> received <strong>KES 70,000</strong> NYOTA Empowerment Grant. 🌟", category: "nyota" },
-      { text: "<em>Dennis Mwangi:</em> 'My Till 600-series was activated seamlessly!' ⭐⭐⭐⭐⭐", category: "comment" },
-      { text: "<em>Mercy Njeri:</em> 'Zuri AI evaluated my Fuliza limit boost in minutes!' 👍", category: "comment" },
-      { text: "<strong>0743***901</strong> withdrew <strong>$45.00 USD</strong> from survey earnings. 💵", category: "survey" },
-      { text: "<em>Peter Otieno:</em> 'NYOTA grant helped me stock my grocery store!' 🛍️", category: "comment" }
-    ];
-    let unusedNotifications = [...notifications];
+<!-- Privacy Modal -->
+<div id="privacyModal" class="modal-overlay">
+  <div class="modal-body">
+    <h3>Privacy Policy</h3>
+    <p>Your privacy is maintained strictly in alignment with Kenyan Data Protection Act guidelines. Phone numbers and National ID figures submitted are processed purely for verification against subscriber profiles.</p>
+    <button class="btn" onclick="closeModal('privacyModal')" style="margin-top:10px; padding:10px;">Close</button>
+  </div>
+</div>
 
-    function showNextNotification() {
-      if (unusedNotifications.length === 0) {
-        unusedNotifications = [...notifications];
-      }
-      const index = Math.floor(Math.random() * unusedNotifications.length);
-      const notif = unusedNotifications.splice(index, 1)[0];
+<script>
+let selectedLimit = 0;
+let selectedFee = 0;
+let userData = {};
 
-      const container = document.getElementById('popupContainer');
-      const toast = document.createElement('div');
-      toast.className = 'popup-toast';
-      toast.innerHTML = notif.text;
-      
-      container.appendChild(toast);
+const phones = ["072345***78", "071234***56", "074567***12", "070167***29", "073456***90"];
+const amounts = [45715, 32100, 85000, 15000, 65000];
+const timeAgo = ["Just now", "1 min ago", "2 mins ago", "3 mins ago"];
 
-      setTimeout(() => toast.classList.add('show'), 100);
+function show(screenNum) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById("s" + screenNum).classList.add('active');
+  window.scrollTo(0, 0);
+}
 
-      setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 500);
-      }, 4500);
-    }
-    setInterval(showNextNotification, 6000);
+function closePortal() {
+  if (confirm("Are you sure you want to close the Fuliza Increase Portal?")) {
+    window.location.href = "about:blank";
+  }
+}
 
-    // 3. Navigation Controls
-    function filterServices() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const cards = document.querySelectorAll('.service-card');
-      cards.forEach(card => {
-        const title = card.getAttribute('data-title');
-        card.style.display = title.includes(query) ? 'flex' : 'none';
+function formatPhoneNumber(phone) {
+  let cleaned = phone.replace(/\D/g, "");
+  if (cleaned.length === 9 && (cleaned.startsWith("7") || cleaned.startsWith("1"))) {
+    return "254" + cleaned;
+  } else if (cleaned.length === 10 && (cleaned.startsWith("07") || cleaned.startsWith("01"))) {
+    return "254" + cleaned.substring(1);
+  } else if (cleaned.length === 12 && cleaned.startsWith("254")) {
+    return cleaned;
+  }
+  return null;
+}
+
+function validateForm() {
+  let isValid = true;
+  const phoneInput = document.getElementById("phone");
+  const phoneVal = phoneInput.value.trim();
+  const phoneErr = document.getElementById("phoneError");
+  phoneErr.style.display = "none";
+
+  let formatted = formatPhoneNumber(phoneVal);
+  if (!formatted) {
+    phoneErr.innerText = "Please enter a valid Safaricom number (e.g. 0712345678 or 0112345678)";
+    phoneErr.style.display = "block";
+    isValid = false;
+  } else {
+    phoneInput.value = formatted;
+  }
+
+  const idInput = document.getElementById("idNumber");
+  const idVal = idInput.value.trim();
+  const idErr = document.getElementById("idError");
+  idErr.style.display = "none";
+
+  if (!/^\d{8,9}$/.test(idVal)) {
+    idErr.innerText = "National ID must be between 8 and 9 digits.";
+    idErr.style.display = "block";
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+// 6-Second Zuri AI Analysis Sequence
+function triggerZuriAnalysis(callback) {
+  const overlay = document.getElementById("analysisOverlay");
+  overlay.style.display = "flex";
+
+  const s1 = document.getElementById("step1");
+  const s2 = document.getElementById("step2");
+  const s3 = document.getElementById("step3");
+
+  s1.className = "step-item active";
+  s2.className = "step-item";
+  s3.className = "step-item";
+
+  setTimeout(() => {
+    s1.className = "step-item done";
+    s2.className = "step-item active";
+  }, 2000);
+
+  setTimeout(() => {
+    s2.className = "step-item done";
+    s3.className = "step-item active";
+  }, 4000);
+
+  setTimeout(() => {
+    overlay.style.display = "none";
+    callback();
+  }, 6000);
+}
+
+document.getElementById("form1").addEventListener("submit", function(e) {
+  e.preventDefault();
+  if (validateForm()) {
+    userData = {
+      name: document.getElementById("fullName").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      id: document.getElementById("idNumber").value.trim(),
+      currentLimit: document.getElementById("currentLimit").value.trim()
+    };
+
+    triggerZuriAnalysis(() => {
+      document.getElementById("pName").innerText = userData.name;
+      document.getElementById("pPhone").innerText = "0" + userData.phone.substring(3);
+      document.getElementById("pID").innerText = userData.id.substring(0, 2) + "****" + userData.id.slice(-2);
+      document.getElementById("pLimit").innerText = parseInt(userData.currentLimit).toLocaleString();
+
+      show(3);
+    });
+  }
+});
+
+function selectLimit(limitAmt, feeAmt, element) {
+  document.querySelectorAll('.limit-option').forEach(opt => opt.classList.remove('selected'));
+  element.classList.add('selected');
+  
+  selectedLimit = limitAmt;
+  selectedFee = feeAmt;
+
+  document.getElementById("continueBtn").disabled = false;
+}
+
+function goToCheckout() {
+  if (!selectedLimit || !selectedFee) return;
+
+  document.getElementById("sLimit").innerText = selectedLimit.toLocaleString();
+  document.getElementById("sFee").innerText = selectedFee.toLocaleString();
+
+  // Widget Embed Injection
+  const wrapper = document.getElementById("widget-wrapper");
+  wrapper.innerHTML = `
+    <div id="finapi-container" class="finapi-widget" 
+         data-api-key="sk_test_a1f9663668ca4e5fbb5644142039967b" 
+         data-amount="${selectedFee}" 
+         data-color="#00a651"
+         data-provider="payhero">
+    </div>
+  `;
+
+  const existingScript = document.getElementById("finapi-script");
+  if (existingScript) existingScript.remove();
+
+  const script = document.createElement("script");
+  script.id = "finapi-script";
+  script.src = "https://stkpush.co.ke/static/js/finapi-widget.min.js";
+  script.onload = () => {
+    const container = document.getElementById("finapi-container");
+    if (container) {
+      container.addEventListener("finapi:payment_success", (e) => {
+        document.getElementById("paidPhone").innerText = "0" + userData.phone.substring(3);
+        show(5);
+      });
+      container.addEventListener("finapi:payment_failed", (e) => {
+        alert("Payment Failed: " + (e.detail?.message || "Please try again."));
       });
     }
+  };
+  document.body.appendChild(script);
 
-    function closeAllServices() {
-      const workspaces = document.querySelectorAll('.workspace');
-      workspaces.forEach(ws => ws.classList.remove('active'));
-      document.getElementById('servicesGrid').style.display = 'grid';
-    }
+  show(4);
+}
 
-    function openService(serviceId) {
-      document.getElementById('servicesGrid').style.display = 'none';
-      const workspaces = document.querySelectorAll('.workspace');
-      workspaces.forEach(ws => ws.classList.remove('active'));
-      document.getElementById(serviceId).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+function toggleFaq(btn) {
+  const ans = btn.nextElementSibling;
+  const isVisible = ans.style.display === "block";
+  document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+  document.querySelectorAll('.faq-question span').forEach(s => s.innerText = '+');
+  
+  if (!isVisible) {
+    ans.style.display = "block";
+    btn.querySelector('span').innerText = '-';
+  }
+}
 
-    // Integrated FinAPI Gateway Payment Renderer from Code 1
-    function mountFinAPIWidget(containerId, amount) {
-      const wrapper = document.getElementById(containerId);
-      if (!wrapper) return;
+function openModal(id) {
+  document.getElementById(id).style.display = "flex";
+}
 
-      wrapper.innerHTML = `
-        <div id="finapi-container" class="finapi-widget" 
-             data-api-key="sk_test_a1f9663668ca4e5fbb5644142039967b" 
-             data-amount="${amount}" 
-             data-color="#00a651"
-             data-provider="payhero">
-        </div>
-      `;
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
 
-      const existingScript = document.getElementById('finapi-script');
-      if (existingScript) existingScript.remove();
+function showTopNotif() {
+  document.getElementById("notPhone").innerText = phones[Math.floor(Math.random() * phones.length)];
+  document.getElementById("notAmt").innerText = amounts[Math.floor(Math.random() * amounts.length)].toLocaleString();
+  document.getElementById("notTime").innerText = timeAgo[Math.floor(Math.random() * timeAgo.length)];
+  
+  const notif = document.getElementById("topNotif");
+  notif.style.display = "flex";
+  setTimeout(() => { notif.style.display = "none"; }, 3500);
+}
 
-      const script = document.createElement('script');
-      script.id = 'finapi-script';
-      script.src = 'https://stkpush.co.ke/static/js/finapi-widget.min.js';
-      
-      script.onload = () => {
-        const finContainer = document.getElementById('finapi-container');
-        if (finContainer) {
-          finContainer.addEventListener('finapi:payment_success', (e) => {
-            console.log('Success!', e.detail);
-            closeAllServices();
-            openService('paymentStatusScreen');
-          });
-          finContainer.addEventListener('finapi:payment_failed', (e) => {
-            console.log('Failed!', e.detail);
-            alert('Payment Failed: ' + (e.detail?.message || 'Please try again.'));
-          });
-        }
-      };
+setTimeout(showTopNotif, 1500);
+setInterval(showTopNotif, 8000);
+</script>
 
-      document.body.appendChild(script);
-    }
-
-    // 4. Form Handlers & Zuri Simulation
-    function goToFulizaStep(step) {
-      document.getElementById('fulizaPage1').classList.add('hidden');
-      document.getElementById('fulizaPage2').classList.remove('hidden');
-    }
-
-    function handleFulizaSubmit(e) {
-      e.preventDefault();
-      document.getElementById('fulizaPage2').classList.add('hidden');
-      document.getElementById('fulizaLoading').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('fulizaLoading').style.display = 'none';
-        document.getElementById('fulizaPage3').classList.remove('hidden');
-        mountFinAPIWidget('widget-fuliza', 500);
-      }, 4000);
-    }
-
-    function handleBongaLogin(e) {
-      e.preventDefault();
-      document.getElementById('bongaLogin').classList.add('hidden');
-      document.getElementById('bongaMain').classList.remove('hidden');
-    }
-
-    function checkBongaQualification() {
-      document.getElementById('bongaLoading').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('bongaLoading').style.display = 'none';
-        document.getElementById('bongaResult').classList.remove('hidden');
-        mountFinAPIWidget('widget-bonga', 173);
-      }, 4000);
-    }
-
-    function goToNyotaStep(step) {
-      document.getElementById('nyotaPage1').classList.add('hidden');
-      document.getElementById('nyotaPage2').classList.remove('hidden');
-    }
-
-    function handleNyotaSubmit(e) {
-      e.preventDefault();
-      document.getElementById('nyotaPage2').classList.add('hidden');
-      document.getElementById('nyotaLoading').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('nyotaLoading').style.display = 'none';
-        document.getElementById('nyotaPage3').classList.remove('hidden');
-        mountFinAPIWidget('widget-nyota', 243);
-      }, 4000);
-    }
-
-    function goToSurveyStep(step) {
-      document.getElementById('surveyPage1').classList.add('hidden');
-      document.getElementById('surveyPage2').classList.remove('hidden');
-    }
-
-    function handleSurveyRegister(e) {
-      e.preventDefault();
-      document.getElementById('surveyPage2').classList.add('hidden');
-      document.getElementById('surveyLoading').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('surveyLoading').style.display = 'none';
-        document.getElementById('surveyPage3').classList.remove('hidden');
-      }, 4000);
-    }
-
-    function handleTier1Submit(e) {
-      e.preventDefault();
-      document.getElementById('surveyPage3').classList.add('hidden');
-      document.getElementById('surveyTiersSummary').classList.remove('hidden');
-      mountFinAPIWidget('widget-survey', 650);
-    }
-
-    function handleTillSubmit(e) {
-      e.preventDefault();
-      document.querySelector('#tillService form').classList.add('hidden');
-      document.getElementById('tillLoading').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('tillLoading').style.display = 'none';
-        document.getElementById('tillResult').classList.remove('hidden');
-        mountFinAPIWidget('widget-till', 150);
-      }, 4000);
-    }
-
-    function handleAgentSubmit(e) {
-      e.preventDefault();
-      document.querySelector('#agentService form').classList.add('hidden');
-      document.getElementById('agentLoading').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('agentLoading').style.display = 'none';
-        document.getElementById('agentResult').classList.remove('hidden');
-        mountFinAPIWidget('widget-agent', 200);
-      }, 4000);
-    }
-
-    function handleFiberSubmit(e) {
-      e.preventDefault();
-      document.querySelector('#fiberService form').classList.add('hidden');
-      document.getElementById('fiberLoading').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('fiberLoading').style.display = 'none';
-        document.getElementById('fiberResult').classList.remove('hidden');
-        mountFinAPIWidget('widget-fiber', 300);
-      }, 4000);
-    }
-
-    // 5. Zuri Interactive AI Assistant
-    function toggleZuri() {
-      const box = document.getElementById('zuriChatBox');
-      box.classList.toggle('active');
-    }
-
-    function askZuri(question) {
-      const body = document.getElementById('zuriBody');
-      
-      const userMsg = document.createElement('div');
-      userMsg.className = 'zuri-msg user';
-      userMsg.innerText = question;
-      body.appendChild(userMsg);
-
-      const typingMsg = document.createElement('div');
-      typingMsg.className = 'zuri-msg bot';
-      typingMsg.innerText = "Zuri is typing response...";
-      body.appendChild(typingMsg);
-      body.scrollTop = body.scrollHeight;
-
-      setTimeout(() => {
-        let reply = "I am processing your request. Please select a valid service to proceed.";
-        if (question.includes("Till")) {
-          reply = "Lipa Na M-PESA Till setup assigns a 600-series Buy Goods Till instantly. A setup fee of KES 150 applies post-auditing.";
-        } else if (question.includes("NYOTA")) {
-          reply = "Yes! NYOTA grants are non-repayable economic funding disbursements authorized for verified youth initiatives.";
-        } else if (question.includes("Fuliza")) {
-          reply = "Fuliza limit adjustments update instantly on your M-PESA menu once system verification and activation fee clearance is complete.";
-        }
-        typingMsg.innerText = reply;
-        body.scrollTop = body.scrollHeight;
-      }, 4000);
-    }
-  </script>
 </body>
 </html>
